@@ -45,7 +45,9 @@ def main():
                 continue
 
             print(f"Check license: {path}")
-            assert any((all(keyword in file_content[0] for keyword in KEYWORDS), "PEFTFactory" in file_content[0])), f"File {path} does not contain license."
+            assert any((all(keyword in file_content[0] for keyword in KEYWORDS), "PEFTFactory" in file_content[0])), (
+                f"File {path} does not contain license."
+            )
 
 
 if __name__ == "__main__":
