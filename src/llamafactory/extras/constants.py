@@ -655,53 +655,53 @@ register_model_group(
 
 register_model_group(
     models={
-        "Falcon-H1-0.5B-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-0.5B-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-0.5B-Instruct",
-        },
         "Falcon-H1-0.5B-Base": {
             DownloadSource.DEFAULT: "tiiuae/Falcon-H1-0.5B-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-0.5B-Base",
-        },
-        "Falcon-H1-1.5B-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-1.5B-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Instruct",
         },
         "Falcon-H1-1.5B-Base": {
             DownloadSource.DEFAULT: "tiiuae/Falcon-H1-1.5B-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Base",
         },
-        "Falcon-H1-1.5B-Deep-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-1.5B-Deep-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Deep-Instruct",
-        },
         "Falcon-H1-1.5B-Deep-Base": {
             DownloadSource.DEFAULT: "tiuae/Falcon-H1-1.5B-Deep-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Deep-Base",
-        },
-        "Falcon-H1-3B-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-3B-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-3B-Instruct",
         },
         "Falcon-H1-3B-Base": {
             DownloadSource.DEFAULT: "tiiuae/Falcon-H1-3B-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-3B-Base",
         },
-        "Falcon-H1-7B-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-7B-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-7B-Instruct",
-        },
         "Falcon-H1-7B-Base": {
             DownloadSource.DEFAULT: "tiiuae/Falcon-H1-7B-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-7B-Base",
         },
-        "Falcon-H1-34B-Instruct": {
-            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-34B-Instruct",
-            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-34B-Instruct",
-        },
         "Falcon-H1-34B-Base": {
             DownloadSource.DEFAULT: "tiiuae/Falcon-H1-34B-Base",
             DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-34B-Base",
+        },
+        "Falcon-H1-0.5B-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-0.5B-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-0.5B-Instruct",
+        },
+        "Falcon-H1-1.5B-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-1.5B-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Instruct",
+        },
+        "Falcon-H1-1.5B-Deep-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-1.5B-Deep-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-1.5B-Deep-Instruct",
+        },
+        "Falcon-H1-3B-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-3B-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-3B-Instruct",
+        },
+        "Falcon-H1-7B-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-7B-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-7B-Instruct",
+        },
+        "Falcon-H1-34B-Instruct": {
+            DownloadSource.DEFAULT: "tiiuae/Falcon-H1-34B-Instruct",
+            DownloadSource.MODELSCOPE: "tiiuae/Falcon-H1-34B-Instruct",
         },
     },
     template="falcon_h1",
@@ -1165,6 +1165,17 @@ register_model_group(
 
 register_model_group(
     models={
+        "Kimi-Dev-72B-Instruct": {
+            DownloadSource.DEFAULT: "moonshotai/Kimi-Dev-72B",
+            DownloadSource.MODELSCOPE: "moonshotai/Kimi-Dev-72B",
+        },
+    },
+    template="qwen",
+)
+
+
+register_model_group(
+    models={
         "Kimi-VL-A3B-Instruct": {
             DownloadSource.DEFAULT: "moonshotai/Kimi-VL-A3B-Instruct",
             DownloadSource.MODELSCOPE: "moonshotai/Kimi-VL-A3B-Instruct",
@@ -1172,6 +1183,10 @@ register_model_group(
         "Kimi-VL-A3B-Thinking": {
             DownloadSource.DEFAULT: "moonshotai/Kimi-VL-A3B-Thinking",
             DownloadSource.MODELSCOPE: "moonshotai/Kimi-VL-A3B-Thinking",
+        },
+        "Kimi-VL-A3B-Thinking-2506": {
+            DownloadSource.DEFAULT: "moonshotai/Kimi-VL-A3B-Thinking-2506",
+            DownloadSource.MODELSCOPE: "moonshotai/Kimi-VL-A3B-Thinking-2506",
         },
     },
     template="kimi_vl",
@@ -1690,6 +1705,10 @@ register_model_group(
         "Mistral-Small-3.1-24B-Instruct": {
             DownloadSource.DEFAULT: "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
             DownloadSource.MODELSCOPE: "mistralai/Mistral-Small-3.1-24B-Instruct-2503",
+        },
+        "Mistral-Small-3.2-24B-Instruct": {
+            DownloadSource.DEFAULT: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+            DownloadSource.MODELSCOPE: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
         },
     },
     template="mistral_small",
