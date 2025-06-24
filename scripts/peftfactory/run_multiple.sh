@@ -35,6 +35,7 @@ do
     do
         for pm in ${peft_methods[@]};
         do
+            TIMESTAMP=`date +%s`
             OUTPUT_DIR="saves/${pm}/${m}/train_${d}_`date +%s`"
             DATASET="${d}"
             SEED=123
