@@ -24,7 +24,7 @@
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
 datasets=(qnli)
-peft_methods=(lora)
+peft_methods=(prompt-tuning)
 models=(gemma-3-1b-it)
 
 export DISABLE_VERSION_CHECK=1
