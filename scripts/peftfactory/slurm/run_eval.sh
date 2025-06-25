@@ -22,7 +22,7 @@
 #SBATCH -o logs/peft-factory-eval-stdout.%J.out
 #SBATCH -e logs/peft-factory-eval-stdout.%J.err
 #SBATCH --time=2-00:00
-#SBATCH --account=p904-24-3
+#SBATCH --account=p1370-25-2
 
 eval "$(conda shell.bash hook)"
 conda activate peft-factory
