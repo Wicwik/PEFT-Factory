@@ -39,9 +39,9 @@ module load libsndfile
 export HF_HOME="/projects/${PROJECT}/cache"
 export DISABLE_VERSION_CHECK=1 # installed peft library from PR https://github.com/huggingface/peft/pull/2458
 
-datasets=(record multirc boolq wic wsc cb copa)
-peft_methods=(ia3 prompt-tuning lora lntuning)
-models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
+datasets=(qnli)
+peft_methods=(prompt-tuning)
+models=(gemma-3-1b-it)
 
 
 for d in ${datasets[@]};
