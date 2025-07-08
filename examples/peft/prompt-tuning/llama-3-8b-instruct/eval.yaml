@@ -27,7 +27,6 @@ packing: false
 output_dir: ${OUTPUT_DIR}
 logging_steps: 5
 save_steps: 0.05
-plot_loss: true
 overwrite_output_dir: true
 save_only_model: false
 plot_loss: true
