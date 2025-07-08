@@ -25,7 +25,7 @@
 
 datasets=(qnli)
 peft_methods=(prompt-tuning)
-models=(gemma-3-1b-it)
+models=(qwen-3-1.7b-instruct)
 
 export DISABLE_VERSION_CHECK=1
 
