@@ -18,9 +18,10 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(record multirc boolq wic wsc cb copa)
-peft_methods=(ia3 prompt-tuning lora lntuning)
-models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
+# datasets=(record multirc boolq wic wsc cb copa)
+datasets=(qnli)
+peft_methods=(prompt-tuning)
+models=(gemma-3-1b-it)
 
 
 for d in ${datasets[@]};
@@ -30,7 +31,7 @@ do
         for pm in ${peft_methods[@]};
         do
             saves=(saves/${pm}/${m}/train_${d}_*)
-            echo $saves
+            # echo $saves
 
             TIMESTAMP=`date +%s`
             OUTPUT_DIR="saves/${pm}/${m}/eval_${d}_${TIMESTAMP}"
@@ -38,6 +39,8 @@ do
             DATASET="${d}_eval"
             SEED=123
             WANDB_PROJECT="peft-factory-eval"
+
+            echo $ADAPTER
 
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 
