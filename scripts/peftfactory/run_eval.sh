@@ -19,8 +19,8 @@
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
 # datasets=(record multirc boolq wic wsc cb copa)
-datasets=(base)
-peft_methods=(prompt-tuning)
+datasets=(qnli)
+peft_methods=(base)
 models=(qwen-3-1.7b-instruct)
 
 
@@ -35,7 +35,13 @@ do
 
             TIMESTAMP=`date +%s`
             OUTPUT_DIR="saves/${pm}/${m}/eval_${d}_${TIMESTAMP}"
-            ADAPTER="${saves[-1]}"
+
+            if [[ "${d}" == 'base']]; then
+                ADAPTER=""
+            else
+                ADAPTER="${saves[-1]}"
+            fi
+        
             DATASET="${d}_eval"
             SEED=123
             WANDB_PROJECT="peft-factory-eval"
