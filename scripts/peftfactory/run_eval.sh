@@ -36,7 +36,7 @@ do
             TIMESTAMP=`date +%s`
             OUTPUT_DIR="saves/${pm}/${m}/eval_${d}_${TIMESTAMP}"
 
-            if [[ "${d}" == 'base']]; then
+            if [[ "${d}" == "base" ]]; then
                 ADAPTER=""
             else
                 ADAPTER="${saves[-1]}"
