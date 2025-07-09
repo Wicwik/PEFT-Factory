@@ -48,7 +48,7 @@ do
 
             llamafactory-cli train ${pm}_${m}_eval_${d}.yaml
 
-            python scipts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
+            python scripts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
         done
     done
 done

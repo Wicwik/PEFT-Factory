@@ -154,6 +154,8 @@ for es in eval_samples:
     labels.append(es["label"].strip())
     predictions.append(es["predict"].strip())
 
+print(predictions)
+
 with open(f"{eval_dir}/results.jsonl", "w") as outfile:
     for metric in DATASET_TO_METRIC_MAPPING[dataset]["metrics"]:
         if dataset in ["record"]:
