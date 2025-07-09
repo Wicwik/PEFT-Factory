@@ -21,7 +21,7 @@
 # datasets=(record multirc boolq wic wsc cb copa)
 datasets=(qnli)
 peft_methods=(prompt-tuning)
-models=(gemma-3-1b-it)
+models=(qwen-3-1.7b-instruct)
 
 
 for d in ${datasets[@]};
