@@ -1,7 +1,7 @@
 seed: ${SEED}
 
 ### model
-model_name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
+model_name_or_path: Qwen/Qwen3-1.7B
 adapter_name_or_path: ${ADAPTER}
 trust_remote_code: true
 flash_attn: auto
