@@ -151,8 +151,8 @@ with open(f"{eval_dir}/generated_predictions.jsonl") as json_file:
 
 labels, predictions = [], []
 for es in eval_samples:
-    labels.append(es["label"].replace("<think>\n\n</think>\n\n", "").strip())
-    predictions.append(es["predict"].replace("<think>\n\n</think>\n\n", "").strip())
+    labels.append(es["label"].split("</think>\n\n")[-1].strip())
+    predictions.append(es["predict"].split("</think>\n\n")[-1].strip())
 
 print(list(zip(predictions,labels)))
 
