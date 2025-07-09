@@ -154,7 +154,7 @@ for es in eval_samples:
     labels.append(es["label"].replace("<think>\n\n</think>\n\n", "").strip())
     predictions.append(es["predict"].replace("<think>\n\n</think>\n\n", "").strip())
 
-print(zip(predictions,labels))
+print(list(zip(predictions,labels)))
 
 with open(f"{eval_dir}/results.jsonl", "w") as outfile:
     for metric in DATASET_TO_METRIC_MAPPING[dataset]["metrics"]:
