@@ -19,6 +19,7 @@ overwrite_cache: true
 preprocessing_num_workers: 16
 dataloader_num_workers: 4
 packing: false
+enable_thinking: false
 
 ### output
 output_dir: ${OUTPUT_DIR}
