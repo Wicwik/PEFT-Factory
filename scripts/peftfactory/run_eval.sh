@@ -19,9 +19,9 @@
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
 # datasets=(record multirc boolq wic wsc cb copa)
-datasets=(qnli)
+datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
 peft_methods=(base)
-models=(qwen-3-1.7b-instruct)
+models=(llama-3-8b-instruct)
 
 
 for d in ${datasets[@]};
