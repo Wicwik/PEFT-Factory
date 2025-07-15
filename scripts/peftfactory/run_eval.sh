@@ -18,8 +18,8 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-# datasets=(record multirc boolq wic wsc cb copa)
-datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
+datasets=(record)
+# datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
 peft_methods=(base)
 models=(llama-3-8b-instruct)
 

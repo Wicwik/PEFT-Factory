@@ -14,12 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export DISABLE_VERSION_CHECK=1 # installed peft library from PR https://github.com/huggingface/peft/pull/2458
-
-# datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-datasets=(record multirc boolq wic wsc cb copa)
-peft_methods=(ia3 prompt-tuning lora lntuning)
-models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
+datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
+# datasets=(record multirc boolq wic wsc cb copa)
+# peft_methods=(ia3 prompt-tuning lora lntuning)
+peft_methods=(base)
+models=(llama-3-8b-instruct)
 
 
 for d in ${datasets[@]};
@@ -32,7 +31,7 @@ do
 
             EVAL_DIR="${saves[-1]}"
 
-            python scipts/peftfactory/compute_metrics.py ${EVAL_DIR} ${d}
+            python scripts/peftfactory/compute_metrics.py ${EVAL_DIR} ${d}
         done
     done
 done

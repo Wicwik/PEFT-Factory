@@ -168,7 +168,7 @@
     "ms_hub_url": "AI-ModelScope/OpenOrca",
     "columns": {
       "prompt": "question",
-      "response": "response",
+      "response": "Respond",
       "system": "system_prompt"
     }
   },
@@ -316,7 +316,7 @@
     "hf_hub_url": "argilla/magpie-ultra-v0.1",
     "columns": {
       "prompt": "instruction",
-      "response": "response"
+      "response": "Respond"
     }
   },
   "web_instruct": {
@@ -331,7 +331,7 @@
     "ms_hub_url": "llamafactory/OpenO1-SFT",
     "columns": {
       "prompt": "prompt",
-      "response": "response"
+      "response": "Respond"
     }
   },
   "open_thoughts": {
@@ -719,7 +719,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mnli",
     "split": "train",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Response only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -730,7 +730,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mnli",
     "split": "validation_mismatched",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Response only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -741,7 +741,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mnli",
     "split": "validation_matched",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Response only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, neutral, and contradiction classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -752,7 +752,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "qqp",
     "split": "train",
-    "instruction": "Classify the following question pair into duplicate and not_duplicate classes. Response only with the corresponding class.",
+    "instruction": "Classify the following question pair into duplicate and not_duplicate classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "question1",
       "query": "question2",
@@ -763,7 +763,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "qqp",
     "split": "validation",
-    "instruction": "Classify the following question pair into duplicate and not_duplicate classes. Response only with the corresponding class.",
+    "instruction": "Classify the following question pair into duplicate and not_duplicate classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "question1",
       "query": "question2",
@@ -774,7 +774,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "qnli",
     "split": "train",
-    "instruction": "Classify the following question and sentence pair into entailment and not_entailment classes. Response only with the corresponding class.",
+    "instruction": "Classify the following question and sentence pair into entailment and not_entailment classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "question",
       "query": "sentence",
@@ -785,7 +785,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "qnli",
     "split": "validation",
-    "instruction": "Classify the following question and sentence pair into entailment and not_entailment classes. Response only with the corresponding class.",
+    "instruction": "Classify the following question and sentence pair into entailment and not_entailment classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "question",
       "query": "sentence",
@@ -796,7 +796,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "sst2",
     "split": "train",
-    "instruction": "Classify the following sentence into negative and positive classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence into negative and positive classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence",
       "response": "label"
@@ -806,7 +806,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "sst2",
     "split": "validation",
-    "instruction": "Classify the following sentence into negative and positive classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence into negative and positive classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence",
       "response": "label"
@@ -816,7 +816,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "stsb",
     "split": "train",
-    "instruction": "Asign a similarity score from 0 to 5 to the following sentence pair. Response only with the corresponding score.",
+    "instruction": "Assign a similarity score from 0 to 5 to the following sentence pair. Respond only with the corresponding score.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -827,7 +827,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "stsb",
     "split": "validation",
-    "instruction": "Asign a similarity score from 0 to 5 to the following sentence pair. Response only with the corresponding score.",
+    "instruction": "Assign a similarity score from 0 to 5 to the following sentence pair. Respond only with the corresponding score.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -838,7 +838,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "train",
-    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Response only with the corresponding class.",
+    "instruction": "lassify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -849,7 +849,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "validation",
-    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -860,7 +860,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "test",
-    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -871,7 +871,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "rte",
     "split": "train",
-    "instruction": "Classify the following sentence pair into entailment and not_entailment classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into entailment and not_entailment classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -882,7 +882,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "rte",
     "split": "validation",
-    "instruction": "Classify the following sentence pair into entailment and not_entailment classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into entailment and not_entailment classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -893,7 +893,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "cola",
     "split": "train",
-    "instruction": "Classify the following sentence into unacceptable and acceptable classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence into unacceptable and acceptable classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence",
       "response": "label"
@@ -903,7 +903,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "cola",
     "split": "validation",
-    "instruction": "Classify the following sentence into unacceptable and acceptable classes. Response only with the corresponding class.",
+    "instruction": "Classify the following sentence into unacceptable and acceptable classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence",
       "response": "label"
@@ -912,7 +912,7 @@
   "record": {
     "hf_hub_url": "rbelanec/record",
     "split": "train",
-    "instruction": "Based on the fowllowing query, entities and passage, replace the @placeholder in the query.",
+    "instruction": "Based on the following query, entities, and passage, replace the @placeholder in the query. Respond only with the correct replacement.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -921,7 +921,7 @@
   "record_eval": {
     "hf_hub_url": "rbelanec/record",
     "split": "validation",
-    "instruction": "Based on the fowllowing query, entities and passage, replace the @placeholder in the query.",
+    "instruction": "Based on the following query, entities, and passage, replace the @placeholder in the query. Respond only with the correct replacement.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -930,7 +930,7 @@
   "multirc": {
     "hf_hub_url": "rbelanec/multirc",
     "split": "train",
-    "instruction": "Based on the following paragraph, question and anwer, determine wheter the answer anwers the question. Response only with the corresponding true or false.",
+    "instruction": "Based on the following paragraph, question, and answer, determine whether the answer answers the question. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -939,7 +939,7 @@
   "multirc_eval": {
     "hf_hub_url": "rbelanec/multirc",
     "split": "validation",
-    "instruction": "Based on the following paragraph, question and anwer, determine wheter the answer anwers the question. Response only with the corresponding true or false.",
+    "instruction": "Based on the following paragraph, question, and answer, determine whether the answer answers the question. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -949,7 +949,7 @@
     "hf_hub_url": "super_glue",
     "subset": "boolq",
     "split": "train",
-    "instruction": "Respond to following question with true or false, based on the passage. Response only with the corresponding true or false.",
+    "instruction": "Based on the passage, respond to the following question with true or false. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "question",
       "query": "passage",
@@ -960,7 +960,7 @@
     "hf_hub_url": "super_glue",
     "subset": "boolq",
     "split": "validation",
-    "instruction": "Respond to following question with true or false, based on the passage. Response only with the corresponding true or false.",
+    "instruction": "Based on the passage, respond to the following question with true or false. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "question",
       "query": "passage",
@@ -970,7 +970,7 @@
   "wic": {
     "hf_hub_url": "rbelanec/wic",
     "split": "train",
-    "instruction": "Based on the contex from following senctence pair, classify the word into true and false classes, based on its meaning in both of the senteces. Response only with the corresponding true or false.",
+    "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -979,7 +979,7 @@
   "wic_eval": {
     "hf_hub_url": "rbelanec/wic",
     "split": "validation",
-    "instruction": "Based on the contex from following senctence pair, classify the word into true and false classes, based on its meaning in both of the senteces. Response only with the corresponding true or false.",
+    "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -988,7 +988,7 @@
   "wsc": {
     "hf_hub_url": "rbelanec/wsc",
     "split": "train",
-    "instruction": "Based on the following sentence, determine wheter the pronoun marked with * * is referencing the noun marked with # #. Response only with corresponding true and false.",
+    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -997,7 +997,7 @@
   "wsc_eval": {
     "hf_hub_url": "rbelanec/wsc",
     "split": "validation",
-    "instruction": "Based on the following sentence, determine wheter the pronoun marked with * * is referencing the noun marked with # #. Response only with corresponding true and false.",
+    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1007,7 +1007,7 @@
     "hf_hub_url": "super_glue",
     "subset": "cb",
     "split": "train",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Response only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -1018,7 +1018,7 @@
     "hf_hub_url": "super_glue",
     "subset": "cb",
     "split": "validation",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Response only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -1028,7 +1028,7 @@
   "copa": {
     "hf_hub_url": "rbelanec/copa",
     "split": "train",
-    "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Response only with the corresponding choice1 or choice2.",
+    "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Respond only with the corresponding choice1 or choice2.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1037,7 +1037,7 @@
   "copa_eval": {
     "hf_hub_url": "rbelanec/copa",
     "split": "validation",
-    "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Response only with the corresponding choice1 or choice2.",
+    "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Respond only with the corresponding choice1 or choice2.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"

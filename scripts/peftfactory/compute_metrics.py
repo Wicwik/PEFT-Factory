@@ -45,28 +45,64 @@ def em(preds, targets, labels):
     return {"exact_match": np.sum(preds == targets) / preds.size}
 
 
-def f1(preds, targets, labels):
-    check_data_state(preds, targets)
+# def f1(preds, targets, labels):
+#     check_data_state(preds, targets)
 
+#     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
+
+#     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
+
+#     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
+
+#     return {"f1": f1_score(targets, preds, labels=labels, pos_label=labels[0])}
+
+
+# def macro_f1(preds, targets, labels):
+#     check_data_state(preds, targets)
+
+#     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
+
+#     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
+
+#     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
+
+#     return {"macro_f1": f1_score(targets, preds, labels=labels, average="macro")}
+
+def f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
 
     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
 
-    return {"f1": f1_score(targets, preds, labels=labels, pos_label=labels[1])}
+    label_to_id = {label: idx for idx, label in enumerate(labels)}
 
+    # print(label_to_id)
+
+    targets = list(map(label_to_id.get, targets))
+    preds = list(map(label_to_id.get, preds))
+
+    # print(preds, targets)
+
+    return {"f1": f1_score(targets, preds)}
 
 def macro_f1(preds, targets, labels):
-    check_data_state(preds, targets)
-
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
 
     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
 
-    return {"macro_f1": f1_score(targets, preds, labels=labels, average="macro")}
+    label_to_id = {label: idx for idx, label in enumerate(labels)}
+
+    # print(label_to_id)
+
+    targets = list(map(label_to_id.get, targets))
+    preds = list(map(label_to_id.get, preds))
+
+    # print(preds, targets)
+
+    return {"macro_f1": f1_score(targets, preds, average="macro")}
 
 
 def pearsonr(preds, targets, labels):
@@ -123,10 +159,10 @@ DATASET_TO_METRIC_MAPPING = {
     "rte": {"metrics": [f1, em], "labels": ["entailment", "not_entailment"]},
     "cola": {"metrics": [f1, em], "labels": ["unacceptable", "acceptable"]},
     "record": {"metrics": [record], "labels": []},
-    "multirc": {"metrics": [f1, em], "labels": ["False", "True"]},
-    "boolq": {"metrics": [f1, em], "labels": ["False", "True"]},
-    "wic": {"metrics": [f1, em], "labels": ["False", "True"]},
-    "wsc": {"metrics": [f1, em], "labels": ["False", "True"]},
+    "multirc": {"metrics": [f1, em], "labels": ["false", "true"]},
+    "boolq": {"metrics": [f1, em], "labels": ["false", "true"]},
+    "wic": {"metrics": [f1, em], "labels": ["false", "true"]},
+    "wsc": {"metrics": [f1, em], "labels": ["false", "true"]},
     "cb": {"metrics": [macro_f1, em], "labels": ["entailment", "contradiction", "neutral"]},
     "copa": {"metrics": [f1, em], "labels": ["choice1", "choice2"]},
 }
@@ -151,10 +187,10 @@ with open(f"{eval_dir}/generated_predictions.jsonl") as json_file:
 
 labels, predictions = [], []
 for es in eval_samples:
-    labels.append(es["label"].split("</think>\n\n")[-1].strip())
-    predictions.append(es["predict"].split("</think>\n\n")[-1].strip())
+    labels.append(es["label"].split("</think>\n\n")[-1].strip().lower())
+    predictions.append(es["predict"].split("</think>\n\n")[-1].strip().lower())
 
-print(list(zip(predictions,labels)))
+# print(list(zip(predictions,labels)))
 
 with open(f"{eval_dir}/results.jsonl", "w") as outfile:
     for metric in DATASET_TO_METRIC_MAPPING[dataset]["metrics"]:

@@ -50,7 +50,7 @@ def preprocess_wic():
     _id2label = {0: "False", 1: "True", -1: ""}
 
     def preprocessor(example):
-        input_text = f"{example['sentence1']}\n\n{example['sentence2']}\n\n{example['word']}"
+        input_text = f"Sentence1: {example['sentence1']}\n\nSentence2: {example['sentence2']}\n\nWord: {example['word']}"
         label = _id2label[example["label"]]
         return {"inputs": input_text, "targets": label}
 
@@ -63,7 +63,7 @@ def preprocess_multirc():
     _id2label = {0: "False", 1: "True", -1: ""}
 
     def preprocessor(example):
-        input_text = f"{example['paragraph']}\n\n{example['question']}\n\n{example['answer']}"
+        input_text = f"Paragraph: {example['paragraph']}\n\nQuestion: {example['question']}\n\nAnswer: {example['answer']}"
         label = _id2label[example["label"]]
         return {"inputs": input_text, "targets": label}
 
@@ -76,7 +76,7 @@ def preprocess_copa():
     _id2label = {0: "choice1", 1: "choice2", -1: ""}
 
     def preprocessor(example):
-        input_text = f"{example['premise']}\n\n{example['choice1']}\n\n{example['choice2']}"
+        input_text = f"Premise: {example['premise']}\n\nChoice1: {example['choice1']}\n\nChoice2: {example['choice2']}"
         label = _id2label[example["label"]]
         return {"inputs": input_text, "targets": label}
 
@@ -96,7 +96,7 @@ def preprocess_record():
             passage = ex["passage"]
             passage = re.sub(r"(\.|\?|\!|\"|\')\n@highlight\n", r"\1 ", passage)
             passage = re.sub(r"\n@highlight\n", ". ", passage)
-            inputs = f"{ex['query']}\n\n{', '.join(ex['entities'])}\n\n{passage}"
+            inputs = f"Query: {ex['query']}\n\nEntities: {', '.join(ex['entities'])}\n\nPassage: {passage}"
 
             # duplicates the samples based on  number of answers.
             num_answers = len(ex["answers"])
@@ -122,8 +122,8 @@ def preprocess_record():
 # multirc = preprocess_multirc()
 # multirc.push_to_hub("rbelanec/multirc")
 
-# copa = preprocess_copa()
-# copa.push_to_hub("rbelanec/copa")
+copa = preprocess_copa()
+copa.push_to_hub("rbelanec/copa")
 
-record = preprocess_record()
-record.push_to_hub("rbelanec/record")
+# record = preprocess_record()
+# record.push_to_hub("rbelanec/record")
