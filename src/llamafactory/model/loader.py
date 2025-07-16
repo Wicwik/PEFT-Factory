@@ -28,8 +28,10 @@ from transformers import (
     AutoTokenizer,
 )
 from trl import AutoModelForCausalLMWithValueHead
+from adapters import AutoAdapterModel
 
 from ..extras import logging
+from ..extras.constants import ADAPTERS_METHODS
 from ..extras.misc import count_parameters, skip_check_imports, try_download_model_from_other_hub
 from .adapter import init_adapter
 from .model_utils.liger_kernel import apply_liger_kernel
@@ -169,6 +171,8 @@ def load_model(
                 load_class = AutoModelForSeq2SeqLM
             elif type(config) in AutoModelForTextToWaveform._model_mapping.keys():  # audio hack for qwen2_5_omni
                 load_class = AutoModelForTextToWaveform
+            elif finetuning_args.finetuning_type in ADAPTERS_METHODS:  # Adapters library model
+                load_class = AutoAdapterModel
             else:
                 load_class = AutoModelForCausalLM
 

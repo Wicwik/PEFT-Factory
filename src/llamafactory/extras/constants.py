@@ -25,6 +25,13 @@ from peft import (
     PromptEncoderConfig,
     PromptTuningConfig,
 )
+
+from adapters import (
+    DoubleSeqBnConfig,
+    SeqBnConfig,
+    ParBnConfig,
+)
+
 from peft.utils import SAFETENSORS_WEIGHTS_NAME as SAFE_ADAPTER_WEIGHTS_NAME
 from peft.utils import WEIGHTS_NAME as ADAPTER_WEIGHTS_NAME
 from transformers.utils import SAFE_WEIGHTS_INDEX_NAME, SAFE_WEIGHTS_NAME, WEIGHTS_INDEX_NAME, WEIGHTS_NAME
@@ -65,7 +72,10 @@ LAYERNORM_NAMES = {"norm", "ln"}
 LLAMABOARD_CONFIG = "llamaboard_config.yaml"
 
 HF_PEFT_METHODS = ["prompt-tuning", "prefix-tuning", "p-tuning", "ia3", "lntuning", "mtp"]
-CUSTOM_PEFT_METHODS = ["dept", "adept", "attempt", "adapters", "adapter-fusion", "bitfit"]
+
+ADAPTERS_METHODS = ["bn-adapter", "seq-bn-adapter", "par-adapter", "adapter-fusion"]
+
+CUSTOM_PEFT_METHODS = ["dept", "adept", "attempt", "bitfit"]
 
 PEFT_CONFIG_MAPPING = {
     "prompt-tuning": PromptTuningConfig,
@@ -76,13 +86,19 @@ PEFT_CONFIG_MAPPING = {
     "mtp": MultitaskPromptTuningConfig,
 }
 
-METHODS = ["full", "freeze", "lora"] + HF_PEFT_METHODS + CUSTOM_PEFT_METHODS
+ADAPTERS_CONFIG_MAPPING = {
+    "bn-adapter": DoubleSeqBnConfig,
+    "seq-bn-adapter": SeqBnConfig,
+    "par-adapter": ParBnConfig,
+}
+
+METHODS = ["full", "freeze", "lora"] + ADAPTERS_METHODS + HF_PEFT_METHODS + CUSTOM_PEFT_METHODS
 
 MOD_SUPPORTED_MODELS = {"bloom", "falcon", "gemma", "llama", "mistral", "mixtral", "phi", "starcoder2"}
 
 MULTIMODAL_SUPPORTED_MODELS = set()
 
-PEFT_METHODS = {"lora"} | set(HF_PEFT_METHODS) | set(CUSTOM_PEFT_METHODS)
+PEFT_METHODS = {"lora"} | set(HF_PEFT_METHODS) | set(ADAPTERS_METHODS) | set(CUSTOM_PEFT_METHODS)
 
 RUNNING_LOG = "running_log.txt"
 

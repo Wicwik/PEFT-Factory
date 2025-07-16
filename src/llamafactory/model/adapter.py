@@ -30,7 +30,7 @@ from .model_utils.visual import COMPOSITE_MODELS, get_forbidden_modules, patch_t
 if TYPE_CHECKING:
     from transformers import PretrainedConfig, PreTrainedModel
 
-    from ..hparams import FinetuningArguments, ModelArguments
+    from ..hparams import FinetuningArguments, ModelArguments, PeftArguments
 
 
 logger = logging.get_logger(__name__)
@@ -258,13 +258,26 @@ def _setup_lora_tuning(
 
     return model
 
+def _setup_adapters(   
+    config: "PretrainedConfig",
+    model: "PreTrainedModel",
+    model_args: "ModelArguments",
+    finetuning_args: "FinetuningArguments",
+    peft_args: "PeftArguments",
+    is_trainable: bool,
+    cast_trainable_params_to_fp32: bool,
+    ):
+    model.add_adapter("test", config=config)
+
+    return model
+
 
 def _setup_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
     finetuning_args: "FinetuningArguments",
-    peft_args: "PeftConfig",
+    peft_args: "PeftArguments",
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
 ) -> "PeftModel":
