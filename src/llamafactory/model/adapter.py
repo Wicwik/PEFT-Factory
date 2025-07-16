@@ -20,7 +20,7 @@ from peft import LoraConfig, LoraModel, PeftConfig, PeftModel, TaskType, get_pef
 from transformers.integrations import is_deepspeed_zero3_enabled
 
 from ..extras import logging
-from ..extras.constants import PEFT_METHODS
+from ..extras.constants import ADAPTERS_METHODS, HF_PEFT_METHODS, CUSTOM_PEFT_METHODS
 from .model_utils.misc import find_all_linear_modules, find_expanded_modules
 from .model_utils.quantization import QuantizationMethod
 from .model_utils.unsloth import get_unsloth_peft_model, load_unsloth_peft_model
@@ -258,7 +258,19 @@ def _setup_lora_tuning(
 
     return model
 
-def _setup_adapters(   
+def _setup_custom_peft(   
+    config: "PretrainedConfig",
+    model: "PreTrainedModel",
+    model_args: "ModelArguments",
+    finetuning_args: "FinetuningArguments",
+    peft_args: "PeftArguments",
+    is_trainable: bool,
+    cast_trainable_params_to_fp32: bool,
+    ):
+
+    return model
+
+def _setup_adapters_peft(   
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -272,7 +284,7 @@ def _setup_adapters(
     return model
 
 
-def _setup_peft(
+def _setup_hf_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -340,8 +352,16 @@ def init_adapter(
         model = _setup_lora_tuning(
             config, model, model_args, finetuning_args, is_trainable, cast_trainable_params_to_fp32
         )
-    elif finetuning_args.finetuning_type in PEFT_METHODS:
-        model = _setup_peft(
+    elif finetuning_args.finetuning_type in HF_PEFT_METHODS:
+        model = _setup_hf_peft(
+            config, model, model_args, finetuning_args, peft_args, is_trainable, cast_trainable_params_to_fp32
+        )
+    elif finetuning_args.finetuning_type in ADAPTERS_METHODS:
+        model = _setup_adapters_peft(
+            config, model, model_args, finetuning_args, peft_args, is_trainable, cast_trainable_params_to_fp32
+        )
+    elif finetuning_args.finetuning_type in ADAPTERS_METHODS:
+        model = _setup_custom_peft(
             config, model, model_args, finetuning_args, peft_args, is_trainable, cast_trainable_params_to_fp32
         )
     else:
