@@ -31,8 +31,7 @@ do
         for pm in ${peft_methods[@]};
         do
             saves=(saves/${pm}/${m}/train_${d}_*)
-            # echo $saves
-
+            
             TIMESTAMP=`date +%s`
             OUTPUT_DIR="saves/${pm}/${m}/eval_${d}_${TIMESTAMP}"
 
@@ -46,13 +45,11 @@ do
             SEED=123
             WANDB_PROJECT="peft-factory-eval"
 
-            echo $ADAPTER
-
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 
-            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${pm}_${m}_eval_${d}.yaml
+            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${OUTPUT_DIR}/eval.yaml
 
-            llamafactory-cli train ${pm}_${m}_eval_${d}.yaml
+            llamafactory-cli train ${OUTPUT_DIR}/eval.yaml
 
             python scripts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
         done

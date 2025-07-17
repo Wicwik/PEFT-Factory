@@ -41,9 +41,9 @@ do
 
             export OUTPUT_DIR DATASET SEED
 
-            envsubst < examples/peft/${pm}/${m}/train.yaml > ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            envsubst < examples/peft/${pm}/${m}/train.yaml > ${OUTPUT_DIR}/train.yaml
 
-            sbatch --job-name ${pm}_${m}_train_${d}_${TIMESTAMP} -o logs/${pm}_${m}_train_${d}_${TIMESTAMP}.out -e logs/${pm}_${m}_train_${d}_${TIMESTAMP}.err scipts/peftfactory/run_single_slurm.sh ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            sbatch --job-name ${pm}_${m}_train_${d}_${TIMESTAMP} -o logs/${pm}_${m}_train_${d}_${TIMESTAMP}.out -e logs/${pm}_${m}_train_${d}_${TIMESTAMP}.err scripts/peftfactory/slurm/run_single.sh ${OUTPUT_DIR}/train.yaml
             
             sleep 1
         done

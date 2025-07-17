@@ -28,6 +28,5 @@ conda activate peft-factory
 module load libsndfile
 
 export HF_HOME="/projects/${PROJECT}/cache"
-export DISABLE_VERSION_CHECK=1 # installed peft library from PR https://github.com/huggingface/peft/pull/2458
 
 llamafactory-cli train $1
