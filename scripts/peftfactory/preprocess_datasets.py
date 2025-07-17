@@ -50,7 +50,9 @@ def preprocess_wic():
     _id2label = {0: "False", 1: "True", -1: ""}
 
     def preprocessor(example):
-        input_text = f"Sentence1: {example['sentence1']}\n\nSentence2: {example['sentence2']}\n\nWord: {example['word']}"
+        input_text = (
+            f"Sentence1: {example['sentence1']}\n\nSentence2: {example['sentence2']}\n\nWord: {example['word']}"
+        )
         label = _id2label[example["label"]]
         return {"inputs": input_text, "targets": label}
 
@@ -63,7 +65,9 @@ def preprocess_multirc():
     _id2label = {0: "False", 1: "True", -1: ""}
 
     def preprocessor(example):
-        input_text = f"Paragraph: {example['paragraph']}\n\nQuestion: {example['question']}\n\nAnswer: {example['answer']}"
+        input_text = (
+            f"Paragraph: {example['paragraph']}\n\nQuestion: {example['question']}\n\nAnswer: {example['answer']}"
+        )
         label = _id2label[example["label"]]
         return {"inputs": input_text, "targets": label}
 

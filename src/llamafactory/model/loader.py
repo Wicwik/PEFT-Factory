@@ -16,6 +16,7 @@ import os
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
 import torch
+from adapters import AutoAdapterModel
 from peft import PeftConfig
 from transformers import (
     AutoConfig,
@@ -28,7 +29,6 @@ from transformers import (
     AutoTokenizer,
 )
 from trl import AutoModelForCausalLMWithValueHead
-from adapters import AutoAdapterModel
 
 from ..extras import logging
 from ..extras.constants import ADAPTERS_METHODS

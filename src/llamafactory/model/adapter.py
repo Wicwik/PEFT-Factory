@@ -20,7 +20,7 @@ from peft import LoraConfig, LoraModel, PeftConfig, PeftModel, TaskType, get_pef
 from transformers.integrations import is_deepspeed_zero3_enabled
 
 from ..extras import logging
-from ..extras.constants import ADAPTERS_METHODS, HF_PEFT_METHODS, CUSTOM_PEFT_METHODS
+from ..extras.constants import ADAPTERS_METHODS, HF_PEFT_METHODS
 from .model_utils.misc import find_all_linear_modules, find_expanded_modules
 from .model_utils.quantization import QuantizationMethod
 from .model_utils.unsloth import get_unsloth_peft_model, load_unsloth_peft_model
@@ -258,7 +258,8 @@ def _setup_lora_tuning(
 
     return model
 
-def _setup_custom_peft(   
+
+def _setup_custom_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -266,11 +267,11 @@ def _setup_custom_peft(
     peft_args: "PeftArguments",
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
-    ):
-
+):
     return model
 
-def _setup_adapters_peft(   
+
+def _setup_adapters_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -278,7 +279,7 @@ def _setup_adapters_peft(
     peft_args: "PeftArguments",
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
-    ):
+):
     model.add_adapter(peft_args.adapter_name, config=peft_args)
     model.train_adapter(peft_args.adapter_name)
     model.set_active_adapters(peft_args.adapter_name)
