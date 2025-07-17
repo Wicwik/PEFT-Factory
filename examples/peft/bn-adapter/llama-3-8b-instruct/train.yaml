@@ -14,6 +14,7 @@ mh_adapter: true
 output_adapter: true
 reduction_factor: 16
 non_linearity: relu
+adapter_name: ${DATASET}
 
 ### dataset
 dataset: ${DATASET}

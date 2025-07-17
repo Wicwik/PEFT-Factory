@@ -1,1 +1,1 @@
-from .config import AdaptersConfig
+from .config import AdaptersDoubleSeqBnConfig

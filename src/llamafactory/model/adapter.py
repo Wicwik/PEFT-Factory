@@ -279,7 +279,11 @@ def _setup_adapters_peft(
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
     ):
-    model.add_adapter("test", config=config)
+    model.add_adapter(peft_args.adapter_name, config=peft_args)
+    model.train_adapter(peft_args.adapter_name)
+    model.set_active_adapters(peft_args.adapter_name)
+
+    print(model)
 
     return model
 

@@ -1,9 +1,16 @@
 from peft import PeftConfig
 from dataclasses import dataclass, field
 
-from typing import Optional
+from typing import Union, Mapping
+
+from adapters import DoubleSeqBnConfig
 
 @dataclass
 class AdaptersConfig():
-    adapters : list[str] = None
-    classification_head : Optional[bool] = False
+    adapter_name: str = "default"
+
+@dataclass
+class AdaptersDoubleSeqBnConfig(AdaptersConfig, DoubleSeqBnConfig):
+    # this is mostly because DoubleSeqBnConfig from adapters contains Union[X, Y] where both are not optional, so HFArgumentParser cannot parse it properly
+    reduction_factor: float = 16
+    residual_before_ln: bool = True
