@@ -26,7 +26,7 @@
 
 datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
 peft_methods=(prompt-tuning)
-models=(gemma-3-1b-it)
+models=(llama-3-8b-instruct)
 
 for d in ${datasets[@]};
 do
