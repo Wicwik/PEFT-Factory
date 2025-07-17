@@ -20,14 +20,14 @@ from typing import TYPE_CHECKING, Optional
 from peft import PeftConfig
 
 from ...data import SFTDataCollatorWith4DAttentionMask, get_dataset, get_template_and_fix_tokenizer
-from ...extras.constants import IGNORE_INDEX
+from ...extras.constants import IGNORE_INDEX, ADAPTERS_METHODS
 from ...extras.logging import get_logger
 from ...extras.misc import calculate_tps
 from ...extras.ploting import plot_loss
 from ...model import load_model, load_tokenizer
 from ..trainer_utils import create_modelcard_and_push
 from .metric import ComputeAccuracy, ComputeSimilarity, eval_logit_processor
-from .trainer import CustomSeq2SeqTrainer
+from .trainer import CustomSeq2SeqTrainer, CustomSeq2SeqAdapterTrainer
 
 
 if TYPE_CHECKING:
@@ -81,8 +81,15 @@ def run_sft(
     gen_kwargs["eos_token_id"] = [tokenizer.eos_token_id] + tokenizer.additional_special_tokens_ids
     gen_kwargs["pad_token_id"] = tokenizer.pad_token_id
 
+    trainer_class = CustomSeq2SeqTrainer
+    if finetuning_args.finetuning_type in ADAPTERS_METHODS:
+        trainer_class = CustomSeq2SeqAdapterTrainer
+
+
+    print(trainer_class)
+
     # Initialize our Trainer
-    trainer = CustomSeq2SeqTrainer(
+    trainer = trainer_class(
         model=model,
         args=training_args,
         finetuning_args=finetuning_args,

@@ -24,6 +24,7 @@ import numpy as np
 import torch
 from transformers import Seq2SeqTrainer
 from typing_extensions import override
+from adapters import AdapterTrainer
 
 from ...extras import logging
 from ...extras.constants import IGNORE_INDEX
@@ -163,3 +164,13 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         with open(output_prediction_file, "w", encoding="utf-8") as f:
             for text, pred, label in zip(decoded_inputs, decoded_preds, decoded_labels):
                 f.write(json.dumps({"prompt": text, "predict": pred, "label": label}, ensure_ascii=False) + "\n")
+
+
+class CustomSeq2SeqAdapterTrainer(CustomSeq2SeqTrainer, AdapterTrainer):
+    def __init__(
+        self,
+        finetuning_args: "FinetuningArguments",
+        processor: Optional["ProcessorMixin"],
+        **kwargs
+    ) -> None:
+        super().__init__(finetuning_args=finetuning_args, processor=processor, **kwargs)
