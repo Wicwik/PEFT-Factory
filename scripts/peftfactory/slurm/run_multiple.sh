@@ -39,7 +39,7 @@ do
             DATASET="${d}"
             SEED=123
 
-            mkdir ${OUTPUT_DIR}
+            mkdir -p ${OUTPUT_DIR}
 
             export OUTPUT_DIR DATASET SEED
 
