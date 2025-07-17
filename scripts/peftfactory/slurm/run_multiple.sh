@@ -39,6 +39,8 @@ do
             DATASET="${d}"
             SEED=123
 
+            mkdir ${OUTPUT_DIR}
+
             export OUTPUT_DIR DATASET SEED
 
             envsubst < examples/peft/${pm}/${m}/train.yaml > ${OUTPUT_DIR}/train.yaml
