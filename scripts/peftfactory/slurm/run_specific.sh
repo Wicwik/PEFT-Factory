@@ -19,7 +19,7 @@ configs=(prompt-tuning_llama-3-8b-instruct_train_stsb_1745333591)
 
 for c in ${configs[@]};
 do
-     sbatch --job-name ${c} -o logs/${c}.out -e logs/${c}.err scipts/peftfactory/slurm/run_single.sh experiments/first_runs/${c}.yaml
+     sbatch --job-name ${c} -o logs/${c}.out -e logs/${c}.err scipts/peftfactory/slurm/run_single.sh ${c}.yaml
 
      sleep 1
 done

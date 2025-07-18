@@ -22,7 +22,23 @@ import pandas as pd
 models = ["llama-3-8b-instruct"]
 # methods = ["ia3", "prompt-tuning", "lora", "lntuning"]
 methods = ["base"]
-datasets = ["mnli", "qqp", "qnli", "sst2", "stsb", "mrpc", "rte", "cola", "record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
+datasets = [
+    "mnli",
+    "qqp",
+    "qnli",
+    "sst2",
+    "stsb",
+    "mrpc",
+    "rte",
+    "cola",
+    "record",
+    "multirc",
+    "boolq",
+    "wic",
+    "wsc",
+    "cb",
+    "copa",
+]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
 
 

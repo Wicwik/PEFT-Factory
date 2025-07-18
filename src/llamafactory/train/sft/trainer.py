@@ -168,9 +168,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
 
 class CustomSeq2SeqAdapterTrainer(CustomSeq2SeqTrainer, AdapterTrainer):
     def __init__(
-        self,
-        finetuning_args: "FinetuningArguments",
-        processor: Optional["ProcessorMixin"],
-        **kwargs
+        self, finetuning_args: "FinetuningArguments", processor: Optional["ProcessorMixin"], **kwargs
     ) -> None:
         super().__init__(finetuning_args=finetuning_args, processor=processor, **kwargs)

@@ -36,15 +36,18 @@ do
         for pm in ${peft_methods[@]};
         do
             TIMESTAMP=`date +%s`
-            OUTPUT_DIR="saves/${pm}/${m}/train_${d}_`date +%s`"
+            OUTPUT_DIR="saves/${pm}/${m}/train_${d}_${TIMESTAMP}"
             DATASET="${d}"
             SEED=123
+            WANDB_PROJECT="peft-factory-train-${pm}"
 
-            export OUTPUT_DIR DATASET SEED
+            mkdir "${OUTPUT_DIR}"
 
-            envsubst < examples/peft/${pm}/${m}/train.yaml > ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            export OUTPUT_DIR DATASET SEED WANDB_PROJECT
 
-            llamafactory-cli train ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            envsubst < examples/peft/${pm}/${m}/train.yaml > ${OUTPUT_DIR}/train.yaml
+
+            llamafactory-cli train ${OUTPUT_DIR}/train.yaml
         done
     done
 done

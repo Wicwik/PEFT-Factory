@@ -37,7 +37,6 @@ module load libsndfile
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
 export HF_HOME="/projects/${PROJECT}/cache"
-export DISABLE_VERSION_CHECK=1 # installed peft library from PR https://github.com/huggingface/peft/pull/2458
 
 datasets=(qnli)
 peft_methods=(prompt-tuning)
@@ -61,9 +60,9 @@ do
 
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 
-            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${pm}_${m}_eval_${d}.yaml
+            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${OUTPUT_DIR}/eval.yaml
 
-            llamafactory-cli train ${pm}_${m}_eval_${d}.yaml
+            llamafactory-cli train ${OUTPUT_DIR}/eval.yaml
 
             python scipts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
         done

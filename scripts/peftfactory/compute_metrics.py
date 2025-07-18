@@ -68,6 +68,7 @@ def em(preds, targets, labels):
 
 #     return {"macro_f1": f1_score(targets, preds, labels=labels, average="macro")}
 
+
 def f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
@@ -85,6 +86,7 @@ def f1(preds, targets, labels):
     # print(preds, targets)
 
     return {"f1": f1_score(targets, preds)}
+
 
 def macro_f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")

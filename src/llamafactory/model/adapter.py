@@ -258,6 +258,7 @@ def _setup_lora_tuning(
 
     return model
 
+
 def _setup_custom_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
@@ -266,9 +267,9 @@ def _setup_custom_peft(
     peft_args: "PeftArguments",
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
-    ):
-
+):
     return model
+
 
 def _setup_adapters_peft(
     config: "PretrainedConfig",

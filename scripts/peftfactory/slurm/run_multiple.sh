@@ -24,9 +24,9 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(qnli)
+datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
 peft_methods=(prompt-tuning)
-models=(gemma-3-1b-it)
+models=(llama-3-8b-instruct)
 
 for d in ${datasets[@]};
 do
@@ -38,12 +38,15 @@ do
             OUTPUT_DIR="saves/${pm}/${m}/train_${d}_${TIMESTAMP}"
             DATASET="${d}"
             SEED=123
+            WANDB_PROJECT="peft-factory-train-${pm}"
 
-            export OUTPUT_DIR DATASET SEED
+            mkdir -p ${OUTPUT_DIR}
 
-            envsubst < examples/peft/${pm}/${m}/train.yaml > ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            export OUTPUT_DIR DATASET SEED WANDB_PROJECT
 
-            sbatch --job-name ${pm}_${m}_train_${d}_${TIMESTAMP} -o logs/${pm}_${m}_train_${d}_${TIMESTAMP}.out -e logs/${pm}_${m}_train_${d}_${TIMESTAMP}.err scipts/peftfactory/run_single_slurm.sh ${pm}_${m}_train_${d}_${TIMESTAMP}.yaml
+            envsubst < examples/peft/${pm}/${m}/train.yaml > ${OUTPUT_DIR}/train.yaml
+
+            sbatch --job-name ${pm}_${m}_train_${d}_${TIMESTAMP} -o logs/${pm}_${m}_train_${d}_${TIMESTAMP}.out -e logs/${pm}_${m}_train_${d}_${TIMESTAMP}.err scripts/peftfactory/slurm/run_single.sh ${OUTPUT_DIR}/train.yaml
             
             sleep 1
         done
