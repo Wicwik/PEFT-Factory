@@ -19,12 +19,12 @@
 # peft_methods=(prompt-tuning)
 # models=(gemma-3-1b-it)
 
-# datasets=(record multirc boolq wic wsc cb copa)
+datasets=(record multirc boolq wic wsc cb copa)
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(qnli)
-peft_methods=(bn-adapter)
+# datasets=(qnli)
+peft_methods=(prompt-tuning)
 models=(llama-3-8b-instruct)
 
 export DISABLE_VERSION_CHECK=1
