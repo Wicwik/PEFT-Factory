@@ -20,7 +20,7 @@ from peft import LoraConfig, LoraModel, PeftConfig, PeftModel, TaskType, get_pef
 from transformers.integrations import is_deepspeed_zero3_enabled
 
 from ..extras import logging
-from ..extras.constants import ADAPTERS_METHODS, HF_PEFT_METHODS, CUSTOM_PEFT_METHODS
+from ..extras.constants import ADAPTERS_METHODS, HF_PEFT_METHODS
 from .model_utils.misc import find_all_linear_modules, find_expanded_modules
 from .model_utils.quantization import QuantizationMethod
 from .model_utils.unsloth import get_unsloth_peft_model, load_unsloth_peft_model
@@ -258,7 +258,7 @@ def _setup_lora_tuning(
 
     return model
 
-def _setup_custom_peft(   
+def _setup_custom_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -270,7 +270,7 @@ def _setup_custom_peft(
 
     return model
 
-def _setup_adapters_peft(   
+def _setup_adapters_peft(
     config: "PretrainedConfig",
     model: "PreTrainedModel",
     model_args: "ModelArguments",
@@ -279,9 +279,28 @@ def _setup_adapters_peft(
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
     ):
-    model.add_adapter(peft_args.adapter_name, config=peft_args)
-    model.train_adapter(peft_args.adapter_name)
-    model.set_active_adapters(peft_args.adapter_name)
+
+    if model_args.adapter_name_or_path is not None:
+        init_kwargs = {
+            "subfolder": model_args.adapter_folder,
+            "offload_folder": model_args.offload_folder,
+            "cache_dir": model_args.cache_dir,
+            "revision": model_args.model_revision,
+            "token": model_args.hf_hub_token,
+        }
+
+        print(model_args.adapter_name_or_path)
+
+        adapter_name = model.load_adapter(model_args.adapter_name_or_path[0], **init_kwargs)
+        model.set_active_adapters(adapter_name)
+
+        logger.info_rank0("Loaded adapter(s): {}".format(",".join(model_args.adapter_name_or_path)))
+
+    else:
+        model.add_adapter(peft_args.adapter_name, config=peft_args)
+        model.train_adapter(peft_args.adapter_name)
+
+        model.set_active_adapters(peft_args.adapter_name)
 
     print(model)
 
@@ -307,6 +326,8 @@ def _setup_hf_peft(
         }
 
         model: PeftModel = PeftModel.from_pretrained(model, model_args.adapter_name_or_path[0], **init_kwargs)
+
+        logger.info_rank0("Loaded adapter(s): {}".format(",".join(model_args.adapter_name_or_path)))
     else:
         model: PeftModel = get_peft_model(model, peft_args)
 

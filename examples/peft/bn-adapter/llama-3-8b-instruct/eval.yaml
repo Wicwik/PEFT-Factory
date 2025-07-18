@@ -10,13 +10,16 @@ use_cache: false
 ### method
 stage: sft
 do_train: false
-finetuning_type: prompt-tuning
-task_type: CAUSAL_LM
-num_virtual_tokens: 100
+finetuning_type: bn-adapter
+mh_adapter: true
+output_adapter: true
+reduction_factor: 16
+non_linearity: relu
+adapter_name: ${DATASET}
 
 ### dataset
 eval_dataset: ${DATASET}
-template: gemma
+template: llama3
 cutoff_len: 2048
 overwrite_cache: true
 preprocessing_num_workers: 16

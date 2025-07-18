@@ -1,6 +1,8 @@
 from dataclasses import dataclass
-from peft import PeftConfig
+
 from adapters import AdapterConfig
+from peft import PeftConfig
+
 
 @dataclass
 class PeftArguments(PeftConfig, AdapterConfig):

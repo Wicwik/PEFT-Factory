@@ -22,9 +22,9 @@ from typing import TYPE_CHECKING, Any, Optional, Union
 
 import numpy as np
 import torch
+from adapters import AdapterTrainer
 from transformers import Seq2SeqTrainer
 from typing_extensions import override
-from adapters import AdapterTrainer
 
 from ...extras import logging
 from ...extras.constants import IGNORE_INDEX

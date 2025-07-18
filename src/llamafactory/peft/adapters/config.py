@@ -1,12 +1,10 @@
-from peft import PeftConfig
-from dataclasses import dataclass, field
-
-from typing import Union, Mapping
+from dataclasses import dataclass
 
 from adapters import DoubleSeqBnConfig
 
+
 @dataclass
-class AdaptersConfig():
+class AdaptersConfig:
     adapter_name: str = "default"
 
 @dataclass

@@ -23,7 +23,6 @@ from typing import Any, Optional, Union
 import torch
 import transformers
 from omegaconf import OmegaConf
-from peft import PeftConfig
 from transformers import HfArgumentParser
 from transformers.integrations import is_deepspeed_zero3_enabled
 from transformers.trainer_utils import get_last_checkpoint
@@ -31,14 +30,21 @@ from transformers.training_args import ParallelMode
 from transformers.utils import is_torch_bf16_gpu_available, is_torch_npu_available
 
 from ..extras import logging
-from ..extras.constants import CHECKPOINT_NAMES, HF_PEFT_METHODS, PEFT_CONFIG_MAPPING, ADAPTERS_METHODS, ADAPTERS_CONFIG_MAPPING, PEFT_METHODS, EngineName
+from ..extras.constants import (
+    ADAPTERS_CONFIG_MAPPING,
+    ADAPTERS_METHODS,
+    CHECKPOINT_NAMES,
+    PEFT_CONFIG_MAPPING,
+    PEFT_METHODS,
+    EngineName,
+)
 from ..extras.misc import check_dependencies, check_version, get_current_device, is_env_enabled
 from .data_args import DataArguments
 from .evaluation_args import EvaluationArguments
 from .finetuning_args import FinetuningArguments
 from .generating_args import GeneratingArguments
-from .peft_args import PeftArguments
 from .model_args import ModelArguments
+from .peft_args import PeftArguments
 from .training_args import RayArguments, TrainingArguments
 
 

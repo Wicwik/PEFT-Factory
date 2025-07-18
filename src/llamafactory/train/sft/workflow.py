@@ -20,14 +20,14 @@ from typing import TYPE_CHECKING, Optional
 from peft import PeftConfig
 
 from ...data import SFTDataCollatorWith4DAttentionMask, get_dataset, get_template_and_fix_tokenizer
-from ...extras.constants import IGNORE_INDEX, ADAPTERS_METHODS
+from ...extras.constants import ADAPTERS_METHODS, IGNORE_INDEX
 from ...extras.logging import get_logger
 from ...extras.misc import calculate_tps
 from ...extras.ploting import plot_loss
 from ...model import load_model, load_tokenizer
 from ..trainer_utils import create_modelcard_and_push
 from .metric import ComputeAccuracy, ComputeSimilarity, eval_logit_processor
-from .trainer import CustomSeq2SeqTrainer, CustomSeq2SeqAdapterTrainer
+from .trainer import CustomSeq2SeqAdapterTrainer, CustomSeq2SeqTrainer
 
 
 if TYPE_CHECKING:

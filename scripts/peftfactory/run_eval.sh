@@ -18,9 +18,10 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(record)
+datasets=(qnli)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-peft_methods=(base)
+peft_methods=(bn-adapter)
+# peft_methods=(base)
 models=(llama-3-8b-instruct)
 
 
@@ -41,6 +42,10 @@ do
             else
                 ADAPTER="${saves[-1]}"
             fi
+
+            if [[ "${pm}" == *"adapter"* ]]; then
+                ADAPTER="${ADAPTER}/${d}"
+            fi
         
             DATASET="${d}_eval"
             SEED=123
@@ -48,11 +53,13 @@ do
 
             echo $ADAPTER
 
+            mkdir ${OUTPUT_DIR}
+
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 
-            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${pm}_${m}_eval_${d}.yaml
+            envsubst < examples/peft/${pm}/${m}/eval.yaml > ${OUTPUT_DIR}/eval.yaml
 
-            llamafactory-cli train ${pm}_${m}_eval_${d}.yaml
+            llamafactory-cli train ${OUTPUT_DIR}/eval.yaml
 
             python scripts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
         done
