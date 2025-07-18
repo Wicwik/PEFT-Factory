@@ -279,8 +279,7 @@ def _setup_adapters_peft(
     peft_args: "PeftArguments",
     is_trainable: bool,
     cast_trainable_params_to_fp32: bool,
-    ):
-
+):
     if model_args.adapter_name_or_path is not None:
         init_kwargs = {
             "subfolder": model_args.adapter_folder,

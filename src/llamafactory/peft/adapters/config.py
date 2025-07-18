@@ -16,6 +16,7 @@ from dataclasses import dataclass
 
 from adapters import DoubleSeqBnConfig
 
+
 @dataclass
 class AdaptersConfig:
     adapter_name: str = "default"
