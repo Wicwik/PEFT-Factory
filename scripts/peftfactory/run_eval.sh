@@ -50,13 +50,6 @@ do
             SEED=123
             WANDB_PROJECT="peft-factory-eval"
 
-<<<<<<< HEAD
-            echo $ADAPTER
-
-            mkdir ${OUTPUT_DIR}
-
-=======
->>>>>>> 0672a0fad4bd7363c7368c1ba52310d1fabef0ec
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 
             envsubst < examples/peft/${pm}/${m}/eval.yaml > ${OUTPUT_DIR}/eval.yaml
