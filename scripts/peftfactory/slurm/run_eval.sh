@@ -56,9 +56,10 @@ do
             ADAPTER="${saves[-1]}"
             DATASET="${d}_eval"
             SEED=123
-            WANDB_PROJECT="peft-factory-eval"
+            WANDB_PROJECT="peft-factory-eval-${pm}"
+            WANDB_NAME="${pm}_${m}_eval_${d}"
 
-            export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
+            export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT WANDB_NAME
 
             envsubst < examples/peft/${pm}/${m}/eval.yaml > ${OUTPUT_DIR}/eval.yaml
 

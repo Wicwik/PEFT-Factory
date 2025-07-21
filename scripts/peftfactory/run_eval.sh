@@ -48,7 +48,7 @@ do
         
             DATASET="${d}_eval"
             SEED=123
-            WANDB_PROJECT="peft-factory-eval"
+            WANDB_PROJECT="peft-factory-eval-${pm}"
 
             mkdir ${OUTPUT_DIR}
 
