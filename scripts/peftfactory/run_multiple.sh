@@ -40,10 +40,11 @@ do
             DATASET="${d}"
             SEED=123
             WANDB_PROJECT="peft-factory-train-${pm}"
+            WANDB_NAME="${pm}_${m}_train_${d}"
 
             mkdir "${OUTPUT_DIR}"
 
-            export OUTPUT_DIR DATASET SEED WANDB_PROJECT
+            export OUTPUT_DIR DATASET SEED WANDB_PROJECT WANDB_NAME
 
             envsubst < examples/peft/${pm}/${m}/train.yaml > ${OUTPUT_DIR}/train.yaml
 
