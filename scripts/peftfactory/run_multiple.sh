@@ -42,7 +42,7 @@ do
             WANDB_PROJECT="peft-factory-train-${pm}"
             WANDB_NAME="${pm}_${m}_train_${d}"
 
-            mkdir "${OUTPUT_DIR}"
+            mkdir -p "${OUTPUT_DIR}"
 
             export OUTPUT_DIR DATASET SEED WANDB_PROJECT WANDB_NAME
 

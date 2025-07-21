@@ -50,7 +50,7 @@ do
             SEED=123
             WANDB_PROJECT="peft-factory-eval-${pm}"
 
-            mkdir ${OUTPUT_DIR}
+            mkdir -p ${OUTPUT_DIR}
 
             export OUTPUT_DIR DATASET SEED ADAPTER WANDB_PROJECT
 

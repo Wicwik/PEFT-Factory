@@ -24,7 +24,6 @@ overwrite_cache: true
 preprocessing_num_workers: 16
 dataloader_num_workers: 4
 packing: false
-dropout: 0.1
 
 ### output
 output_dir: ${OUTPUT_DIR}
@@ -43,7 +42,7 @@ save_total_limit: 1
 per_device_train_batch_size: 8
 learning_rate: 2.0e-6
 num_train_epochs: 10.0
-weight_decay: 1.0e-5
+weight_decay: 1.0e-3
 lr_scheduler_type: cosine
 bf16: true
 ddp_timeout: 180000000
