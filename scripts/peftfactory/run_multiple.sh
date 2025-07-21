@@ -23,7 +23,7 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(mnli)
+datasets=(qnli)
 peft_methods=(prompt-tuning)
 models=(llama-3-8b-instruct)
 
@@ -42,7 +42,7 @@ do
             WANDB_PROJECT="peft-factory-train-${pm}"
             WANDB_NAME="${pm}_${m}_train_${d}"
 
-            mkdir -p "${OUTPUT_DIR}"
+            mkdir "${OUTPUT_DIR}"
 
             export OUTPUT_DIR DATASET SEED WANDB_PROJECT WANDB_NAME
 
