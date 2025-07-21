@@ -13,7 +13,7 @@ finetuning_type: bn-adapter
 mh_adapter: true
 output_adapter: true
 reduction_factor: 16
-non_linearity: relu
+non_linearity: tanh
 adapter_name: ${DATASET}
 
 ### dataset
