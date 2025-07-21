@@ -117,6 +117,79 @@ def preprocess_record():
     return record.map(preprocessor, batched=True, remove_columns=record["train"].column_names)
 
 
+def preprocess_mmlu():
+    _id2label = {0: "A", 1: "B", 2: "C", 3: "D", -1: ""}
+
+    def preprocessor(example):
+        input_text = f"Question: {example['question']}\n\nChoices:\nA: {example['choices'][0]}\nB: {example['choices'][1]}\nC: {example['choices'][2]}\nD: {example['choices'][3]}"
+        label = _id2label[example["answer"]]
+
+        return {"inputs": input_text, "targets": label}
+
+    mmlu = load_dataset("cais/mmlu", "all")
+    return mmlu.map(preprocessor)
+
+
+def preprocess_piqa():
+    _id2label = {0: "solution1", 1: "solution2", -1: ""}
+
+    def preprocessor(example):
+        input_text = f"Question: {example['goal']}\n\nSolution1: {example['sol1']}\nSolution2: {example['sol2']}"
+        label = _id2label[example["label"]]
+
+        return {"inputs": input_text, "targets": label}
+
+    piqa = load_dataset("ybisk/piqa")
+    return piqa.map(preprocessor)
+
+def preprocess_siqa():
+    _id2label = {"1": "A", "2": "B", "3": "C", "": ""}
+
+    def preprocessor(example):
+        input_text = f"Context: {example['context']}\n\nQuestion: {example['question']}\n\nChoices:\nA: {example['answerA']}\nB: {example['answerB']}\nC: {example['answerC']}"
+        label = _id2label[example["label"]]
+
+        return {"inputs": input_text, "targets": label}
+
+    siqa = load_dataset("allenai/social_i_qa")
+    return siqa.map(preprocessor)
+
+def preprocess_hellaswag():
+    _id2label = {"0": "ending1", "1": "ending2", "2": "ending3", "3": "ending4", "": ""}
+
+    def preprocessor(example):
+        input_text = f"Sentence: {example['ctx_a']} {example['ctx_b'].capitalize()},\n\nEnding1: {example['endings'][0]}\nEnding2: {example['endings'][1]}\nEnding3: {example['endings'][2]}\nEnding4: {example['endings'][3]}"
+        label = _id2label[example["label"]]
+
+        return {"inputs": input_text, "targets": label}
+
+    hellaswag = load_dataset("Rowan/hellaswag")
+    return hellaswag.map(preprocessor)
+
+def preprocess_winogrande():
+    _id2label = {"1": "option1", "2": "option2", "": ""}
+
+    def preprocessor(example):
+        input_text = f"Sentence: {example['sentence']}\n\nOption1: {example['option1']}\nOption1: {example['option2']}"
+        label = _id2label[example["answer"]]
+
+        return {"inputs": input_text, "targets": label}
+
+    winogrande = load_dataset("allenai/winogrande", "winogrande_xl")
+    return winogrande.map(preprocessor)
+
+def preprocess_openbookqa():
+    def preprocessor(example):
+        input_text = f"Question: {example['question_stem']}\n\nChoices:\nA: {example['choices']['text'][0]}\nB: {example['choices']['text'][1]}\nC: {example['choices']['text'][2]}\nD: {example['choices']['text'][3]}"
+        label = example["answerKey"]
+
+        return {"inputs": input_text, "targets": label}
+
+    winogrande = load_dataset("allenai/openbookqa", "main")
+    return winogrande.map(preprocessor)
+
+
+
 # wsc = preprocess_wsc()
 # wsc.push_to_hub("rbelanec/wsc")
 
@@ -126,8 +199,26 @@ def preprocess_record():
 # multirc = preprocess_multirc()
 # multirc.push_to_hub("rbelanec/multirc")
 
-copa = preprocess_copa()
-copa.push_to_hub("rbelanec/copa")
+# copa = preprocess_copa()
+# copa.push_to_hub("rbelanec/copa")
 
 # record = preprocess_record()
 # record.push_to_hub("rbelanec/record")
+
+# mmlu = preprocess_mmlu()
+# mmlu.push_to_hub("rbelanec/mmlu")
+
+# piqa = preprocess_piqa()
+# piqa.push_to_hub("rbelanec/piqa")
+
+# siqa = preprocess_siqa()
+# siqa.push_to_hub("rbelanec/siqa")
+
+# hellaswag = preprocess_hellaswag()
+# hellaswag.push_to_hub("rbelanec/hellaswag")
+
+# winogrande = preprocess_winogrande()
+# winogrande.push_to_hub("rbelanec/winogrande")
+
+openbookqa = preprocess_openbookqa()
+openbookqa.push_to_hub("rbelanec/openbookqa")
