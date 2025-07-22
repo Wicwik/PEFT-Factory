@@ -1042,5 +1042,113 @@
       "prompt": "inputs",
       "response": "targets"
     }
+  },
+  "mmlu": {
+    "hf_hub_url": "rbelanec/mmlu",
+    "split": "train",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "mmlu_eval": {
+    "hf_hub_url": "rbelanec/mmlu",
+    "split": "validation",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "piqa": {
+    "hf_hub_url": "rbelanec/piqa",
+    "split": "train",
+    "instruction": "Based on the question and provided solutions, select the right solution. Respond only with the corresponding solution1 or solution2.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "piqa_eval": {
+    "hf_hub_url": "rbelanec/piqa",
+    "split": "validation",
+    "instruction": "Based on the question and provided solutions, select the right solution. Respond only with the corresponding solution1 or solution2.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "siqa": {
+    "hf_hub_url": "rbelanec/siqa",
+    "split": "train",
+    "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B and C.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "siqa_eval": {
+    "hf_hub_url": "rbelanec/siqa",
+    "split": "validation",
+    "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B and C.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "hellaswag": {
+    "hf_hub_url": "rbelanec/hellaswag",
+    "split": "train",
+    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "hellaswag_eval": {
+    "hf_hub_url": "rbelanec/hellaswag",
+    "split": "validation",
+    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "winogrande": {
+    "hf_hub_url": "rbelanec/winogrande",
+    "split": "train",
+    "instruction": "Based on the sentence and provided options, select the best option that replaces the '_' character in the sentence. Respond only with the corresponding option1 or option2.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "winogrande_eval": {
+    "hf_hub_url": "rbelanec/winogrande",
+    "split": "validation",
+    "instruction": "Based on the sentence and provided options, select the best option that replaces the '_' character in the sentence. Respond only with the corresponding option1 or option2.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "openbookqa": {
+    "hf_hub_url": "rbelanec/openbookqa",
+    "split": "train",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+    "openbookqa_eval": {
+    "hf_hub_url": "rbelanec/openbookqa",
+    "split": "validation",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
   }
 }
