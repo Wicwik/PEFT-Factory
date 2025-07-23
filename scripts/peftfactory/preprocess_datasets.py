@@ -188,7 +188,52 @@ def preprocess_openbookqa():
     winogrande = load_dataset("allenai/openbookqa", "main")
     return winogrande.map(preprocessor)
 
+def preprocess_math_qa():
+    def preprocessor(example):
+        input_text = f"Problem: {example['Problem']}\n\nOptions: {example['options']}"
+        label = example["correct"]
 
+        return {"inputs": input_text, "targets": label}
+
+    math_qa = load_dataset("allenai/math_qa", "main")
+    return math_qa.map(preprocessor)
+
+def preprocess_svamp():
+    def preprocessor(example):
+        input_text = f"Question: {example['question_concat']}"
+        label = f"{example['Equation']} = {example['Answer']}"
+
+        return {"inputs": input_text, "targets": label}
+
+    svamp = load_dataset("ChilleD/SVAMP")
+    return svamp.map(preprocessor)
+
+def preprocess_apps():
+    def preprocessor(batch):
+        new_batch = collections.defaultdict(list)
+        keys = batch.keys()
+
+        for values in zip(*batch.values()):
+            ex = dict(zip(keys, values))
+
+        
+            # updates the passage.
+            inputs = ex["question"]
+
+            # duplicates the samples based on  number of answers.
+            num_answers = len(ex["solutions"])
+            num_duplicates = np.maximum(1, num_answers)
+            new_batch["inputs"].extend([inputs] * num_duplicates)
+            new_batch["targets"].extend(ex["solutions"] if num_answers > 0 else ["<unk>"])
+            new_batch["problem_id"].extend([ex["problem_id"]] * num_duplicates)
+            new_batch["solutions"].extend([ex["solutions"] if num_answers > 0 else ["<unk>"]] * num_duplicates)
+
+            print(new_batch)
+
+        return new_batch
+
+    apps = load_dataset("codeparrot/apps")
+    return apps.map(preprocessor, batched=True, remove_columns=apps["train"].column_names)
 
 # wsc = preprocess_wsc()
 # wsc.push_to_hub("rbelanec/wsc")
@@ -220,5 +265,14 @@ def preprocess_openbookqa():
 # winogrande = preprocess_winogrande()
 # winogrande.push_to_hub("rbelanec/winogrande")
 
-openbookqa = preprocess_openbookqa()
-openbookqa.push_to_hub("rbelanec/openbookqa")
+# openbookqa = preprocess_openbookqa()
+# openbookqa.push_to_hub("rbelanec/openbookqa")
+
+# math_qa = preprocess_math_qa()
+# math_qa.push_to_hub("rbelanec/math_qa")
+
+# svamp = preprocess_svamp()
+# svamp.push_to_hub("rbelanec/svamp")
+
+apps = preprocess_apps()
+apps.push_to_hub("rbelanec/apps")

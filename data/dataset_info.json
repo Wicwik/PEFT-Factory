@@ -1150,5 +1150,117 @@
       "prompt": "inputs",
       "response": "targets"
     }
+  },
+  "math_qa": {
+    "hf_hub_url": "rbelanec/math_qa",
+    "split": "train",
+    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "math_qa_eval": {
+    "hf_hub_url": "rbelanec/math_qa",
+    "split": "validation",
+    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "gsm8k": {
+    "hf_hub_url": "openai/gsm8k",
+    "subset": "main",
+    "split": "train",
+    "instruction": "Answer following math question. Answer is always numerical. Mark your final answer with a newline starting with '####'.",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    }
+  },
+  "gsm8k_eval": {
+    "hf_hub_url": "openai/gsm8k",
+    "subset": "main",
+    "split": "test",
+    "instruction": "Answer following math question. Answer is always numerical. Mark your final answer with a newline starting with '####'.",
+    "columns": {
+      "prompt": "question",
+      "response": "answer"
+    }
+  },
+  "svamp": {
+    "hf_hub_url": "rbelanec/svamp",
+    "split": "train",
+    "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "svamp_eval": {
+    "hf_hub_url": "rbelanec/svamp",
+    "split": "test",
+    "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "conala": {
+    "hf_hub_url": "neulab/conala",
+    "subset": "curated",
+    "split": "train",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "rewritten_intent",
+      "response": "snippet"
+    }
+  },
+  "conala_eval": {
+    "hf_hub_url": "neulab/conala",
+    "subset": "curated",
+    "split": "test",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "rewritten_intent",
+      "response": "snippet"
+    }
+  },
+  "codealpacapy": {
+    "hf_hub_url": "Abzu/CodeAlpacaPython",
+    "split": "train",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "prompt",
+      "response": "response"
+    }
+  },
+  "codealpacapy_eval": {
+    "hf_hub_url": "Abzu/CodeAlpacaPython",
+    "split": "test",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "prompt",
+      "response": "response"
+    }
+  },
+  "apps": {
+    "hf_hub_url": "rbelanec/apps",
+    "split": "train",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
+  },
+  "apps_eval": {
+    "hf_hub_url": "rbelanec/apps",
+    "split": "test",
+    "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
+    "columns": {
+      "prompt": "inputs",
+      "response": "targets"
+    }
   }
 }
