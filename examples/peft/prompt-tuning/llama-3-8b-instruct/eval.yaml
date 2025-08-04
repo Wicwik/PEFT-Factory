@@ -16,7 +16,7 @@ num_virtual_tokens: 100
 
 ### dataset
 eval_dataset: ${DATASET}
-template: gemma
+template: llama3
 cutoff_len: 2048
 overwrite_cache: true
 preprocessing_num_workers: 16
