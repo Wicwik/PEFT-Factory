@@ -209,6 +209,9 @@ def preprocess_svamp():
     return svamp.map(preprocessor)
 
 def preprocess_apps():
+    def remove_surrogates(text):
+        return ''.join(c for c in text if not ('\uD800' <= c <= '\uDFFF'))
+
     def preprocessor(batch):
         new_batch = collections.defaultdict(list)
         keys = batch.keys()
@@ -216,19 +219,22 @@ def preprocess_apps():
         for values in zip(*batch.values()):
             ex = dict(zip(keys, values))
 
-        
             # updates the passage.
             inputs = f"{ex['question']}\n\n{ex['starter_code']}"
+            if ex["solutions"] != "":
+                ex["solutions"] = eval(ex["solutions"])
 
-            # duplicates the samples based on  number of answers.
+            for i,_ in enumerate(ex["solutions"]):
+                ex["solutions"][i] = remove_surrogates(ex["solutions"][i])
+
+            inputs = ex["question"]
+
             num_answers = len(ex["solutions"])
             num_duplicates = np.maximum(1, num_answers)
             new_batch["inputs"].extend([inputs] * num_duplicates)
-            new_batch["targets"].extend(ex["solutions"] if num_answers > 0 else ["<unk>"])
-            new_batch["problem_id"].extend([ex["problem_id"]] * num_duplicates)
-            new_batch["solutions"].extend([ex["solutions"] if num_answers > 0 else ["<unk>"]] * num_duplicates)
+            new_batch["targets"].extend(ex["solutions"] if num_answers > 0 else [""])
 
-            print(new_batch)
+            # new_batch["solutions"].extend([ex["solutions"] if num_answers > 0 else ["<unk>"]] * num_duplicates)
 
         return new_batch
 
