@@ -14,10 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#SBATCH --partition=gpu
+#SBATCH --gres=gpu:1
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH -o logs/peft-factory-cm-stdout.%J.out
+#SBATCH -e logs/peft-factory-cm-stderr.%J.out
+#SBATCH --time=2-00:00
+#SBATCH --account=p1370-25-2
+
+eval "$(conda shell.bash hook)"
+conda activate peft-factory
+module load libsndfile
+
+export HF_HOME="/projects/${PROJECT}/cache"
+
 datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # datasets=(record multirc boolq wic wsc cb copa)
-# peft_methods=(ia3 prompt-tuning lora lntuning)
-peft_methods=(prompt-tuning)
+peft_methods=(ia3 prompt-tuning lora lntuning)
+# peft_methods=(prompt-tuning)
 models=(llama-3-8b-instruct)
 
 

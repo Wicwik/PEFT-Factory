@@ -38,9 +38,9 @@ module load libsndfile
 
 export HF_HOME="/projects/${PROJECT}/cache"
 
-datasets=(qnli)
+datasets=(mnli record)
 peft_methods=(prompt-tuning)
-models=(gemma-3-1b-it)
+models=(llama-3-8b-instruct)
 
 
 for d in ${datasets[@]};
@@ -67,7 +67,7 @@ do
 
             llamafactory-cli train ${OUTPUT_DIR}/eval.yaml
 
-            python scipts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
+            python scripts/peftfactory/compute_metrics.py ${OUTPUT_DIR} ${d}
         done
     done
 done

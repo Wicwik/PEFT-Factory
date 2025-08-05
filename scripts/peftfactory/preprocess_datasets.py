@@ -218,7 +218,7 @@ def preprocess_apps():
 
         
             # updates the passage.
-            inputs = ex["question"]
+            inputs = f"{ex['question']}\n\n{ex['starter_code']}"
 
             # duplicates the samples based on  number of answers.
             num_answers = len(ex["solutions"])

@@ -20,10 +20,9 @@ import pandas as pd
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
-# methods = ["ia3", "prompt-tuning", "lora", "lntuning"]
-methods = ["base"]
+methods = ["ia3", "lora", "lntuning", "prompt-tuning"]
+# methods = ["base"]
 datasets = [
-    "mnli",
     "qqp",
     "qnli",
     "sst2",
@@ -31,7 +30,6 @@ datasets = [
     "mrpc",
     "rte",
     "cola",
-    "record",
     "multirc",
     "boolq",
     "wic",
