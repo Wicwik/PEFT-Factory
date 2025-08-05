@@ -1016,6 +1016,22 @@ register_template(
 
 # copied from glm4 template
 register_template(
+    name="glm4_moe",
+    format_user=StringFormatter(slots=["<|user|>\n{{content}}<|assistant|>"]),
+    format_assistant=StringFormatter(slots=["\n{{content}}"]),
+    format_system=StringFormatter(slots=["<|system|>\n{{content}}"]),
+    format_function=FunctionFormatter(slots=["{{content}}"], tool_format="glm4_moe"),
+    format_observation=StringFormatter(slots=["<|observation|>\n{{content}}<|assistant|>"]),
+    format_tools=ToolFormatter(tool_format="glm4_moe"),
+    format_prefix=EmptyFormatter(slots=["[gMASK]<sop>"]),
+    stop_words=["<|user|>", "<|observation|>"],
+    efficient_eos=True,
+    template_class=ReasoningTemplate,
+)
+
+
+# copied from glm4 template
+register_template(
     name="glm4v",
     format_user=StringFormatter(slots=["<|user|>\n{{content}}<|assistant|>"]),
     format_assistant=StringFormatter(slots=["\n{{content}}"]),
@@ -1068,6 +1084,25 @@ register_template(
         "The assistant gives helpful, detailed, and polite answers to the user's questions."
     ),
     mm_plugin=get_mm_plugin(name="llava_next", image_token="<image>"),
+)
+
+
+register_template(
+    name="granite4",
+    format_user=StringFormatter(
+        slots=[
+            "<|start_of_role|>user<|end_of_role|>{{content}}<|end_of_text|>\n<|start_of_role|>assistant<|end_of_role|>"
+        ]
+    ),
+    format_assistant=StringFormatter(slots=["{{content}}<|end_of_text|>\n"]),
+    format_system=StringFormatter(slots=["<|start_of_role|>system<|end_of_role|>{{content}}<|end_of_text|>\n"]),
+    format_function=FunctionFormatter(slots=["{{content}}<|end_of_text|>\n"], tool_format="default"),
+    format_observation=StringFormatter(
+        slots=["<|start_of_role|>tool<|end_of_role|>{{content}}<|end_of_text|>\n<|start_of_role|>assistant\n"]
+    ),
+    format_tools=ToolFormatter(tool_format="default"),
+    stop_words=["<|end_of_text|>"],
+    default_system="You are Granite, developed by IBM. You are a helpful AI assistant.",
 )
 
 
@@ -1134,6 +1169,24 @@ register_template(
     ),
     stop_words=["<|im_end|>"],
     mm_plugin=get_mm_plugin(name="intern_vl", image_token="<image>", video_token="<video>"),
+)
+
+
+# copied from qwen template
+register_template(
+    name="keye_vl",
+    format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
+    format_assistant=StringFormatter(slots=["{{content}}<|im_end|>\n"]),
+    format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
+    format_function=FunctionFormatter(slots=["{{content}}<|im_end|>\n"], tool_format="qwen"),
+    format_observation=StringFormatter(
+        slots=["<|im_start|>user\n<tool_response>\n{{content}}\n</tool_response><|im_end|>\n<|im_start|>assistant\n"]
+    ),
+    format_tools=ToolFormatter(tool_format="qwen"),
+    stop_words=["<|im_end|>"],
+    replace_eos=True,
+    mm_plugin=get_mm_plugin(name="qwen2_vl", image_token="<|image_pad|>", video_token="<|video_pad|>"),
+    template_class=ReasoningTemplate,
 )
 
 
