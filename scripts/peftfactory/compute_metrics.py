@@ -91,7 +91,7 @@ def f1(preds, targets, labels):
 def macro_f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
-    invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
+    invalid_idx_mask = ~np.isin(preds, labels)
 
     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
 

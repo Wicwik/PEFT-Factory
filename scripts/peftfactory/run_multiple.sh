@@ -23,7 +23,9 @@
 # peft_methods=(ia3 prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(record)
+#datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
+
+datasets=(boolq record piqa mmlu codealpacapy apps)
 peft_methods=(prompt-tuning)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # peft_methods=(ia3 lora lntuning)

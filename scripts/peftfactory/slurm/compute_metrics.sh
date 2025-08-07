@@ -29,10 +29,10 @@ module load libsndfile
 
 export HF_HOME="/projects/${PROJECT}/cache"
 
-datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
+# datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # datasets=(record multirc boolq wic wsc cb copa)
-peft_methods=(ia3 prompt-tuning lora lntuning)
-# peft_methods=(prompt-tuning)
+datasets=(mnli cb)
+peft_methods=(base)
 models=(llama-3-8b-instruct)
 
 

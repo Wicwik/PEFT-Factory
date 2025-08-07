@@ -171,9 +171,11 @@ ms_cache/
 om_cache/
 cache/
 config/
-saves/
+saves*
 output/
 wandb/
 swanlog/
 generated_predictions.jsonl
 predictions_score.json
+experiments
+logs

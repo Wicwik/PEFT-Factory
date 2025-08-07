@@ -1045,7 +1045,7 @@
   },
   "mmlu": {
     "hf_hub_url": "rbelanec/mmlu",
-    "split": "train",
+    "split": "auxiliary_train",
     "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
     "columns": {
       "prompt": "inputs",

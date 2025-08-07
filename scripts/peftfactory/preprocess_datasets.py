@@ -142,6 +142,7 @@ def preprocess_piqa():
     piqa = load_dataset("ybisk/piqa")
     return piqa.map(preprocessor)
 
+
 def preprocess_siqa():
     _id2label = {"1": "A", "2": "B", "3": "C", "": ""}
 
@@ -153,6 +154,7 @@ def preprocess_siqa():
 
     siqa = load_dataset("allenai/social_i_qa")
     return siqa.map(preprocessor)
+
 
 def preprocess_hellaswag():
     _id2label = {"0": "ending1", "1": "ending2", "2": "ending3", "3": "ending4", "": ""}
@@ -166,6 +168,7 @@ def preprocess_hellaswag():
     hellaswag = load_dataset("Rowan/hellaswag")
     return hellaswag.map(preprocessor)
 
+
 def preprocess_winogrande():
     _id2label = {"1": "option1", "2": "option2", "": ""}
 
@@ -178,6 +181,7 @@ def preprocess_winogrande():
     winogrande = load_dataset("allenai/winogrande", "winogrande_xl")
     return winogrande.map(preprocessor)
 
+
 def preprocess_openbookqa():
     def preprocessor(example):
         input_text = f"Question: {example['question_stem']}\n\nChoices:\nA: {example['choices']['text'][0]}\nB: {example['choices']['text'][1]}\nC: {example['choices']['text'][2]}\nD: {example['choices']['text'][3]}"
@@ -187,6 +191,7 @@ def preprocess_openbookqa():
 
     winogrande = load_dataset("allenai/openbookqa", "main")
     return winogrande.map(preprocessor)
+
 
 def preprocess_math_qa():
     def preprocessor(example):
@@ -198,6 +203,7 @@ def preprocess_math_qa():
     math_qa = load_dataset("allenai/math_qa", "main")
     return math_qa.map(preprocessor)
 
+
 def preprocess_svamp():
     def preprocessor(example):
         input_text = f"Question: {example['question_concat']}"
@@ -208,9 +214,10 @@ def preprocess_svamp():
     svamp = load_dataset("ChilleD/SVAMP")
     return svamp.map(preprocessor)
 
+
 def preprocess_apps():
     def remove_surrogates(text):
-        return ''.join(c for c in text if not ('\uD800' <= c <= '\uDFFF'))
+        return "".join(c for c in text if not ("\ud800" <= c <= "\udfff"))
 
     def preprocessor(batch):
         new_batch = collections.defaultdict(list)
@@ -224,7 +231,7 @@ def preprocess_apps():
             if ex["solutions"] != "":
                 ex["solutions"] = eval(ex["solutions"])
 
-            for i,_ in enumerate(ex["solutions"]):
+            for i, _ in enumerate(ex["solutions"]):
                 ex["solutions"][i] = remove_surrogates(ex["solutions"][i])
 
             inputs = ex["question"]
@@ -240,6 +247,7 @@ def preprocess_apps():
 
     apps = load_dataset("codeparrot/apps")
     return apps.map(preprocessor, batched=True, remove_columns=apps["train"].column_names)
+
 
 # wsc = preprocess_wsc()
 # wsc.push_to_hub("rbelanec/wsc")

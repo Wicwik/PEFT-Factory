@@ -15,6 +15,7 @@
 import re
 from typing import TYPE_CHECKING
 
+import numpy as np
 import torch
 from peft import LoraConfig, LoraModel, PeftConfig, PeftModel, TaskType, get_peft_model
 from transformers.integrations import is_deepspeed_zero3_enabled
@@ -330,6 +331,18 @@ def _setup_hf_peft(
         logger.info_rank0("Loaded adapter(s): {}".format(",".join(model_args.adapter_name_or_path)))
     else:
         model: PeftModel = get_peft_model(model, peft_args)
+
+    if finetuning_args.finetuning_type == "prompt-tuning":
+        indices = np.random.permutation(range(5000))[:peft_args.num_virtual_tokens]
+
+        word_embedding_weights = (model.word_embeddings(torch.LongTensor(indices).to("cuda")).detach().clone()).to(
+            torch.bfloat16
+        )
+        word_embedding_weights = word_embedding_weights
+
+        model.prompt_encoder.default.embedding.weight = torch.nn.Parameter(word_embedding_weights)
+
+        print(model.prompt_encoder.default.embedding.weight, model.prompt_encoder.default.embedding.weight.shape)
 
     return model
 
