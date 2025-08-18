@@ -25,7 +25,7 @@
 
 #datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
 
-datasets=(copa)
+datasets=(piqa codealpacapy boolq record mmlu apps)
 peft_methods=(prefix-tuning)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # peft_methods=(prompt-tuning ia3 lora lntuning p-tuning)
