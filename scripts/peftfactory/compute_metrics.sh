@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
+# datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # datasets=(record multirc boolq wic wsc cb copa)
 # peft_methods=(ia3 prompt-tuning lora lntuning)
-peft_methods=(prompt-tuning)
+datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
+peft_methods=(base)
 models=(llama-3-8b-instruct)
 
 

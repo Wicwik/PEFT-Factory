@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .adapters import AdaptersDoubleSeqBnConfig
+from .adapters import AdaptersDoubleSeqBnConfig, AdaptersSeqBnConfig, AdaptersParBnConfig
 
 
 __all__ = [
     "AdaptersDoubleSeqBnConfig",
+    "AdaptersSeqBnConfig",
+    "AdaptersParBnConfig"
 ]

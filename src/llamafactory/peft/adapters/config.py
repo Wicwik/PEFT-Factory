@@ -14,7 +14,7 @@
 
 from dataclasses import dataclass
 
-from adapters import DoubleSeqBnConfig
+from adapters import DoubleSeqBnConfig, SeqBnConfig, ParBnConfig
 
 
 @dataclass
@@ -27,3 +27,17 @@ class AdaptersDoubleSeqBnConfig(AdaptersConfig, DoubleSeqBnConfig):
     # this is mostly because DoubleSeqBnConfig from adapters contains Union[X, Y] where both are not optional, so HFArgumentParser cannot parse it properly
     reduction_factor: float = 16
     residual_before_ln: bool = True
+
+
+@dataclass
+class AdaptersSeqBnConfig(AdaptersConfig, SeqBnConfig):
+    # this is mostly because DoubleSeqBnConfig from adapters contains Union[X, Y] where both are not optional, so HFArgumentParser cannot parse it properly
+    reduction_factor: float = 16
+    residual_before_ln: bool = True
+
+@dataclass
+class AdaptersParBnConfig(AdaptersConfig, ParBnConfig):
+    # this is mostly because DoubleSeqBnConfig from adapters contains Union[X, Y] where both are not optional, so HFArgumentParser cannot parse it properly
+    reduction_factor: float = 16
+    residual_before_ln: bool = True
+

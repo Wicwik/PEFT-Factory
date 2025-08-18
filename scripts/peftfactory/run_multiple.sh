@@ -25,10 +25,10 @@
 
 #datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
 
-datasets=(boolq record piqa mmlu codealpacapy apps)
-peft_methods=(prompt-tuning)
+datasets=(copa)
+peft_methods=(prefix-tuning)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
-# peft_methods=(ia3 lora lntuning)
+# peft_methods=(prompt-tuning ia3 lora lntuning p-tuning)
 models=(llama-3-8b-instruct)
 
 for d in ${datasets[@]};
@@ -44,7 +44,7 @@ do
             WANDB_PROJECT="peft-factory-train-${pm}"
             WANDB_NAME="${pm}_${m}_train_${d}"
 
-            mkdir "${OUTPUT_DIR}"
+            mkdir -p "${OUTPUT_DIR}"
 
             export OUTPUT_DIR DATASET SEED WANDB_PROJECT WANDB_NAME
 

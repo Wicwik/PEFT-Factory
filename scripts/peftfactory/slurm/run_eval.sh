@@ -38,8 +38,8 @@ module load libsndfile
 
 export HF_HOME="/projects/${PROJECT}/cache"
 
-datasets=(mnli record)
-peft_methods=(prompt-tuning)
+datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
+peft_methods=(base)
 models=(llama-3-8b-instruct)
 
 
