@@ -29,7 +29,7 @@ from peft.utils import SAFETENSORS_WEIGHTS_NAME as SAFE_ADAPTER_WEIGHTS_NAME
 from peft.utils import WEIGHTS_NAME as ADAPTER_WEIGHTS_NAME
 from transformers.utils import SAFE_WEIGHTS_INDEX_NAME, SAFE_WEIGHTS_NAME, WEIGHTS_INDEX_NAME, WEIGHTS_NAME
 
-from llamafactory.model.peft.adapters import AdaptersDoubleSeqBnConfig, AdaptersParBnConfig, AdaptersSeqBnConfig
+from ..cpeft.adapters import AdaptersDoubleSeqBnConfig, AdaptersParBnConfig, AdaptersSeqBnConfig
 
 
 AUDIO_PLACEHOLDER = os.getenv("AUDIO_PLACEHOLDER", "<audio>")
