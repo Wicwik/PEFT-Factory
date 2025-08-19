@@ -15,7 +15,7 @@
 # limitations under the License.
 
 #SBATCH --partition=gpu
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH -o logs/peft-factory-stdout.%J.out

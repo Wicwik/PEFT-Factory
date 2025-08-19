@@ -333,7 +333,7 @@ def _setup_hf_peft(
         model: PeftModel = get_peft_model(model, peft_args)
 
     if finetuning_args.finetuning_type == "prompt-tuning":
-        indices = np.random.permutation(range(5000))[:peft_args.num_virtual_tokens]
+        indices = np.random.permutation(range(5000))[: peft_args.num_virtual_tokens]
 
         word_embedding_weights = (model.word_embeddings(torch.LongTensor(indices).to("cuda")).detach().clone()).to(
             torch.bfloat16

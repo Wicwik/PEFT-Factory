@@ -17,10 +17,6 @@ from collections import OrderedDict, defaultdict
 from enum import Enum, unique
 from typing import Optional
 
-from adapters import (
-    ParBnConfig,
-    SeqBnConfig,
-)
 from peft import (
     IA3Config,
     LNTuningConfig,
@@ -33,7 +29,7 @@ from peft.utils import SAFETENSORS_WEIGHTS_NAME as SAFE_ADAPTER_WEIGHTS_NAME
 from peft.utils import WEIGHTS_NAME as ADAPTER_WEIGHTS_NAME
 from transformers.utils import SAFE_WEIGHTS_INDEX_NAME, SAFE_WEIGHTS_NAME, WEIGHTS_INDEX_NAME, WEIGHTS_NAME
 
-from llamafactory.peft.adapters import AdaptersDoubleSeqBnConfig
+from llamafactory.model.peft.adapters import AdaptersDoubleSeqBnConfig, AdaptersParBnConfig, AdaptersSeqBnConfig
 
 
 AUDIO_PLACEHOLDER = os.getenv("AUDIO_PLACEHOLDER", "<audio>")
@@ -87,8 +83,8 @@ PEFT_CONFIG_MAPPING = {
 
 ADAPTERS_CONFIG_MAPPING = {
     "bn-adapter": AdaptersDoubleSeqBnConfig,
-    "seq-bn-adapter": SeqBnConfig,
-    "par-adapter": ParBnConfig,
+    "seq-bn-adapter": AdaptersSeqBnConfig,
+    "par-adapter": AdaptersParBnConfig,
 }
 
 METHODS = ["full", "freeze", "lora"] + ADAPTERS_METHODS + HF_PEFT_METHODS + CUSTOM_PEFT_METHODS

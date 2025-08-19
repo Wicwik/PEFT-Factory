@@ -13,20 +13,17 @@
 # limitations under the License.
 
 import argparse
+import ast
 import json
+import math
+import operator
+import re
 
 import evaluate
 import numpy as np
+from codebleu import calc_codebleu
 from datasets import load_dataset
 from sklearn.metrics import f1_score
-
-import ast
-import re
-import math
-import operator
-
-from codebleu import calc_codebleu
-
 
 
 def string_to_float(string, default=-1.0):
@@ -80,7 +77,7 @@ def em(preds, targets, labels):
 def f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
-    labels = list(map(lambda x: x.lower(), labels))
+    labels = [x.lower() for x in labels]
 
     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
 
@@ -101,7 +98,7 @@ def f1(preds, targets, labels):
 def macro_f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
-    labels = list(map(lambda x: x.lower(), labels))
+    labels = [x.lower() for x in labels]
 
     invalid_idx_mask = ~np.isin(preds, labels)
 
@@ -147,17 +144,15 @@ def record(preds):
 
     return metric.compute(predictions=predictions, references=references)
 
+
 def gsm8k(preds, targets, labels):
     def extract_final_answer(text):
-        if '####' in text:
-            return text.split('####')[-1].strip()
+        if "####" in text:
+            return text.split("####")[-1].strip()
         return None
 
     def normalize_answer(ans):
-        try:
-            return float(ans.replace(',', ''))
-        except:
-            return None
+        return float(ans.replace(",", ""))
 
     format_errors = 0
     correct = 0
@@ -171,41 +166,60 @@ def gsm8k(preds, targets, labels):
 
         if pred is None or gold is None:
             format_errors += 1
-        
+
         total += 1
 
     accuracy = correct / total
     return {"accuracy": accuracy, "format_errors": format_errors}
 
+
 def svamp(preds, targets, labels):
-    OPS = {ast.Add: operator.add, ast.Sub: operator.sub, ast.Mult: operator.mul,
-       ast.Div: operator.truediv, ast.FloorDiv: operator.floordiv, ast.Mod: operator.mod,
-       ast.USub: operator.neg, ast.UAdd: operator.pos}
+    OPS = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.FloorDiv: operator.floordiv,
+        ast.Mod: operator.mod,
+        ast.USub: operator.neg,
+        ast.UAdd: operator.pos,
+    }
 
     def safe_eval(expr):
         def _eval(node):
-            if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)): return node.value
-            if isinstance(node, ast.UnaryOp) and type(node.op) in OPS: return OPS[type(node.op)](_eval(node.operand))
-            if isinstance(node, ast.BinOp) and type(node.op) in OPS: return OPS[type(node.op)](_eval(node.left), _eval(node.right))
-            if isinstance(node, ast.Expr): return _eval(node.value)
+            if isinstance(node, ast.Constant) and isinstance(node.value, (int, float)):
+                return node.value
+
+            if isinstance(node, ast.UnaryOp) and type(node.op) in OPS:
+                return OPS[type(node.op)](_eval(node.operand))
+
+            if isinstance(node, ast.BinOp) and type(node.op) in OPS:
+                return OPS[type(node.op)](_eval(node.left), _eval(node.right))
+
+            if isinstance(node, ast.Expr):
+                return _eval(node.value)
+
             raise ValueError("Disallowed expression")
-        
-        tree = ast.parse(expr.strip(), mode='eval')
+
+        tree = ast.parse(expr.strip(), mode="eval")
         return float(_eval(tree.body))
 
     def is_single_outer_parens(s):
         s = s.strip()
-        if not (s.startswith("(") and s.endswith(")")): return False
+        if not (s.startswith("(") and s.endswith(")")):
+            return False
+
         depth = 0
         for i, ch in enumerate(s):
-            if ch == "(": depth += 1
+            if ch == "(":
+                depth += 1
             elif ch == ")":
                 depth -= 1
                 if depth == 0 and i != len(s) - 1:
                     return False  # outer pair closes before end -> not a single outer wrapper
         return depth == 0
 
-    num_re = re.compile(r'^[+-]?(\d+(\.\d+)?|\.\d+)$')
+    num_re = re.compile(r"^[+-]?(\d+(\.\d+)?|\.\d+)$")
 
     def parse_equation(eq: str):
         if eq.count("=") != 1:
@@ -224,7 +238,7 @@ def svamp(preds, targets, labels):
     def canon(eq):
         # remove spaces and normalize RHS number to canonical form
         lhs, rhs = [p.strip() for p in eq.split("=", 1)]
-        sub = re.sub(r'\\s+', '', lhs)
+        sub = re.sub(r"\\s+", "", lhs)
         return f"{sub}={normalize_number_str(rhs)}"
 
     def evaluate_svamp(pred, gold=None, tol=1e-6):
@@ -234,19 +248,18 @@ def svamp(preds, targets, labels):
         try:
             lhs_val = safe_eval(lhs[1:-1])  # strip outer parentheses
             rhs_val = float(rhs.replace(",", ""))
-        except Exception as e:
+        except Exception:
             # print(e)
             return {"ok": False, "reason": "eval_error", "match_gold": False}
         math_ok = abs(lhs_val - rhs_val) < tol
         gold_match = (canon(pred) == canon(gold)) if gold else None
         return {"ok": math_ok, "reason": None if math_ok else "math_mismatch", "match_gold": gold_match}
 
-
     total = len(preds)
     fmt_errors = 0
     math_correct = 0
     gold_exact = 0
-    
+
     for i in range(total):
         r = evaluate_svamp(preds[i], targets[i])
         if r["reason"] in {"not_single_equation", "lhs_not_single_parenthesized", "rhs_not_numeric", "eval_error"}:
@@ -257,7 +270,7 @@ def svamp(preds, targets, labels):
             math_correct += 1
         if r["ok"] and r["match_gold"]:
             gold_exact += 1
-    
+
     accuracy = math_correct / total if total else 0.0
 
     return {
@@ -268,12 +281,9 @@ def svamp(preds, targets, labels):
         "accuracy": accuracy,
     }
 
+
 def codebleu_metric(preds, targets, labels):
-
     return calc_codebleu(targets, preds, lang="python", weights=(0.25, 0.25, 0.25, 0.25))
-
-
-
 
 
 DATASET_TO_METRIC_MAPPING = {

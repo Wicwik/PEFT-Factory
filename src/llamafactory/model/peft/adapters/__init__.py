@@ -12,11 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .config import AdaptersDoubleSeqBnConfig, AdaptersSeqBnConfig, AdaptersParBnConfig
+from .config import AdaptersDoubleSeqBnConfig, AdaptersParBnConfig, AdaptersSeqBnConfig
 
 
-__all__ = [
-    "AdaptersDoubleSeqBnConfig",
-    "AdaptersSeqBnConfig",
-    "AdaptersParBnConfig"
-]
+__all__ = ["AdaptersDoubleSeqBnConfig", "AdaptersParBnConfig", "AdaptersSeqBnConfig"]
