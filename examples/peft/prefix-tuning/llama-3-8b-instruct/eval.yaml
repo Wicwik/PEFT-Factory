@@ -9,10 +9,12 @@ use_cache: false
 
 ### method
 stage: sft
-do_train: true
+do_train: false
 finetuning_type: prefix-tuning
 task_type: CAUSAL_LM
-num_virtual_tokens: 100
+num_virtual_tokens: 32
+prefix_projection: true
+encoder_hidden_size: 512
 disable_gradient_checkpointing: true
 
 ### dataset

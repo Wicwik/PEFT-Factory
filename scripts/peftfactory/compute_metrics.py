@@ -80,6 +80,8 @@ def em(preds, targets, labels):
 def f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
 
+    labels = list(map(lambda x: x.lower(), labels))
+
     invalid_idx_mask = np.logical_and(preds != labels[0], preds != labels[1])
 
     preds[invalid_idx_mask] = binary_reverse(targets[invalid_idx_mask], labels)
@@ -98,6 +100,8 @@ def f1(preds, targets, labels):
 
 def macro_f1(preds, targets, labels):
     preds, targets = np.asarray(preds, dtype="<U16"), np.asarray(targets, dtype="<U16")
+
+    labels = list(map(lambda x: x.lower(), labels))
 
     invalid_idx_mask = ~np.isin(preds, labels)
 
@@ -185,7 +189,8 @@ def svamp(preds, targets, labels):
             if isinstance(node, ast.BinOp) and type(node.op) in OPS: return OPS[type(node.op)](_eval(node.left), _eval(node.right))
             if isinstance(node, ast.Expr): return _eval(node.value)
             raise ValueError("Disallowed expression")
-        tree = ast.parse(expr, mode='eval')
+        
+        tree = ast.parse(expr.strip(), mode='eval')
         return float(_eval(tree.body))
 
     def is_single_outer_parens(s):
@@ -229,7 +234,8 @@ def svamp(preds, targets, labels):
         try:
             lhs_val = safe_eval(lhs[1:-1])  # strip outer parentheses
             rhs_val = float(rhs.replace(",", ""))
-        except Exception:
+        except Exception as e:
+            # print(e)
             return {"ok": False, "reason": "eval_error", "match_gold": False}
         math_ok = abs(lhs_val - rhs_val) < tol
         gold_match = (canon(pred) == canon(gold)) if gold else None

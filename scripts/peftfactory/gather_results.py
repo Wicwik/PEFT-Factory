@@ -20,33 +20,39 @@ import pandas as pd
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
-methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning"]
+methods = ["base", "lora", "lntuning", "prompt-tuning"]
 # methods = ["base"]
-datasets = [
-    "mnli",
-    "qqp",
-    "qnli",
-    "sst2",
-    "stsb",
-    "mrpc",
-    "rte",
-    "cola",
-    "record",
-    "multirc",
-    "boolq",
-    "wic",
-    "wsc",
-    "cb",
-    "copa",
-]
+# datasets = [
+#     "mnli",
+#     "qqp",
+#     "qnli",
+#     "sst2",
+#     "stsb",
+#     "mrpc",
+#     "rte",
+#     "cola",
+#     "record",
+#     "multirc",
+#     "boolq",
+#     "wic",
+#     "wsc",
+#     "cb",
+#     "copa",
+# ]
+datasets = ["siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "apps"]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
 
 
-def get_single_result(results):
+def get_single_result(results, dataset):
+    print(dataset)
     if "macro_f1" in results:
         return results["macro_f1"]
     elif "pearsonr" in results:
         return results["pearsonr"]
+    elif dataset in ["gsm8k", "svamp"]:
+        return results["accuracy"]
+    elif dataset in ["conala", "codealpacapy", "apps"]:
+        return results["codebleu"]
     else:
         return results["f1"]
 
@@ -74,7 +80,7 @@ for m in models:
             if not glob_res:
                 continue
 
-            results[pm][d] = get_single_result(get_results_from_jsonl(sorted(glob_res)[-1])) * 100
+            results[pm][d] = get_single_result(get_results_from_jsonl(sorted(glob_res)[-1]), d) * 100
 
     results_df = pd.DataFrame(results).T
     print(
