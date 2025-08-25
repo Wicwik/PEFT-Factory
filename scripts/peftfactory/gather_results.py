@@ -20,7 +20,7 @@ import pandas as pd
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
-methods = ["base", "lora", "lntuning", "prompt-tuning"]
+methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "p-tuning"]
 # methods = ["base"]
 # datasets = [
 #     "mnli",
@@ -39,7 +39,7 @@ methods = ["base", "lora", "lntuning", "prompt-tuning"]
 #     "cb",
 #     "copa",
 # ]
-datasets = ["siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "apps"]
+datasets = ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
 
 
@@ -80,7 +80,10 @@ for m in models:
             if not glob_res:
                 continue
 
-            results[pm][d] = get_single_result(get_results_from_jsonl(sorted(glob_res)[-1]), d) * 100
+            try:
+                results[pm][d] = get_single_result(get_results_from_jsonl(sorted(glob_res)[-1]), d) * 100
+            except FileNotFoundError:
+                continue
 
     results_df = pd.DataFrame(results).T
     print(

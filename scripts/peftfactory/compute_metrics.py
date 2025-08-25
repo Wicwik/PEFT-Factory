@@ -152,7 +152,10 @@ def gsm8k(preds, targets, labels):
         return None
 
     def normalize_answer(ans):
-        return float(ans.replace(",", ""))
+        try:
+            return float(ans.replace(",", "").replace("%", ""))
+        except (AttributeError, ValueError):
+            return None
 
     format_errors = 0
     correct = 0

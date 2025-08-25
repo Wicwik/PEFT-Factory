@@ -17,8 +17,9 @@
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola record multirc boolq wic wsc cb copa)
 # datasets=(record multirc boolq wic wsc cb copa)
 # peft_methods=(ia3 prompt-tuning lora lntuning)
-datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
-peft_methods=(prompt-tuning)
+# datasets=(mmlu piqa siqa hellaswag winogrande openbookqa math_qa gsm8k svamp conala codealpacapy apps)
+datasets=(gsm8k)
+peft_methods=(ia3 prompt-tuning lora lntuning prefix-tuning p-tuning)
 models=(llama-3-8b-instruct)
 
 
