@@ -20,7 +20,7 @@
 
 datasets=(apps)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-peft_methods=(lora)
+peft_methods=(lntuning)
 # peft_methods=(base)
 models=(llama-3-8b-instruct)
 
