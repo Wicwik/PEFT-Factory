@@ -24,7 +24,6 @@ peft_methods=(lntuning)
 # peft_methods=(base)
 models=(llama-3-8b-instruct)
 
-
 for d in ${datasets[@]};
 do
     for m in ${models[@]};
