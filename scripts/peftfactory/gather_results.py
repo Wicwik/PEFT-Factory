@@ -20,7 +20,8 @@ import pandas as pd
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
-methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "p-tuning"]
+# methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "p-tuning"]
+methods = ["prefix-tuning"]
 # methods = ["base"]
 # datasets = [
 #     "mnli",
