@@ -50,7 +50,16 @@ export OUTPUT_DIR DATASET SEED WANDB_PROJECT WANDB_NAME
 ```
 
 #### Use the template
+Utility `envsubst` replaces the occurances of env variables with their values (see the [template](https://github.com/Wicwik/PEFT-Factory/blob/main/examples/peft/prefix-tuning/llama-3-8b-instruct/train.yaml)).
 
+```bash
+envsubst < examples/peft/prefix-tuning/llama-3-8b-instruct/train.yaml > ${OUTPUT_DIR}/train.yaml
+```
+
+#### Run the factory
+```bash
+llamafactory-cli train ${OUTPUT_DIR}/train.yaml
+```
 
 ### Supported methods
 
