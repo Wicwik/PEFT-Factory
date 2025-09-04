@@ -61,6 +61,9 @@ envsubst < examples/peft/prefix-tuning/llama-3-8b-instruct/train.yaml > ${OUTPUT
 llamafactory-cli train ${OUTPUT_DIR}/train.yaml
 ```
 
+---
+<div align="center" markdown="1">
+
 ### Supported methods
 
 | PEFT method name           | Support |
@@ -73,6 +76,8 @@ llamafactory-cli train ${OUTPUT_DIR}/train.yaml
 | SVD                        | 🔜 ⚙️  |
 | BitFit                     | 🔜 ⚙️  |
 
+
+</div>
 
 <!-- ![# LLaMA Factory](assets/logo.png)
 
