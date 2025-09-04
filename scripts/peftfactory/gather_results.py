@@ -23,24 +23,24 @@ models = ["llama-3-8b-instruct"]
 # methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "p-tuning"]
 methods = ["prefix-tuning"]
 # methods = ["base"]
-# datasets = [
-#     "mnli",
-#     "qqp",
-#     "qnli",
-#     "sst2",
-#     "stsb",
-#     "mrpc",
-#     "rte",
-#     "cola",
-#     "record",
-#     "multirc",
-#     "boolq",
-#     "wic",
-#     "wsc",
-#     "cb",
-#     "copa",
-# ]
-datasets = ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
+datasets = [
+    "mnli",
+    "qqp",
+    "qnli",
+    "sst2",
+    "stsb",
+    "mrpc",
+    "rte",
+    "cola",
+    "record",
+    "multirc",
+    "boolq",
+    "wic",
+    "wsc",
+    "cb",
+    "copa",
+]
+# datasets = ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
 
 

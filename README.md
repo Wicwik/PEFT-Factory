@@ -1,4 +1,6 @@
-![# LLaMA Factory](assets/logo.png)
+![# PEFT Factory](assets/logo.png)
+
+<!-- ![# LLaMA Factory](assets/logo.png)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/hiyouga/LLaMA-Factory?style=social)](https://github.com/hiyouga/LLaMA-Factory/stargazers)
 [![GitHub last commit](https://img.shields.io/github/last-commit/hiyouga/LLaMA-Factory)](https://github.com/hiyouga/LLaMA-Factory/commits/main)
@@ -943,4 +945,4 @@ This repo benefits from [PEFT](https://github.com/huggingface/peft), [TRL](https
 
 ## Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=hiyouga/LLaMA-Factory&type=Date)
+![Star History Chart](https://api.star-history.com/svg?repos=hiyouga/LLaMA-Factory&type=Date) -->
