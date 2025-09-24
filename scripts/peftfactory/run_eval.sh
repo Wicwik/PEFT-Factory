@@ -18,9 +18,9 @@
 # peft_methods=(ia3 prefix-tuning prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(record apps)
+datasets=(apps)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-peft_methods=(prefix-tuning)
+peft_methods=(prompt-tuning)
 # peft_methods=(base)
 models=(llama-3-8b-instruct)
 
