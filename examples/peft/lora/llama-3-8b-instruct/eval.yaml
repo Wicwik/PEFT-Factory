@@ -48,6 +48,7 @@ warmup_ratio: 0.1
 optim: adamw_torch
 report_to:
 - wandb
+run_name: ${WANDB_NAME}
 
 ### eval
 do_eval: false

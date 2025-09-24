@@ -16,12 +16,14 @@ import glob
 import json
 
 import pandas as pd
+import numpy as np
 
+import matplotlib.pyplot as plt
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
-# methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "p-tuning"]
-methods = ["prefix-tuning"]
+methods = ["base", "ia3", "lora", "lntuning", "prompt-tuning", "prefix-tuning", "p-tuning"]
+# methods = ["prefix-tuning"]
 # methods = ["base"]
 datasets = [
     "mnli",
@@ -39,10 +41,98 @@ datasets = [
     "wsc",
     "cb",
     "copa",
-]
+] + ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
 # datasets = ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
+seeds = [42, 123, 456, 789, 101112]
 
+methods_map = {
+    "base": "Base",
+    "ia3": "IA3",
+    "lora": "LoRA",
+    "lntuning": "LNTuning",
+    "prompt-tuning": "Prompt Tuning",
+    "prefix-tuning": "Prefix Tuning",
+    "p-tuning": "P-Tuning",
+}
+
+datasets_map = {
+    "mnli": "MNLI",
+    "qqp": "QQP",
+    "qnli": "QNLI",
+    "sst2": "SST-2",
+    "stsb": "STSB",
+    "mrpc": "MRPC",
+    "rte": "RTE",
+    "cola": "CoLA",
+    "record": "ReCoRD",
+    "multirc": "MultiRC",
+    "boolq": "BoolQ",
+    "wic": "WiC",
+    "wsc": "WSC",
+    "cb": "CB",
+    "copa": "COPA",
+    "mmlu": "MMLU",
+    "piqa": "PIQA",
+    "siqa": "SIQA",
+    "hellaswag": "HellaSwag",
+    "winogrande": "Winogrande",
+    "openbookqa": "OpenBookQA",
+    "math_qa": "MathQA",
+    "gsm8k": "GSM8K",
+    "svamp": "SVAMP",
+    "conala": "CoNaLa",
+    "codealpacapy": "CodeAlpacaPy",
+    "apps": "APPS",
+}
+
+
+def plot_barplot(df, title="Performance Comparison", basename="barplot"):
+    """
+    Create and save a barplot from a dataframe where each cell is a dict
+    with 'mean' and 'std' keys.
+    
+    Args:
+        df (pd.DataFrame): DataFrame with dict values {'mean': x, 'std': y}
+        title (str): Title of the plot
+        basename (str): Base name (without extension) for output files
+    """
+    # Expand dictionary values into two DataFrames
+    means = df.applymap(lambda x: x["mean"])
+    stds = df.applymap(lambda x: x["std"])
+
+    # Plot
+    ax = means.plot(
+        kind="bar",
+        yerr=stds,
+        capsize=4,
+        figsize=(12, 6),
+        rot=45
+    )
+
+    ax.set_xticklabels(ax.get_xticklabels(), fontweight="bold")
+
+    # Titles and labels
+    # plt.title(title, fontsize=14)
+    plt.ylabel("F1 (%)", fontsize=12, fontweight="bold")
+    # plt.xlabel("Method", fontsize=12, fontweight="bold")
+
+    # Legend under the image, single row
+    plt.legend(
+        # title="Dataset",
+        bbox_to_anchor=(0.5, -0.25),  # move under plot
+        loc="upper center",
+        ncol=len(df.columns),         # all in one line
+        frameon=False
+    )
+
+    plt.tight_layout()
+
+    # Save in both formats
+    plt.savefig(f"{basename}.png", dpi=300, bbox_inches="tight")
+    plt.savefig(f"{basename}.pdf", bbox_inches="tight")
+    plt.close()
+    print(f"Saved barplot as {basename}.png and {basename}.pdf")
 
 def get_single_result(results, dataset):
     print(dataset)
@@ -92,3 +182,43 @@ for m in models:
             float_format="%.1f", caption="Performance across tasks and tuning methods", label="tab:results"
         )
     )
+
+    print(results_df.T.mean().round(1))
+
+
+
+for m in models:
+    print(f"Model {m}")
+
+    results = {}
+    for pm in ["ia3", "lora", "lntuning", "prompt-tuning", "prefix-tuning", "p-tuning"]:
+        print(f"Method {pm}")
+        results[methods_map[pm]] = {}
+        for d in ["cb", "copa", "svamp", "cola"]:
+            print(f"Dataset {d}")
+            results[methods_map[pm]][datasets_map[d]] = {}
+            seed_results = []
+            for s in seeds:
+                glob_res = glob.glob(f"saves_stability/{pm}/{m}/eval_{d}_{s}*")
+
+                if not glob_res:
+                    continue
+
+                try:
+                    seed_results.append(get_single_result(get_results_from_jsonl(sorted(glob_res)[-1]), d) * 100)
+                except FileNotFoundError:
+                    continue
+
+            if seed_results:
+                results[methods_map[pm]][datasets_map[d]]["mean"] = np.mean(seed_results)
+                results[methods_map[pm]][datasets_map[d]]["std"] = np.std(seed_results)
+
+    results_df = pd.DataFrame(results).T
+    print(results_df.to_string())
+    print(
+        results_df.to_latex(
+            float_format="%.1f", caption="Performance across tasks and tuning methods", label="tab:results"
+        )
+    )
+    plot_barplot(results_df, title=f"")
+

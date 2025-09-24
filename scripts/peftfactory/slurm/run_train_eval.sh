@@ -31,3 +31,4 @@ export HF_HOME="/projects/${PROJECT}/cache"
 
 llamafactory-cli train $1
 llamafactory-cli train $2
+python scripts/peftfactory/compute_metrics.py $3 $4
