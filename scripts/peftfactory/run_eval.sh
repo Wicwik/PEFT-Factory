@@ -15,12 +15,12 @@
 # limitations under the License.
 
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-# peft_methods=(ia3 prompt-tuning lora lntuning)
+# peft_methods=(ia3 prefix-tuning prompt-tuning lora lntuning)
 # models=(gemma-3-1b-it llama-3-8b-instruct mistral-7b-instruct)
 
-datasets=(apps)
+datasets=(record apps)
 # datasets=(mnli qqp qnli sst2 stsb mrpc rte cola)
-peft_methods=(lntuning)
+peft_methods=(prefix-tuning)
 # peft_methods=(base)
 models=(llama-3-8b-instruct)
 
