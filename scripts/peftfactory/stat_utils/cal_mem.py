@@ -12,7 +12,7 @@ mean_memory_usage = {}
 
 for m in methods:
     print(f"Processing method: {m}")
-    project = f"rbelanec/peft-factory-train-{m}"
+    project = f""
     runs = api.runs(project)
 
     max_values = []

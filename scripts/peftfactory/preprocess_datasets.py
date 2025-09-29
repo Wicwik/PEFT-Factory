@@ -250,43 +250,43 @@ def preprocess_apps():
 
 
 # wsc = preprocess_wsc()
-# wsc.push_to_hub("rbelanec/wsc")
+# wsc.push_to_hub("anon/wsc")
 
 # wic = preprocess_wic()
-# wic.push_to_hub("rbelanec/wic")
+# wic.push_to_hub("anon/wic")
 
 # multirc = preprocess_multirc()
-# multirc.push_to_hub("rbelanec/multirc")
+# multirc.push_to_hub("anon/multirc")
 
 # copa = preprocess_copa()
-# copa.push_to_hub("rbelanec/copa")
+# copa.push_to_hub("anon/copa")
 
 # record = preprocess_record()
-# record.push_to_hub("rbelanec/record")
+# record.push_to_hub("anon/record")
 
 # mmlu = preprocess_mmlu()
-# mmlu.push_to_hub("rbelanec/mmlu")
+# mmlu.push_to_hub("anon/mmlu")
 
 # piqa = preprocess_piqa()
-# piqa.push_to_hub("rbelanec/piqa")
+# piqa.push_to_hub("anon/piqa")
 
 # siqa = preprocess_siqa()
-# siqa.push_to_hub("rbelanec/siqa")
+# siqa.push_to_hub("anon/siqa")
 
 # hellaswag = preprocess_hellaswag()
-# hellaswag.push_to_hub("rbelanec/hellaswag")
+# hellaswag.push_to_hub("anon/hellaswag")
 
 # winogrande = preprocess_winogrande()
-# winogrande.push_to_hub("rbelanec/winogrande")
+# winogrande.push_to_hub("anon/winogrande")
 
 # openbookqa = preprocess_openbookqa()
-# openbookqa.push_to_hub("rbelanec/openbookqa")
+# openbookqa.push_to_hub("anon/openbookqa")
 
 # math_qa = preprocess_math_qa()
-# math_qa.push_to_hub("rbelanec/math_qa")
+# math_qa.push_to_hub("anon/math_qa")
 
 # svamp = preprocess_svamp()
-# svamp.push_to_hub("rbelanec/svamp")
+# svamp.push_to_hub("anon/svamp")
 
 apps = preprocess_apps()
-apps.push_to_hub("rbelanec/apps")
+apps.push_to_hub("anon/apps")
