@@ -17,7 +17,7 @@ PEFT-Factory is a fork of [LLaMa-Factory](https://github.com/hiyouga/LLaMA-Facto
 #### Clone the repository
 
 ```bash
-git clone git@github.com:Wicwik/PEFT-Factory.git
+git clone https://anonymous.4open.science/r/PEFT-Factory
 ```
 
 #### Build the wheel
