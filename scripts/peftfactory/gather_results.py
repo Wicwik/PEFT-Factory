@@ -106,21 +106,21 @@ def plot_barplot(df, title="Performance Comparison", basename="barplot"):
         kind="bar",
         yerr=stds,
         capsize=4,
-        figsize=(12, 6),
-        rot=45
+        figsize=(12, 4),
+        rot=0
     )
 
-    ax.set_xticklabels(ax.get_xticklabels(), fontweight="bold")
+    ax.set_xticklabels(ax.get_xticklabels())
 
     # Titles and labels
     # plt.title(title, fontsize=14)
-    plt.ylabel("F1 (%)", fontsize=12, fontweight="bold")
+    plt.ylabel("F1 (%)", fontsize=12)
     # plt.xlabel("Method", fontsize=12, fontweight="bold")
 
     # Legend under the image, single row
     plt.legend(
         # title="Dataset",
-        bbox_to_anchor=(0.5, -0.25),  # move under plot
+        bbox_to_anchor=(0.5, -0.1),  # move under plot
         loc="upper center",
         ncol=len(df.columns),         # all in one line
         frameon=False

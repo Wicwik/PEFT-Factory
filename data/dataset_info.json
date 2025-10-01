@@ -838,7 +838,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "train",
-    "instruction": "lassify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction, and neutral classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
