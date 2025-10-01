@@ -838,7 +838,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "train",
-    "instruction": "lassify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -910,7 +910,7 @@
     }
   },
   "record": {
-    "hf_hub_url": "rbelanec/record",
+    "hf_hub_url": "anon/record",
     "split": "train",
     "instruction": "Based on the following query, entities, and passage, replace the @placeholder in the query. Respond only with the correct replacement.",
     "columns": {
@@ -919,7 +919,7 @@
     }
   },
   "record_eval": {
-    "hf_hub_url": "rbelanec/record",
+    "hf_hub_url": "anon/record",
     "split": "validation",
     "instruction": "Based on the following query, entities, and passage, replace the @placeholder in the query. Respond only with the correct replacement.",
     "columns": {
@@ -928,7 +928,7 @@
     }
   },
   "multirc": {
-    "hf_hub_url": "rbelanec/multirc",
+    "hf_hub_url": "anon/multirc",
     "split": "train",
     "instruction": "Based on the following paragraph, question, and answer, determine whether the answer answers the question. Respond only with the corresponding true or false.",
     "columns": {
@@ -937,7 +937,7 @@
     }
   },
   "multirc_eval": {
-    "hf_hub_url": "rbelanec/multirc",
+    "hf_hub_url": "anon/multirc",
     "split": "validation",
     "instruction": "Based on the following paragraph, question, and answer, determine whether the answer answers the question. Respond only with the corresponding true or false.",
     "columns": {
@@ -968,7 +968,7 @@
     }
   },
   "wic": {
-    "hf_hub_url": "rbelanec/wic",
+    "hf_hub_url": "anon/wic",
     "split": "train",
     "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
@@ -977,7 +977,7 @@
     }
   },
   "wic_eval": {
-    "hf_hub_url": "rbelanec/wic",
+    "hf_hub_url": "anon/wic",
     "split": "validation",
     "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
@@ -986,7 +986,7 @@
     }
   },
   "wsc": {
-    "hf_hub_url": "rbelanec/wsc",
+    "hf_hub_url": "anon/wsc",
     "split": "train",
     "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
     "columns": {
@@ -995,7 +995,7 @@
     }
   },
   "wsc_eval": {
-    "hf_hub_url": "rbelanec/wsc",
+    "hf_hub_url": "anon/wsc",
     "split": "validation",
     "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
     "columns": {
@@ -1026,7 +1026,7 @@
     }
   },
   "copa": {
-    "hf_hub_url": "rbelanec/copa",
+    "hf_hub_url": "anon/copa",
     "split": "train",
     "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Respond only with the corresponding choice1 or choice2.",
     "columns": {
@@ -1035,7 +1035,7 @@
     }
   },
   "copa_eval": {
-    "hf_hub_url": "rbelanec/copa",
+    "hf_hub_url": "anon/copa",
     "split": "validation",
     "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Respond only with the corresponding choice1 or choice2.",
     "columns": {
@@ -1044,7 +1044,7 @@
     }
   },
   "mmlu": {
-    "hf_hub_url": "rbelanec/mmlu",
+    "hf_hub_url": "anon/mmlu",
     "split": "auxiliary_train",
     "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
     "columns": {
@@ -1053,7 +1053,7 @@
     }
   },
   "mmlu_eval": {
-    "hf_hub_url": "rbelanec/mmlu",
+    "hf_hub_url": "anon/mmlu",
     "split": "validation",
     "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
     "columns": {
@@ -1062,7 +1062,7 @@
     }
   },
   "piqa": {
-    "hf_hub_url": "rbelanec/piqa",
+    "hf_hub_url": "anon/piqa",
     "split": "train",
     "instruction": "Based on the question and provided solutions, select the right solution. Respond only with the corresponding solution1 or solution2.",
     "columns": {
@@ -1071,7 +1071,7 @@
     }
   },
   "piqa_eval": {
-    "hf_hub_url": "rbelanec/piqa",
+    "hf_hub_url": "anon/piqa",
     "split": "validation",
     "instruction": "Based on the question and provided solutions, select the right solution. Respond only with the corresponding solution1 or solution2.",
     "columns": {
@@ -1080,7 +1080,7 @@
     }
   },
   "siqa": {
-    "hf_hub_url": "rbelanec/siqa",
+    "hf_hub_url": "anon/siqa",
     "split": "train",
     "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B and C.",
     "columns": {
@@ -1089,7 +1089,7 @@
     }
   },
   "siqa_eval": {
-    "hf_hub_url": "rbelanec/siqa",
+    "hf_hub_url": "anon/siqa",
     "split": "validation",
     "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B and C.",
     "columns": {
@@ -1098,7 +1098,7 @@
     }
   },
   "hellaswag": {
-    "hf_hub_url": "rbelanec/hellaswag",
+    "hf_hub_url": "anon/hellaswag",
     "split": "train",
     "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
     "columns": {
@@ -1107,7 +1107,7 @@
     }
   },
   "hellaswag_eval": {
-    "hf_hub_url": "rbelanec/hellaswag",
+    "hf_hub_url": "anon/hellaswag",
     "split": "validation",
     "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
     "columns": {
@@ -1116,7 +1116,7 @@
     }
   },
   "winogrande": {
-    "hf_hub_url": "rbelanec/winogrande",
+    "hf_hub_url": "anon/winogrande",
     "split": "train",
     "instruction": "Based on the sentence and provided options, select the best option that replaces the '_' character in the sentence. Respond only with the corresponding option1 or option2.",
     "columns": {
@@ -1125,7 +1125,7 @@
     }
   },
   "winogrande_eval": {
-    "hf_hub_url": "rbelanec/winogrande",
+    "hf_hub_url": "anon/winogrande",
     "split": "validation",
     "instruction": "Based on the sentence and provided options, select the best option that replaces the '_' character in the sentence. Respond only with the corresponding option1 or option2.",
     "columns": {
@@ -1134,7 +1134,7 @@
     }
   },
   "openbookqa": {
-    "hf_hub_url": "rbelanec/openbookqa",
+    "hf_hub_url": "anon/openbookqa",
     "split": "train",
     "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
     "columns": {
@@ -1143,7 +1143,7 @@
     }
   },
     "openbookqa_eval": {
-    "hf_hub_url": "rbelanec/openbookqa",
+    "hf_hub_url": "anon/openbookqa",
     "split": "validation",
     "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
     "columns": {
@@ -1152,7 +1152,7 @@
     }
   },
   "math_qa": {
-    "hf_hub_url": "rbelanec/math_qa",
+    "hf_hub_url": "anon/math_qa",
     "split": "train",
     "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
     "columns": {
@@ -1161,7 +1161,7 @@
     }
   },
   "math_qa_eval": {
-    "hf_hub_url": "rbelanec/math_qa",
+    "hf_hub_url": "anon/math_qa",
     "split": "validation",
     "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
     "columns": {
@@ -1190,7 +1190,7 @@
     }
   },
   "svamp": {
-    "hf_hub_url": "rbelanec/svamp",
+    "hf_hub_url": "anon/svamp",
     "split": "train",
     "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
     "columns": {
@@ -1199,7 +1199,7 @@
     }
   },
   "svamp_eval": {
-    "hf_hub_url": "rbelanec/svamp",
+    "hf_hub_url": "anon/svamp",
     "split": "test",
     "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
     "columns": {
@@ -1246,7 +1246,7 @@
     }
   },
   "apps": {
-    "hf_hub_url": "rbelanec/apps",
+    "hf_hub_url": "anon/apps",
     "split": "train",
     "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
     "columns": {
@@ -1255,7 +1255,7 @@
     }
   },
   "apps_eval": {
-    "hf_hub_url": "rbelanec/apps",
+    "hf_hub_url": "anon/apps",
     "split": "test",
     "instruction": "Based on the following instruction, generate a valid Python code that answers it.",
     "columns": {
