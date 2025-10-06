@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+<<<<<<< HEAD
 from llamafactory.train.tuner import run_exp  # use absolute import
 
 
@@ -21,3 +22,48 @@ def launch():
 
 if __name__ == "__main__":
     launch()
+=======
+
+def run_api():
+    from llamafactory.api.app import run_api as _run_api
+
+    _run_api()
+
+
+def run_chat():
+    from llamafactory.chat.chat_model import run_chat as _run_chat
+
+    return _run_chat()
+
+
+def run_eval():
+    raise NotImplementedError("Evaluation will be deprecated in the future.")
+
+
+def export_model():
+    from llamafactory.train.tuner import export_model as _export_model
+
+    return _export_model()
+
+
+def run_exp():
+    from llamafactory.train.tuner import run_exp as _run_exp
+
+    return _run_exp()  # use absolute import
+
+
+def run_web_demo():
+    from llamafactory.webui.interface import run_web_demo as _run_web_demo
+
+    return _run_web_demo()
+
+
+def run_web_ui():
+    from llamafactory.webui.interface import run_web_ui as _run_web_ui
+
+    return _run_web_ui()
+
+
+if __name__ == "__main__":
+    run_exp()
+>>>>>>> upstream/main

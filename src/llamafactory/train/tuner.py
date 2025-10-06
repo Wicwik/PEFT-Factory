@@ -52,7 +52,11 @@ logger = logging.get_logger(__name__)
 def _training_function(config: dict[str, Any]) -> None:
     args = config.get("args")
     callbacks: list[Any] = config.get("callbacks")
+<<<<<<< HEAD
     model_args, data_args, training_args, finetuning_args, generating_args, peft_args = get_train_args(args)
+=======
+    model_args, data_args, training_args, finetuning_args, generating_args = get_train_args(args)
+>>>>>>> upstream/main
 
     callbacks.append(LogCallback())
     if finetuning_args.pissa_convert:
@@ -67,6 +71,7 @@ def _training_function(config: dict[str, Any]) -> None:
     callbacks.append(ReporterCallback(model_args, data_args, finetuning_args, generating_args))  # add to last
 
     if finetuning_args.stage == "pt":
+<<<<<<< HEAD
         run_pt(model_args, data_args, training_args, finetuning_args, peft_args, callbacks)
     elif finetuning_args.stage == "sft":
         run_sft(model_args, data_args, training_args, finetuning_args, generating_args, peft_args, callbacks)
@@ -78,6 +83,19 @@ def _training_function(config: dict[str, Any]) -> None:
         run_dpo(model_args, data_args, training_args, finetuning_args, peft_args, callbacks)
     elif finetuning_args.stage == "kto":
         run_kto(model_args, data_args, training_args, finetuning_args, peft_args, callbacks)
+=======
+        run_pt(model_args, data_args, training_args, finetuning_args, callbacks)
+    elif finetuning_args.stage == "sft":
+        run_sft(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+    elif finetuning_args.stage == "rm":
+        run_rm(model_args, data_args, training_args, finetuning_args, callbacks)
+    elif finetuning_args.stage == "ppo":
+        run_ppo(model_args, data_args, training_args, finetuning_args, generating_args, callbacks)
+    elif finetuning_args.stage == "dpo":
+        run_dpo(model_args, data_args, training_args, finetuning_args, callbacks)
+    elif finetuning_args.stage == "kto":
+        run_kto(model_args, data_args, training_args, finetuning_args, callbacks)
+>>>>>>> upstream/main
     else:
         raise ValueError(f"Unknown task: {finetuning_args.stage}.")
 

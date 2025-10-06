@@ -30,6 +30,7 @@ from transformers.training_args import ParallelMode
 from transformers.utils import is_torch_bf16_gpu_available, is_torch_npu_available
 
 from ..extras import logging
+<<<<<<< HEAD
 from ..extras.constants import (
     ADAPTERS_CONFIG_MAPPING,
     ADAPTERS_METHODS,
@@ -39,12 +40,20 @@ from ..extras.constants import (
     EngineName,
 )
 from ..extras.misc import check_dependencies, check_version, get_current_device, is_env_enabled
+=======
+from ..extras.constants import CHECKPOINT_NAMES, EngineName
+from ..extras.misc import check_dependencies, check_version, get_current_device, is_env_enabled
+from ..extras.packages import is_transformers_version_greater_than
+>>>>>>> upstream/main
 from .data_args import DataArguments
 from .evaluation_args import EvaluationArguments
 from .finetuning_args import FinetuningArguments
 from .generating_args import GeneratingArguments
 from .model_args import ModelArguments
+<<<<<<< HEAD
 from .peft_args import PeftArguments
+=======
+>>>>>>> upstream/main
 from .training_args import RayArguments, TrainingArguments
 
 
@@ -54,9 +63,13 @@ check_dependencies()
 
 
 _TRAIN_ARGS = [ModelArguments, DataArguments, TrainingArguments, FinetuningArguments, GeneratingArguments]
+<<<<<<< HEAD
 _TRAIN_CLS = tuple[
     ModelArguments, DataArguments, TrainingArguments, FinetuningArguments, GeneratingArguments, PeftArguments
 ]
+=======
+_TRAIN_CLS = tuple[ModelArguments, DataArguments, TrainingArguments, FinetuningArguments, GeneratingArguments]
+>>>>>>> upstream/main
 _INFER_ARGS = [ModelArguments, DataArguments, FinetuningArguments, GeneratingArguments]
 _INFER_CLS = tuple[ModelArguments, DataArguments, FinetuningArguments, GeneratingArguments]
 _EVAL_ARGS = [ModelArguments, DataArguments, EvaluationArguments, FinetuningArguments]
@@ -117,12 +130,21 @@ def _verify_model_args(
     data_args: "DataArguments",
     finetuning_args: "FinetuningArguments",
 ) -> None:
+<<<<<<< HEAD
     if model_args.adapter_name_or_path is not None and finetuning_args.finetuning_type not in PEFT_METHODS:
         raise ValueError("Adapter is only valid for PEFT methods.")
 
     if model_args.quantization_bit is not None:
         if finetuning_args.finetuning_type != "lora":
             raise ValueError("Quantization is only compatible with the LoRA method.")
+=======
+    if model_args.adapter_name_or_path is not None and finetuning_args.finetuning_type != "lora":
+        raise ValueError("Adapter is only valid for the LoRA method.")
+
+    if model_args.quantization_bit is not None:
+        if finetuning_args.finetuning_type not in ["lora", "oft"]:
+            raise ValueError("Quantization is only compatible with the LoRA or OFT method.")
+>>>>>>> upstream/main
 
         if finetuning_args.pissa_init:
             raise ValueError("Please use scripts/pissa_init.py to initialize PiSSA for a quantized model.")
@@ -140,6 +162,17 @@ def _verify_model_args(
         logger.warning_rank0("We should use slow tokenizer for the Yi models. Change `use_fast_tokenizer` to False.")
         model_args.use_fast_tokenizer = False
 
+<<<<<<< HEAD
+=======
+    # Validate advanced training features
+    if model_args.fp8 and model_args.quantization_bit is not None:
+        raise ValueError("FP8 training is not compatible with quantization. Please disable one of them.")
+
+    if model_args.fp8_enable_fsdp_float8_all_gather and not model_args.fp8:
+        logger.warning_rank0("fp8_enable_fsdp_float8_all_gather requires fp8=True. Setting fp8=True.")
+        model_args.fp8 = True
+
+>>>>>>> upstream/main
 
 def _check_extra_dependencies(
     model_args: "ModelArguments",
@@ -156,7 +189,11 @@ def _check_extra_dependencies(
         check_version("mixture-of-depth>=1.1.6", mandatory=True)
 
     if model_args.infer_backend == EngineName.VLLM:
+<<<<<<< HEAD
         check_version("vllm>=0.4.3,<=0.10.0")
+=======
+        check_version("vllm>=0.4.3,<=0.10.2")
+>>>>>>> upstream/main
         check_version("vllm", mandatory=True)
     elif model_args.infer_backend == EngineName.SGLANG:
         check_version("sglang>=0.4.5")
@@ -183,7 +220,12 @@ def _check_extra_dependencies(
     if training_args is not None:
         if training_args.deepspeed:
             # pin deepspeed version < 0.17 because of https://github.com/deepspeedai/DeepSpeed/issues/7347
+<<<<<<< HEAD
             check_version("deepspeed>=0.10.0,<=0.16.9", mandatory=True)
+=======
+            check_version("deepspeed", mandatory=True)
+            check_version("deepspeed>=0.10.0,<=0.16.9")
+>>>>>>> upstream/main
 
         if training_args.predict_with_generate:
             check_version("jieba", mandatory=True)
@@ -192,11 +234,15 @@ def _check_extra_dependencies(
 
 
 def _parse_train_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> _TRAIN_CLS:
+<<<<<<< HEAD
     if args["finetuning_type"] in ADAPTERS_METHODS:
         peft_args_class = ADAPTERS_CONFIG_MAPPING.get(args["finetuning_type"], PeftArguments)
     else:
         peft_args_class = PEFT_CONFIG_MAPPING.get(args["finetuning_type"], PeftArguments)
     parser = HfArgumentParser(_TRAIN_ARGS + [peft_args_class])
+=======
+    parser = HfArgumentParser(_TRAIN_ARGS)
+>>>>>>> upstream/main
     allow_extra_keys = is_env_enabled("ALLOW_EXTRA_ARGS")
     return _parse_args(parser, args, allow_extra_keys=allow_extra_keys)
 
@@ -220,7 +266,11 @@ def get_ray_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> Ray
 
 
 def get_train_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> _TRAIN_CLS:
+<<<<<<< HEAD
     model_args, data_args, training_args, finetuning_args, generating_args, peft_args = _parse_train_args(args)
+=======
+    model_args, data_args, training_args, finetuning_args, generating_args = _parse_train_args(args)
+>>>>>>> upstream/main
 
     # Setup logging
     if training_args.should_log:
@@ -318,6 +368,12 @@ def get_train_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> _
     if model_args.use_unsloth and is_deepspeed_zero3_enabled():
         raise ValueError("Unsloth is incompatible with DeepSpeed ZeRO-3.")
 
+<<<<<<< HEAD
+=======
+    if data_args.neat_packing and is_transformers_version_greater_than("4.53.0"):
+        raise ValueError("Neat packing is incompatible with transformers>=4.53.0.")
+
+>>>>>>> upstream/main
     _set_env_vars()
     _verify_model_args(model_args, data_args, finetuning_args)
     _check_extra_dependencies(model_args, finetuning_args, training_args)
@@ -429,7 +485,11 @@ def get_train_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> _
     )
     transformers.set_seed(training_args.seed)
 
+<<<<<<< HEAD
     return model_args, data_args, training_args, finetuning_args, generating_args, peft_args
+=======
+    return model_args, data_args, training_args, finetuning_args, generating_args
+>>>>>>> upstream/main
 
 
 def get_infer_args(args: Optional[Union[dict[str, Any], list[str]]] = None) -> _INFER_CLS:

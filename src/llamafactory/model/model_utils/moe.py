@@ -39,6 +39,12 @@ def add_z3_leaf_module(model: "PreTrainedModel") -> None:
         return
 
     model_type = getattr(model.config, "model_type", None)
+<<<<<<< HEAD
+=======
+    text_config = getattr(model.config, "text_config", None)
+    text_model_type = getattr(text_config, "model_type", None)
+
+>>>>>>> upstream/main
     if model_type == "dbrx":
         from transformers.models.dbrx.modeling_dbrx import DbrxFFN
 
@@ -62,6 +68,14 @@ def add_z3_leaf_module(model: "PreTrainedModel") -> None:
 
         _set_z3_leaf_modules(model, [Glm4MoeMoE])
 
+<<<<<<< HEAD
+=======
+    if model_type == "glm4v_moe":
+        from transformers.models.glm4v_moe.modeling_glm4v_moe import Glm4vMoeTextMoE
+
+        _set_z3_leaf_modules(model, [Glm4vMoeTextMoE])
+
+>>>>>>> upstream/main
     if model_type == "jamba":
         from transformers.models.jamba.modeling_jamba import JambaSparseMoeBlock
 
@@ -97,17 +111,39 @@ def add_z3_leaf_module(model: "PreTrainedModel") -> None:
 
         _set_z3_leaf_modules(model, [Qwen2MoeSparseMoeBlock])
 
+<<<<<<< HEAD
     if model_type == "qwen3_moe":
+=======
+    if model_type == "qwen3_moe" or text_model_type == "qwen3_moe":  # internvl 3.5
+>>>>>>> upstream/main
         from transformers.models.qwen3_moe.modeling_qwen3_moe import Qwen3MoeSparseMoeBlock
 
         _set_z3_leaf_modules(model, [Qwen3MoeSparseMoeBlock])
 
+<<<<<<< HEAD
+=======
+    if model_type == "qwen3_vl_moe":
+        from transformers.models.qwen3_vl_moe.modeling_qwen3_vl_moe import Qwen3VLMoeTextSparseMoeBlock
+
+        _set_z3_leaf_modules(model, [Qwen3VLMoeTextSparseMoeBlock])
+
+    if model_type == "qwen3_omni_moe":
+        from transformers.models.qwen3_omni_moe.modeling_qwen3_omni_moe import Qwen3OmniMoeThinkerTextSparseMoeBlock
+
+        _set_z3_leaf_modules(model, [Qwen3OmniMoeThinkerTextSparseMoeBlock])
+
+>>>>>>> upstream/main
 
 def configure_moe(config: "PretrainedConfig", model_args: "ModelArguments", is_trainable: bool) -> None:
     if not is_trainable or not model_args.moe_aux_loss_coef:
         return
 
     model_type = getattr(config, "model_type", None)
+<<<<<<< HEAD
+=======
+    text_config = getattr(config, "text_config", None)  # for multimodal model
+
+>>>>>>> upstream/main
     if model_type in [
         "dbrx",
         "granitemoe",
@@ -122,9 +158,24 @@ def configure_moe(config: "PretrainedConfig", model_args: "ModelArguments", is_t
     ]:
         setattr(config, "output_router_logits", True)
 
+<<<<<<< HEAD
     if model_type in ["granitemoe", "jamba", "llama4", "mixtral", "olmoe", "phimoe", "qwen2_moe", "qwen3_moe"]:
         setattr(config, "router_aux_loss_coef", model_args.moe_aux_loss_coef)
 
+=======
+    if text_config and getattr(text_config, "model_type", None) in [
+        "glm4v_moe_text",  # glmv4_5
+        "qwen3_moe",  # internvl_3_5
+    ]:
+        setattr(text_config, "output_router_logits", True)
+
+    if model_type in ["granitemoe", "jamba", "llama4", "mixtral", "olmoe", "phimoe", "qwen2_moe", "qwen3_moe"]:
+        setattr(config, "router_aux_loss_coef", model_args.moe_aux_loss_coef)
+
+    elif text_config and getattr(text_config, "model_type", None) in ["qwen3_moe"]:
+        setattr(text_config, "router_aux_loss_coef", model_args.moe_aux_loss_coef)
+
+>>>>>>> upstream/main
     elif model_type == "deepseek":
         setattr(config, "aux_loss_alpha", model_args.moe_aux_loss_coef)
 

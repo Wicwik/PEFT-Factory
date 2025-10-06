@@ -168,7 +168,11 @@
     "ms_hub_url": "AI-ModelScope/OpenOrca",
     "columns": {
       "prompt": "question",
+<<<<<<< HEAD
       "response": "Respond",
+=======
+      "response": "response",
+>>>>>>> upstream/main
       "system": "system_prompt"
     }
   },
@@ -217,7 +221,11 @@
   "deepctrl": {
     "ms_hub_url": "deepctrl/deepctrl-sft-data"
   },
+<<<<<<< HEAD
   "adgen": {
+=======
+  "adgen_train": {
+>>>>>>> upstream/main
     "hf_hub_url": "HasturOfficial/adgen",
     "ms_hub_url": "AI-ModelScope/adgen",
     "split": "train",
@@ -259,6 +267,13 @@
       "assistant_tag": "assistant"
     }
   },
+<<<<<<< HEAD
+=======
+  "infinity_instruct": {
+    "hf_hub_url": "BAAI/Infinity-Instruct",
+    "formatting": "sharegpt"
+  },
+>>>>>>> upstream/main
   "agent_instruct": {
     "hf_hub_url": "THUDM/AgentInstruct",
     "ms_hub_url": "ZhipuAI/AgentInstruct",
@@ -316,7 +331,11 @@
     "hf_hub_url": "argilla/magpie-ultra-v0.1",
     "columns": {
       "prompt": "instruction",
+<<<<<<< HEAD
       "response": "Respond"
+=======
+      "response": "response"
+>>>>>>> upstream/main
     }
   },
   "web_instruct": {
@@ -331,7 +350,11 @@
     "ms_hub_url": "llamafactory/OpenO1-SFT",
     "columns": {
       "prompt": "prompt",
+<<<<<<< HEAD
       "response": "Respond"
+=======
+      "response": "response"
+>>>>>>> upstream/main
     }
   },
   "open_thoughts": {
@@ -700,6 +723,39 @@
       "prompt": "text"
     }
   },
+<<<<<<< HEAD
+=======
+  "cci3_hq": {
+    "hf_hub_url": "BAAI/CCI3-HQ",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "cci3_data": {
+    "hf_hub_url": "BAAI/CCI3-Data",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "cci4_base": {
+    "hf_hub_url": "BAAI/CCI4.0-M2-Base-v1",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "cci4_cot": {
+    "hf_hub_url": "BAAI/CCI4.0-M2-CoT-v1",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+  "cci4_extra": {
+    "hf_hub_url": "BAAI/CCI4.0-M2-Extra-v1",
+    "columns": {
+      "prompt": "text"
+    }
+  },
+>>>>>>> upstream/main
   "the_stack": {
     "hf_hub_url": "bigcode/the-stack",
     "ms_hub_url": "AI-ModelScope/the-stack",
@@ -714,6 +770,7 @@
       "prompt": "content"
     },
     "folder": "python"
+<<<<<<< HEAD
   },
   "mnli": {
     "hf_hub_url": "nyu-mll/glue",
@@ -1262,5 +1319,7 @@
       "prompt": "inputs",
       "response": "targets"
     }
+=======
+>>>>>>> upstream/main
   }
 }

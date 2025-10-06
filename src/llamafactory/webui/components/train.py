@@ -12,17 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+<<<<<<< HEAD
 from dataclasses import fields
+=======
+>>>>>>> upstream/main
 from typing import TYPE_CHECKING
 
 from transformers.trainer_utils import SchedulerType
 
+<<<<<<< HEAD
 from ...extras.constants import PEFT_CONFIG_MAPPING, TRAINING_STAGES
+=======
+from ...extras.constants import TRAINING_STAGES
+>>>>>>> upstream/main
 from ...extras.misc import get_device_count
 from ...extras.packages import is_gradio_available
 from ..common import DEFAULT_DATA_DIR
 from ..control import change_stage, list_checkpoints, list_config_paths, list_datasets, list_output_dirs
+<<<<<<< HEAD
 from ..locales import LOCALES
+=======
+>>>>>>> upstream/main
 from .data import create_preview_box
 
 
@@ -212,6 +222,7 @@ def create_train_tab(engine: "Engine") -> dict[str, "Component"]:
         )
     )
 
+<<<<<<< HEAD
     with gr.Accordion(open=False) as peft_tab:
         with gr.Row():
             task_type = gr.Dropdown(
@@ -259,6 +270,8 @@ def create_train_tab(engine: "Engine") -> dict[str, "Component"]:
 
                     LOCALES.update({f"{peft_name}_{field.name}": {"en": {"label": field.name}}})
 
+=======
+>>>>>>> upstream/main
     with gr.Accordion(open=False) as rlhf_tab:
         with gr.Row():
             pref_beta = gr.Slider(minimum=0, maximum=1, value=0.1, step=0.01)

@@ -30,7 +30,11 @@ jobs:
         os:
           - "ubuntu-latest"
           - "windows-latest"
+<<<<<<< HEAD
           - "macos-13"
+=======
+          - "macos-latest"
+>>>>>>> upstream/main
         transformers:
           - null
         include:  # test backward compatibility
@@ -40,6 +44,12 @@ jobs:
           - python: "3.9"
             os: "ubuntu-latest"
             transformers: "4.51.0"
+<<<<<<< HEAD
+=======
+          - python: "3.9"
+            os: "ubuntu-latest"
+            transformers: "4.53.0"
+>>>>>>> upstream/main
 
     runs-on: ${{ matrix.os }}
 
@@ -72,6 +82,15 @@ jobs:
         run: |
           python -m pip install "transformers==${{ matrix.transformers }}"
 
+<<<<<<< HEAD
+=======
+      - name: Update accelerate to avoid mac os ci errors (before accelerate 1.11.0)
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: |
+          python -m pip uninstall -y accelerate
+          python -m pip install "git+https://github.com/huggingface/accelerate.git"
+
+>>>>>>> upstream/main
       - name: Cache files
         id: hf-hub-cache
         uses: actions/cache@v4

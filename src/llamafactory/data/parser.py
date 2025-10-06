@@ -15,7 +15,11 @@
 import json
 import os
 from dataclasses import dataclass
+<<<<<<< HEAD
 from typing import Any, Literal, Optional
+=======
+from typing import Any, Literal, Optional, Union
+>>>>>>> upstream/main
 
 from huggingface_hub import hf_hub_download
 
@@ -48,7 +52,10 @@ class DatasetAttr:
     rejected: Optional[str] = None
     kto_tag: Optional[str] = None
     # alpaca columns
+<<<<<<< HEAD
     instruction: Optional[str] = None
+=======
+>>>>>>> upstream/main
     prompt: Optional[str] = "instruction"
     query: Optional[str] = "input"
     response: Optional[str] = "output"
@@ -77,7 +84,10 @@ class DatasetAttr:
         self.set_attr("split", attr, default="train")
         self.set_attr("folder", attr)
         self.set_attr("num_samples", attr)
+<<<<<<< HEAD
         self.set_attr("instruction", attr)
+=======
+>>>>>>> upstream/main
 
         if "columns" in attr:
             column_names = ["prompt", "query", "response", "history", "messages", "system", "tools"]
@@ -92,12 +102,22 @@ class DatasetAttr:
                 self.set_attr(tag, attr["tags"])
 
 
+<<<<<<< HEAD
 def get_dataset_list(dataset_names: Optional[list[str]], dataset_dir: str) -> list["DatasetAttr"]:
+=======
+def get_dataset_list(dataset_names: Optional[list[str]], dataset_dir: Union[str, dict]) -> list["DatasetAttr"]:
+>>>>>>> upstream/main
     r"""Get the attributes of the datasets."""
     if dataset_names is None:
         dataset_names = []
 
+<<<<<<< HEAD
     if dataset_dir == "ONLINE":
+=======
+    if isinstance(dataset_dir, dict):
+        dataset_info = dataset_dir
+    elif dataset_dir == "ONLINE":
+>>>>>>> upstream/main
         dataset_info = None
     else:
         if dataset_dir.startswith("REMOTE:"):

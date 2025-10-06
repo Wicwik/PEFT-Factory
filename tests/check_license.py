@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Copyright 2025 the PEFTFactory team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+=======
+>>>>>>> upstream/main
 # Copyright 2025 the LlamaFactory team.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,9 +48,13 @@ def main():
                 continue
 
             print(f"Check license: {path}")
+<<<<<<< HEAD
             assert any((all(keyword in file_content[0] for keyword in KEYWORDS), "PEFTFactory" in file_content[0])), (
                 f"File {path} does not contain license."
             )
+=======
+            assert all(keyword in file_content[0] for keyword in KEYWORDS), f"File {path} does not contain license."
+>>>>>>> upstream/main
 
 
 if __name__ == "__main__":

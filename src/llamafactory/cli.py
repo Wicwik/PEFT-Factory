@@ -25,17 +25,27 @@ USAGE = (
     + "| Usage:                                                             |\n"
     + "|   llamafactory-cli api -h: launch an OpenAI-style API server       |\n"
     + "|   llamafactory-cli chat -h: launch a chat interface in CLI         |\n"
+<<<<<<< HEAD
     + "|   llamafactory-cli eval -h: evaluate models                        |\n"
+=======
+>>>>>>> upstream/main
     + "|   llamafactory-cli export -h: merge LoRA adapters and export model |\n"
     + "|   llamafactory-cli train -h: train models                          |\n"
     + "|   llamafactory-cli webchat -h: launch a chat interface in Web UI   |\n"
     + "|   llamafactory-cli webui: launch LlamaBoard                        |\n"
+<<<<<<< HEAD
     + "|   llamafactory-cli version: show version info                      |\n"
+=======
+    + "|   llamafactory-cli env: show environment info                      |\n"
+    + "|   llamafactory-cli version: show version info                      |\n"
+    + "| Hint: You can use `lmf` as a shortcut for `llamafactory-cli`.      |\n"
+>>>>>>> upstream/main
     + "-" * 70
 )
 
 
 def main():
+<<<<<<< HEAD
     from . import launcher
     from .api.app import run_api
     from .chat.chat_model import run_chat
@@ -45,6 +55,16 @@ def main():
     from .extras.misc import find_available_port, get_device_count, is_env_enabled, use_ray
     from .train.tuner import export_model, run_exp
     from .webui.interface import run_web_demo, run_web_ui
+=======
+    from .extras import logging
+    from .extras.env import VERSION, print_env
+    from .extras.misc import find_available_port, get_device_count, is_env_enabled, use_ray
+
+    if is_env_enabled("USE_V1"):
+        from .v1 import launcher
+    else:
+        from . import launcher
+>>>>>>> upstream/main
 
     logger = logging.get_logger(__name__)
 
@@ -61,6 +81,7 @@ def main():
     )
 
     COMMAND_MAP = {
+<<<<<<< HEAD
         "api": run_api,
         "chat": run_chat,
         "env": print_env,
@@ -69,6 +90,16 @@ def main():
         "train": run_exp,
         "webchat": run_web_demo,
         "webui": run_web_ui,
+=======
+        "api": launcher.run_api,
+        "chat": launcher.run_chat,
+        "env": print_env,
+        "eval": launcher.run_eval,
+        "export": launcher.export_model,
+        "train": launcher.run_exp,
+        "webchat": launcher.run_web_demo,
+        "webui": launcher.run_web_ui,
+>>>>>>> upstream/main
         "version": partial(print, WELCOME),
         "help": partial(print, USAGE),
     }
