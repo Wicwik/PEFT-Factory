@@ -838,7 +838,7 @@
     "hf_hub_url": "nyu-mll/glue",
     "subset": "mrpc",
     "split": "train",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction, and neutral classes. Respond only with the corresponding class.",
+    "instruction": "Classify the following sentence pair into not_equivalent and equivalent classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "sentence1",
       "query": "sentence2",
@@ -1007,7 +1007,7 @@
     "hf_hub_url": "super_glue",
     "subset": "cb",
     "split": "train",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Respond only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction, and neutral classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -1018,7 +1018,7 @@
     "hf_hub_url": "super_glue",
     "subset": "cb",
     "split": "validation",
-    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction and neutral classes. Respond only with the corresponding class.",
+    "instruction": "Classify the following premise and hypothesis pair into entailment, contradiction, and neutral classes. Respond only with the corresponding class.",
     "columns": {
       "prompt": "premise",
       "query": "hypothesis",
@@ -1037,7 +1037,7 @@
   "copa_eval": {
     "hf_hub_url": "rbelanec/copa",
     "split": "validation",
-    "instruction": "Based on the following premise and choice pair, select the plausible alternative from choice pair. Respond only with the corresponding choice1 or choice2.",
+    "instruction": "Based on the following premise and choice pair, select the plausible alternative from the choice pair. Respond only with the corresponding choice1 or choice2.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1046,7 +1046,7 @@
   "mmlu": {
     "hf_hub_url": "rbelanec/mmlu",
     "split": "auxiliary_train",
-    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C, and D.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1055,7 +1055,7 @@
   "mmlu_eval": {
     "hf_hub_url": "rbelanec/mmlu",
     "split": "validation",
-    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C, and D.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1082,7 +1082,7 @@
   "siqa": {
     "hf_hub_url": "rbelanec/siqa",
     "split": "train",
-    "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B and C.",
+    "instruction": "Based on the context, question and provided choices, select the right answer. Respond only with the corresponding choices A, B, and C.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1100,7 +1100,7 @@
   "hellaswag": {
     "hf_hub_url": "rbelanec/hellaswag",
     "split": "train",
-    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
+    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3, and ending4.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1109,7 +1109,7 @@
   "hellaswag_eval": {
     "hf_hub_url": "rbelanec/hellaswag",
     "split": "validation",
-    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3 and ending4.",
+    "instruction": "Based on the sentence and provided endings, select the correct ending that finishes the sentence correctly. Respond only with the corresponding ending1, ending2, ending3, and ending4.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1118,7 +1118,7 @@
   "winogrande": {
     "hf_hub_url": "rbelanec/winogrande",
     "split": "train",
-    "instruction": "Based on the sentence and provided options, select the best option that replaces the '_' character in the sentence. Respond only with the corresponding option1 or option2.",
+    "instruction": "",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1136,7 +1136,7 @@
   "openbookqa": {
     "hf_hub_url": "rbelanec/openbookqa",
     "split": "train",
-    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C, and D.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1145,7 +1145,7 @@
     "openbookqa_eval": {
     "hf_hub_url": "rbelanec/openbookqa",
     "split": "validation",
-    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C and D.",
+    "instruction": "Based on the question and provided choices, select the right answer. Respond only with the corresponding choices A, B, C, and D.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1154,7 +1154,7 @@
   "math_qa": {
     "hf_hub_url": "rbelanec/math_qa",
     "split": "train",
-    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
+    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d, and e.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1163,7 +1163,7 @@
   "math_qa_eval": {
     "hf_hub_url": "rbelanec/math_qa",
     "split": "validation",
-    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d and e.",
+    "instruction": "Based on the problem and provided options, select the right answer. Respond only with the corresponding choices a, b, c, d, and e.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1173,7 +1173,7 @@
     "hf_hub_url": "openai/gsm8k",
     "subset": "main",
     "split": "train",
-    "instruction": "Answer following math question. Answer is always numerical. Mark your final answer with a newline starting with '####'.",
+    "instruction": "Answer following math question. The answer is always numerical. Mark your final answer with a newline starting with '####'.",
     "columns": {
       "prompt": "question",
       "response": "answer"
@@ -1183,7 +1183,7 @@
     "hf_hub_url": "openai/gsm8k",
     "subset": "main",
     "split": "test",
-    "instruction": "Answer following math question. Answer is always numerical. Mark your final answer with a newline starting with '####'.",
+    "instruction": "Answer following math question. The answer is always numerical. Mark your final answer with a newline starting with '####'.",
     "columns": {
       "prompt": "question",
       "response": "answer"
@@ -1192,7 +1192,7 @@
   "svamp": {
     "hf_hub_url": "rbelanec/svamp",
     "split": "train",
-    "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
+    "instruction": "Answer following math question. The answer is always numerical. Respond only with a single equation with parentheses (e.g., (1 + 1) = 2).",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1201,7 +1201,7 @@
   "svamp_eval": {
     "hf_hub_url": "rbelanec/svamp",
     "split": "test",
-    "instruction": "Answer following math question. Answer is always numerical. Respond only with single equation with parentheses (e.g., (1 + 1) = 2).",
+    "instruction": "Answer following math question. The answer is always numerical. Respond only with a single equation with parentheses (e.g., (1 + 1) = 2).",
     "columns": {
       "prompt": "inputs",
       "response": "targets"

@@ -3,7 +3,7 @@ import pandas as pd
 
 llama_base_flops = 8.38
 
-methods = ["lora", "prefix-tuning", "prompt-tuning", "p-tuning", "lntuning", "ia3"]
+methods = ["ia3", "prompt-tuning", "prefix-tuning", "p-tuning", "lora", "lntuning"]
 methods_parameters_map = {
     "ia3": 196608,
     "prompt-tuning": 409600,
@@ -54,60 +54,6 @@ def highlight(val, best, second):
         return f"\\underline{{{val}}}"
     else:
         return str(val)
-    
-def print_combined_latex_tables(c_p, c_f, c_m, betas):
-    """Prints all beta configurations as a single 2x3 LaTeX table of sub-tables."""
-    all_tables = []
-
-    for i, (beta_p, beta_f, beta_m) in enumerate(betas):
-        psqp_df = cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m)
-
-        # Generate one small table as before
-        df = psqp_df.copy()
-        name_map = {
-            "ia3": "IA3",
-            "prompt-tuning": "Prompt Tuning",
-            "prefix-tuning": "Prefix Tuning",
-            "p-tuning": "P-Tuning",
-            "lora": "LoRA",
-            "lntuning": "LNTuning"
-        }
-        df["latex_name"] = df["method"].map(name_map)
-
-        best, second = df["psqp"].nlargest(2)
-        df["psqp_fmt"] = df["psqp"].apply(lambda x: highlight(x, best, second))
-
-        lines = []
-        lines.append("\\begin{tabular}{@{}l|lllll@{}}")
-        lines.append("\\toprule")
-        lines.append("PEFT Method & $P_{avg}$ & $cost_p^{-" + str(beta_p) + "}$ & $cost_f^{-"+ str(beta_f) +"}$ & $cost_m^{-" + str(beta_m) + "}$ & PSQP \\\\ \\midrule")
-        for _, row in df.iterrows():
-            lines.append(
-                f"{row['latex_name']} & {row['performance']} & {row['params']} & {row['flops']} & {row['memory']} & {row['psqp_fmt']} \\\\"
-            )
-        lines.append("\\bottomrule")
-        lines.append("\\end{tabular}")
-        table_code = "\n".join(lines)
-
-        # Wrap into minipage for grid placement
-        minipage_code = f"\\begin{{minipage}}{{0.48\\linewidth}}\n\\centering\n{table_code}\n\\end{{minipage}}"
-        all_tables.append(minipage_code)
-
-    # Arrange 2x3 grid
-    final = []
-    final.append("\\begin{table*}[ht]")
-    final.append("\\centering")
-
-    for i, code in enumerate(all_tables):
-        final.append(code)
-        if i % 2 == 0:  # add small horizontal space between two columns
-            final.append("\\hfill")
-        if i % 3 == 2:  # line break after 3 in a row
-            final.append("\\\\[1em]")
-
-    final.append("\\end{table*}")
-
-    print("\n".join(final))
 
 def print_latex_table(df: pd.DataFrame, beta_p, beta_f, beta_m):
     df = df.copy()
@@ -123,7 +69,7 @@ def print_latex_table(df: pd.DataFrame, beta_p, beta_f, beta_m):
 
     df["latex_name"] = df["method"].map(name_map)
     
-    best, second = psqp_df["psqp"].iloc[0], psqp_df["psqp"].iloc[1]
+    best, second = psqp_df["psqp"].sort_values(ascending=False).iloc[0], psqp_df["psqp"].sort_values(ascending=False).iloc[1]
 
     df["psqp_fmt"] = df["psqp"].apply(lambda x: highlight(x, best, second))
 
@@ -176,7 +122,7 @@ def cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m):
             "psqp": psqp_val
         })
     
-    return pd.DataFrame(rows).sort_values("psqp", ascending=False)
+    return pd.DataFrame(rows)
 
 beta_p = 1
 beta_f = 1
@@ -189,12 +135,10 @@ print(psqp_df)
 
 print_latex_table(psqp_df, beta_p, beta_f, beta_m)
 
-# betas = [(0.5,1,1),(1,0.5,1),(1,1,0.5),(2,1,1),(1,2,1),(1,1,2)]
-betas = [(1,1,1), (2,2,2), (3,3,3), (4,4,4)]
+betas = [(0.5,1,1),(1,0.5,1),(1,1,0.5),(2,1,1),(1,2,1),(1,1,2)]
+# betas = [(1,1,1), (2,2,2), (3,3,3), (4,4,4)]
 for beta_p, beta_f, beta_m in betas:
     psqp_df = cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m)
     print(f"Beta params: {beta_p}, Beta flops: {beta_f}, Beta memory: {beta_m}")
     print_latex_table(psqp_df, beta_p, beta_f, beta_m)
     print("\n\n")
-
-# print_combined_latex_tables(c_p, c_f, c_m, betas)
