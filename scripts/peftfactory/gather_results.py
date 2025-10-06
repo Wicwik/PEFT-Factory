@@ -15,10 +15,10 @@
 import glob
 import json
 
-import pandas as pd
-import numpy as np
-
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
 
 # models = ["gemma-3-1b-it", "llama-3-8b-instruct", "mistral-7b-instruct"]
 models = ["llama-3-8b-instruct"]
@@ -41,7 +41,20 @@ datasets = [
     "wsc",
     "cb",
     "copa",
-] + ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
+] + [
+    "mmlu",
+    "piqa",
+    "siqa",
+    "hellaswag",
+    "winogrande",
+    "openbookqa",
+    "math_qa",
+    "gsm8k",
+    "svamp",
+    "conala",
+    "codealpacapy",
+    "apps",
+]
 # datasets = ["mmlu", "piqa", "siqa", "hellaswag", "winogrande", "openbookqa", "math_qa", "gsm8k", "svamp", "conala", "codealpacapy", "apps"]
 # datasets = ["record", "multirc", "boolq", "wic", "wsc", "cb", "copa"]
 seeds = [42, 123, 456, 789, 101112]
@@ -88,27 +101,18 @@ datasets_map = {
 
 
 def plot_barplot(df, title="Performance Comparison", basename="barplot"):
-    """
-    Create and save a barplot from a dataframe where each cell is a dict
-    with 'mean' and 'std' keys.
-    
+    """Create and save a barplot from a dataframe where each cell is a dict with 'mean' and 'std' keys.
+
     Args:
         df (pd.DataFrame): DataFrame with dict values {'mean': x, 'std': y}
         title (str): Title of the plot
         basename (str): Base name (without extension) for output files
     """
-    # Expand dictionary values into two DataFrames
     means = df.applymap(lambda x: x["mean"])
     stds = df.applymap(lambda x: x["std"])
 
     # Plot
-    ax = means.plot(
-        kind="bar",
-        yerr=stds,
-        capsize=4,
-        figsize=(12, 4),
-        rot=0
-    )
+    ax = means.plot(kind="bar", yerr=stds, capsize=4, figsize=(12, 4), rot=0)
 
     ax.set_xticklabels(ax.get_xticklabels())
 
@@ -122,8 +126,8 @@ def plot_barplot(df, title="Performance Comparison", basename="barplot"):
         # title="Dataset",
         bbox_to_anchor=(0.5, -0.1),  # move under plot
         loc="upper center",
-        ncol=len(df.columns),         # all in one line
-        frameon=False
+        ncol=len(df.columns),  # all in one line
+        frameon=False,
     )
 
     plt.tight_layout()
@@ -133,6 +137,7 @@ def plot_barplot(df, title="Performance Comparison", basename="barplot"):
     plt.savefig(f"{basename}.pdf", bbox_inches="tight")
     plt.close()
     print(f"Saved barplot as {basename}.png and {basename}.pdf")
+
 
 def get_single_result(results, dataset):
     print(dataset)
@@ -186,7 +191,6 @@ for m in models:
     print(results_df.T.mean().round(1))
 
 
-
 for m in models:
     print(f"Model {m}")
 
@@ -220,5 +224,4 @@ for m in models:
             float_format="%.1f", caption="Performance across tasks and tuning methods", label="tab:results"
         )
     )
-    plot_barplot(results_df, title=f"")
-
+    plot_barplot(results_df, title="")

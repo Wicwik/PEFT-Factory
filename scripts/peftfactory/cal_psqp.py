@@ -1,5 +1,20 @@
+# Copyright 2025 the PEFTFactory team.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import numpy as np
 import pandas as pd
+
 
 llama_base_flops = 8.38
 
@@ -40,14 +55,16 @@ performance_map = {
     "lntuning": 77.8,
 }
 
+
 def cost(m, c, beta):
-    return (1 + m/c)**-beta
+    return (1 + m / c) ** -beta
+
 
 def psqp(p, cost_params, cost_flops, cost_memory):
     return p * cost_params * cost_flops * cost_memory
 
+
 def highlight(val, best, second):
-    
     if val == best:
         return f"\\textbf{{{val}}}"
     elif val == second:
@@ -55,21 +72,25 @@ def highlight(val, best, second):
     else:
         return str(val)
 
+
 def print_latex_table(df: pd.DataFrame, beta_p, beta_f, beta_m):
     df = df.copy()
-    
+
     name_map = {
         "ia3": "IA3",
         "prompt-tuning": "Prompt Tuning",
         "prefix-tuning": "Prefix Tuning",
         "p-tuning": "P-Tuning",
         "lora": "LoRA",
-        "lntuning": "LNTuning"
+        "lntuning": "LNTuning",
     }
 
     df["latex_name"] = df["method"].map(name_map)
-    
-    best, second = psqp_df["psqp"].sort_values(ascending=False).iloc[0], psqp_df["psqp"].sort_values(ascending=False).iloc[1]
+
+    best, second = (
+        psqp_df["psqp"].sort_values(ascending=False).iloc[0],
+        psqp_df["psqp"].sort_values(ascending=False).iloc[1],
+    )
 
     df["psqp_fmt"] = df["psqp"].apply(lambda x: highlight(x, best, second))
 
@@ -79,7 +100,15 @@ def print_latex_table(df: pd.DataFrame, beta_p, beta_f, beta_m):
     latex_lines.append("\\resizebox{\\columnwidth}{!}{%")
     latex_lines.append("\\begin{tabular}{@{}l|lllll@{}}")
     latex_lines.append("\\toprule")
-    latex_lines.append("PEFT Method & $P_{avg}$ & $cost_p^{-" + str(beta_p) + "}$ & $cost_f^{-"+ str(beta_f) +"}$ & $cost_m^{-" + str(beta_m) + "}$ & PSCP \\\\ \\midrule")
+    latex_lines.append(
+        "PEFT Method & $P_{avg}$ & $cost_p^{-"
+        + str(beta_p)
+        + "}$ & $cost_f^{-"
+        + str(beta_f)
+        + "}$ & $cost_m^{-"
+        + str(beta_m)
+        + "}$ & PSCP \\\\ \\midrule"
+    )
 
     for _, row in df.iterrows():
         latex_lines.append(
@@ -96,12 +125,14 @@ def print_latex_table(df: pd.DataFrame, beta_p, beta_f, beta_m):
     latex_table = "\n".join(latex_lines)
     print(latex_table)
 
+
 # c_p = np.median(list(methods_parameters_map.values()))
 # c_p = np.exp(np.mean(np.log(list(methods_parameters_map.values()))))
 # c_p = np.max(list(methods_parameters_map.values()))
-c_p = 5e8 # 
-c_f = 10 # such slowdown would mean that its better to use the base model
-c_m = 94 # h100 nvl has 94GB
+c_p = 5e8  #
+c_f = 10  # such slowdown would mean that its better to use the base model
+c_m = 94  # h100 nvl has 94GB
+
 
 def cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m):
     rows = []
@@ -112,17 +143,19 @@ def cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m):
 
         psqp_val = np.round(psqp(performance_map[method], cost_params, cost_flops, cost_memory), 2)
 
+        rows.append(
+            {
+                "method": method,
+                "performance": performance_map[method],
+                "params": np.round(cost_params, 2),
+                "flops": np.round(cost_flops, 2),
+                "memory": np.round(cost_memory, 2),
+                "psqp": psqp_val,
+            }
+        )
 
-        rows.append({
-            "method": method,
-            "performance": performance_map[method],
-            "params": np.round(cost_params, 2),
-            "flops": np.round(cost_flops, 2),
-            "memory": np.round(cost_memory, 2),
-            "psqp": psqp_val
-        })
-    
     return pd.DataFrame(rows)
+
 
 beta_p = 1
 beta_f = 1
@@ -135,7 +168,7 @@ print(psqp_df)
 
 print_latex_table(psqp_df, beta_p, beta_f, beta_m)
 
-betas = [(0.5,1,1),(1,0.5,1),(1,1,0.5),(2,1,1),(1,2,1),(1,1,2)]
+betas = [(0.5, 1, 1), (1, 0.5, 1), (1, 1, 0.5), (2, 1, 1), (1, 2, 1), (1, 1, 2)]
 # betas = [(1,1,1), (2,2,2), (3,3,3), (4,4,4)]
 for beta_p, beta_f, beta_m in betas:
     psqp_df = cal_psqps(c_p, c_f, c_m, beta_p, beta_f, beta_m)

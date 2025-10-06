@@ -29,25 +29,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+
 import fire
 import torch
-import json
 from deepspeed.accelerator import get_accelerator  # type: ignore
 from deepspeed.profiling.flops_profiler import get_model_profile  # type: ignore
 
-from llamafactory.chat import ChatModel
-from llamafactory.model import load_model, load_tokenizer
 from llamafactory.data import get_template_and_fix_tokenizer
+from llamafactory.hparams import get_train_args, read_args
+from llamafactory.model import load_model, load_tokenizer
 
-from llamafactory.hparams import read_args, get_train_args
 
 def save_number_to_json(number, filename):
     """Save a single number to a JSON file."""
-    with open(filename, 'w') as f:
+    with open(filename, "w") as f:
         json.dump({"number": number}, f)
 
+
 def calculate_flops(
-    path_to_config = None,
+    path_to_config=None,
 ):
     r"""Calculate the flops of pre-trained models.
 
@@ -70,14 +71,15 @@ def calculate_flops(
 
         fake_input = torch.ones((batch_size, seq_length), dtype=torch.long, device=model.device)
         input_dict = {"input_ids": fake_input, "labels": fake_input.clone()}
-        flops, macs, params = get_model_profile(
-            model, kwargs=input_dict, print_profile=True, detailed=True
-        )
+        flops, macs, params = get_model_profile(model, kwargs=input_dict, print_profile=True, detailed=True)
         print("FLOPs:", flops)
         print("MACs:", macs)
         print("Params:", params)
 
-        save_number_to_json(flops, f"scripts/peftfactory/stat_utils/flops_{path_to_config.split('/')[-1].split('.')[0]}.json")
+        save_number_to_json(
+            flops, f"scripts/peftfactory/stat_utils/flops_{path_to_config.split('/')[-1].split('.')[0]}.json"
+        )
+
 
 if __name__ == "__main__":
     fire.Fire(calculate_flops)
