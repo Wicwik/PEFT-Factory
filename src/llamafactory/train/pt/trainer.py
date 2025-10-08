@@ -21,31 +21,20 @@ from typing_extensions import override
 
 from ...extras.packages import is_transformers_version_greater_than
 from ..callbacks import SaveProcessorCallback
-<<<<<<< HEAD
-=======
 from ..fp8_utils import configure_fp8_environment, verify_fp8_status
->>>>>>> upstream/main
 from ..trainer_utils import create_custom_optimizer, create_custom_scheduler
 
 
 if TYPE_CHECKING:
     from transformers import ProcessorMixin
 
-<<<<<<< HEAD
-    from ...hparams import FinetuningArguments
-=======
     from ...hparams import FinetuningArguments, ModelArguments
->>>>>>> upstream/main
 
 
 class CustomTrainer(Trainer):
     r"""Inherit Trainer for custom optimizer."""
 
     def __init__(
-<<<<<<< HEAD
-        self, finetuning_args: "FinetuningArguments", processor: Optional["ProcessorMixin"], **kwargs
-    ) -> None:
-=======
         self,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
@@ -55,7 +44,6 @@ class CustomTrainer(Trainer):
         # Configure FP8 environment if enabled
         if model_args is not None and model_args.fp8:
             configure_fp8_environment(model_args)
->>>>>>> upstream/main
         if is_transformers_version_greater_than("4.46"):
             kwargs["processing_class"] = kwargs.pop("tokenizer")
 
@@ -76,13 +64,10 @@ class CustomTrainer(Trainer):
             self.accelerator.clip_grad_norm_ = MethodType(clip_grad_norm_old_version, self.accelerator)
             self.add_callback(BAdamCallback)
 
-<<<<<<< HEAD
-=======
         # Verify FP8 status after trainer initialization (accelerator should be available)
         if model_args is not None and model_args.fp8 and hasattr(self, "accelerator"):
             verify_fp8_status(self.accelerator, model_args)
 
->>>>>>> upstream/main
     @override
     def create_optimizer(self) -> "torch.optim.Optimizer":
         if self.optimizer is None:

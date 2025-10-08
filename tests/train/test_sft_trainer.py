@@ -61,11 +61,7 @@ class DataCollatorWithVerbose(DataCollatorWithPadding):
 
 @pytest.mark.parametrize("disable_shuffling", [False, True])
 def test_shuffle(disable_shuffling: bool):
-<<<<<<< HEAD
     model_args, data_args, training_args, finetuning_args, _, peft_args = get_train_args(
-=======
-    model_args, data_args, training_args, finetuning_args, _ = get_train_args(
->>>>>>> upstream/main
         {
             "output_dir": os.path.join("output", f"shuffle{str(disable_shuffling).lower()}"),
             "disable_shuffling": disable_shuffling,
@@ -76,11 +72,7 @@ def test_shuffle(disable_shuffling: bool):
     tokenizer = tokenizer_module["tokenizer"]
     template = get_template_and_fix_tokenizer(tokenizer, data_args)
     dataset_module = get_dataset(template, model_args, data_args, training_args, stage="sft", **tokenizer_module)
-<<<<<<< HEAD
     model = load_model(tokenizer, model_args, finetuning_args, peft_args, training_args.do_train)
-=======
-    model = load_model(tokenizer, model_args, finetuning_args, training_args.do_train)
->>>>>>> upstream/main
     data_collator = DataCollatorWithVerbose(tokenizer=tokenizer)
     trainer = CustomSeq2SeqTrainer(
         model=model,

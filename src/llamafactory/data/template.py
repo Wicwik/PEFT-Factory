@@ -96,11 +96,7 @@ class Template:
 
     def add_thought(self, content: str = "") -> str:
         r"""Add empty thought to assistant message."""
-<<<<<<< HEAD
-        return f"{self.thought_words[0]}\n\n{self.thought_words[1]}\n\n" + content
-=======
         return f"{self.thought_words[0]}{self.thought_words[1]}" + content
->>>>>>> upstream/main
 
     def remove_thought(self, content: str) -> str:
         r"""Remove thought from assistant message."""
@@ -160,11 +156,7 @@ class Template:
             elif message["role"] == Role.OBSERVATION:
                 elements += self.format_observation.apply(content=message["content"])
             elif message["role"] == Role.FUNCTION:
-<<<<<<< HEAD
-                elements += self.format_function.apply(content=message["content"])
-=======
                 elements += self.format_function.apply(content=message["content"], thought_words=self.thought_words)
->>>>>>> upstream/main
             else:
                 raise NotImplementedError("Unexpected role: {}".format(message["role"]))
 
@@ -424,13 +416,8 @@ class ReasoningTemplate(Template):
 
         prompt_ids, response_ids = super().encode_oneturn(tokenizer, messages, system, tools)
         if (
-<<<<<<< HEAD
-            self.thought_words[0] not in messages[-1]["content"]
-            and self.thought_words[1] not in messages[-1]["content"]
-=======
             self.thought_words[0].strip() not in messages[-1]["content"]
             and self.thought_words[1].strip() not in messages[-1]["content"]
->>>>>>> upstream/main
         ):  # add empty cot
             if not self.enable_thinking:  # do not compute loss
                 prompt_ids += self.get_thought_word_ids(tokenizer)
@@ -455,13 +442,8 @@ class ReasoningTemplate(Template):
         encoded_messages = self._encode(tokenizer, messages, system, tools)
         for i in range(0, len(messages), 2):
             if (
-<<<<<<< HEAD
-                self.thought_words[0] not in messages[i + 1]["content"]
-                and self.thought_words[1] not in messages[i + 1]["content"]
-=======
                 self.thought_words[0].strip() not in messages[i + 1]["content"]
                 and self.thought_words[1].strip() not in messages[i + 1]["content"]
->>>>>>> upstream/main
             ):  # add empty cot
                 if not self.enable_thinking:  # do not compute loss
                     encoded_messages[i] += self.get_thought_word_ids(tokenizer)
@@ -536,11 +518,7 @@ def register_template(
         format_prefix=format_prefix or default_prefix_formatter,
         default_system=default_system,
         stop_words=stop_words or [],
-<<<<<<< HEAD
-        thought_words=thought_words or ("<think>", "</think>"),
-=======
         thought_words=thought_words or ("<think>\n", "\n</think>\n\n"),
->>>>>>> upstream/main
         efficient_eos=efficient_eos,
         replace_eos=replace_eos,
         replace_jinja_template=replace_jinja_template,
@@ -601,11 +579,7 @@ def parse_template(tokenizer: "PreTrainedTokenizer") -> "Template":
         format_prefix=EmptyFormatter(slots=[prefix]) if prefix else EmptyFormatter(),
         default_system=default_system,
         stop_words=[],
-<<<<<<< HEAD
-        thought_words=("<think>", "</think>"),
-=======
         thought_words=("<think>\n", "\n</think>\n\n"),
->>>>>>> upstream/main
         efficient_eos=False,
         replace_eos=False,
         replace_jinja_template=False,
@@ -706,8 +680,6 @@ register_template(
 
 
 register_template(
-<<<<<<< HEAD
-=======
     name="bailing_v2",
     format_user=StringFormatter(slots=["<role>HUMAN</role>{{content}}<|role_end|><role>ASSISTANT</role>"]),
     format_system=StringFormatter(slots=["<role>SYSTEM</role>{{content}}<|role_end|>"]),
@@ -725,7 +697,6 @@ register_template(
 
 
 register_template(
->>>>>>> upstream/main
     name="belle",
     format_user=StringFormatter(slots=["Human: {{content}}\n\nBelle: "]),
     format_assistant=StringFormatter(slots=["{{content}}", {"eos_token"}, "\n\n"]),
@@ -941,8 +912,6 @@ register_template(
 
 
 register_template(
-<<<<<<< HEAD
-=======
     name="dots_ocr",
     format_user=StringFormatter(slots=["<|user|>{{content}}<|endofuser|><|assistant|>"]),
     format_assistant=StringFormatter(slots=["{{content}}<|endofassistant|>"]),
@@ -960,14 +929,11 @@ register_template(
 
 
 register_template(
->>>>>>> upstream/main
     name="empty",
     format_assistant=StringFormatter(slots=["{{content}}"]),
 )
 
 
-<<<<<<< HEAD
-=======
 # copied from chatml template
 register_template(
     name="ernie",
@@ -990,7 +956,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 register_template(
     name="exaone",
     format_user=StringFormatter(slots=["[|user|]{{content}}\n[|assistant|]"]),
@@ -1140,8 +1105,6 @@ register_template(
 
 # copied from glm4 template
 register_template(
-<<<<<<< HEAD
-=======
     name="glm4v_moe",
     format_user=StringFormatter(slots=["<|user|>\n{{content}}<|assistant|>"]),
     format_assistant=StringFormatter(slots=["\n{{content}}"]),
@@ -1159,7 +1122,6 @@ register_template(
 
 # copied from glm4 template
 register_template(
->>>>>>> upstream/main
     name="glmz1",
     format_user=StringFormatter(slots=["<|user|>\n{{content}}<|assistant|>"]),
     format_assistant=StringFormatter(slots=["\n{{content}}"]),
@@ -1175,8 +1137,6 @@ register_template(
 
 
 register_template(
-<<<<<<< HEAD
-=======
     name="gpt",
     format_user=StringFormatter(slots=["<|start|>user<|message|>{{content}}<|end|><|start|>assistant"]),
     format_assistant=StringFormatter(slots=["{{content}}<|end|>"]),
@@ -1189,7 +1149,6 @@ register_template(
 
 
 register_template(
->>>>>>> upstream/main
     name="granite3",
     format_user=StringFormatter(
         slots=[
@@ -1298,8 +1257,6 @@ register_template(
 )
 
 
-<<<<<<< HEAD
-=======
 register_template(
     name="intern_s1",
     format_user=StringFormatter(slots=["<|im_start|>user\n{{content}}<|im_end|>\n<|im_start|>assistant\n"]),
@@ -1311,7 +1268,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 # copied from qwen template
 register_template(
     name="keye_vl",
@@ -1663,11 +1619,7 @@ register_template(
     format_assistant=StringFormatter(slots=["{{content}}<|im_end|>\n"]),
     format_system=StringFormatter(slots=["<|im_start|>system\n{{content}}<|im_end|>\n"]),
     stop_words=["<|im_end|>"],
-<<<<<<< HEAD
-    default_system="You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
-=======
     default_system="You are a helpful assistant. You can accept audio and text input and output voice and text.",
->>>>>>> upstream/main
     mm_plugin=get_mm_plugin(name="minicpm_v", image_token="<image>", video_token="<video>", audio_token="<audio>"),
 )
 
@@ -1866,8 +1818,6 @@ register_template(
 )
 
 
-<<<<<<< HEAD
-=======
 # copied from qwen template
 register_template(
     name="qwen3_nothink",
@@ -1884,7 +1834,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 # copied from chatml template
 register_template(
     name="qwen2_audio",
@@ -1913,12 +1862,6 @@ register_template(
     stop_words=["<|im_end|>"],
     replace_eos=True,
     mm_plugin=get_mm_plugin(
-<<<<<<< HEAD
-        name="qwen2_omni", audio_token="<|AUDIO|>", image_token="<|IMAGE|>", video_token="<|VIDEO|>"
-    ),
-)
-
-=======
         name="qwen2_omni",
         image_token="<|IMAGE|>",
         video_token="<|VIDEO|>",
@@ -1968,7 +1911,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 # copied from qwen template
 register_template(
     name="qwen2_vl",
@@ -1987,8 +1929,6 @@ register_template(
 )
 
 
-<<<<<<< HEAD
-=======
 # copied from qwen template
 register_template(
     name="qwen3_vl",
@@ -2024,7 +1964,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 register_template(
     name="sailor",
     format_user=StringFormatter(slots=["<|im_start|>question\n{{content}}<|im_end|>\n<|im_start|>answer\n"]),
@@ -2052,8 +1991,6 @@ register_template(
 )
 
 
-<<<<<<< HEAD
-=======
 # copied from seed_coder
 register_template(
     name="seed_oss",
@@ -2068,7 +2005,6 @@ register_template(
 )
 
 
->>>>>>> upstream/main
 # copied from llama3 template
 register_template(
     name="skywork_o1",

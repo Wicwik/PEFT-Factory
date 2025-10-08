@@ -17,11 +17,8 @@
 
 from typing import TYPE_CHECKING, Optional
 
-<<<<<<< HEAD
 from peft import PeftConfig
 
-=======
->>>>>>> upstream/main
 from ...data import KTODataCollatorWithPadding, get_dataset, get_template_and_fix_tokenizer
 from ...extras.constants import IGNORE_INDEX
 from ...extras.ploting import plot_loss
@@ -42,21 +39,14 @@ def run_kto(
     data_args: "DataArguments",
     training_args: "Seq2SeqTrainingArguments",
     finetuning_args: "FinetuningArguments",
-<<<<<<< HEAD
     peft_args: "PeftConfig",
-=======
->>>>>>> upstream/main
     callbacks: Optional[list["TrainerCallback"]] = None,
 ):
     tokenizer_module = load_tokenizer(model_args)
     tokenizer = tokenizer_module["tokenizer"]
     template = get_template_and_fix_tokenizer(tokenizer, data_args)
     dataset_module = get_dataset(template, model_args, data_args, training_args, stage="kto", **tokenizer_module)
-<<<<<<< HEAD
     model = load_model(tokenizer, model_args, finetuning_args, peft_args, training_args.do_train)
-=======
-    model = load_model(tokenizer, model_args, finetuning_args, training_args.do_train)
->>>>>>> upstream/main
 
     data_collator = KTODataCollatorWithPadding(
         template=template,

@@ -52,11 +52,7 @@ extra_require = {
     "eetq": ["eetq"],
     "gptq": ["optimum>=1.24.0", "gptqmodel>=2.0.0"],
     "aqlm": ["aqlm[gpu]>=1.1.0"],
-<<<<<<< HEAD
-    "vllm": ["vllm>=0.4.3,<=0.10.0"],
-=======
     "vllm": ["vllm>=0.4.3,<=0.10.2"],
->>>>>>> upstream/main
     "sglang": ["sglang[srt]>=0.4.5", "transformers==4.51.1"],
     "galore": ["galore-torch"],
     "apollo": ["apollo-torch"],
@@ -74,12 +70,9 @@ extra_require = {
     ],
     "openmind": ["openmind"],
     "swanlab": ["swanlab"],
-<<<<<<< HEAD
-=======
     "fp8": ["torchao>=0.8.0", "accelerate>=1.10.0"],
     "fp8-te": ["transformer_engine[pytorch]>=2.0.0", "accelerate>=1.10.0"],
     "fp8-all": ["torchao>=0.8.0", "transformer_engine[pytorch]>=2.0.0", "accelerate>=1.10.0"],
->>>>>>> upstream/main
     "dev": ["pre-commit", "ruff", "pytest", "build"],
 }
 

@@ -171,18 +171,11 @@ ms_cache/
 om_cache/
 cache/
 config/
-<<<<<<< HEAD
 saves*
-=======
-saves/
->>>>>>> upstream/main
 output/
 wandb/
 swanlog/
 generated_predictions.jsonl
 predictions_score.json
-<<<<<<< HEAD
 experiments
 logs
-=======
->>>>>>> upstream/main

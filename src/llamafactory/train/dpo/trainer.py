@@ -78,10 +78,7 @@ class CustomDPOTrainer(DPOTrainer):
         self.beta = finetuning_args.pref_beta
         self.loss_type = finetuning_args.pref_loss
         self.ftx_gamma = finetuning_args.pref_ftx
-<<<<<<< HEAD
-=======
         self.bco_gemma = finetuning_args.pref_bco_weight
->>>>>>> upstream/main
         self.label_smoothing = finetuning_args.dpo_label_smoothing
         self.simpo_gamma = finetuning_args.simpo_gamma
         self.ld_alpha = finetuning_args.ld_alpha
@@ -112,14 +109,11 @@ class CustomDPOTrainer(DPOTrainer):
             self.accelerator.clip_grad_norm_ = MethodType(clip_grad_norm_old_version, self.accelerator)
             self.add_callback(BAdamCallback)
 
-<<<<<<< HEAD
-=======
         if self.bco_gemma >= 1e-6:
             from trl.trainer import RunningMoments
 
             self.running = RunningMoments(self.accelerator)
 
->>>>>>> upstream/main
     @override
     def create_optimizer(self) -> "torch.optim.Optimizer":
         if self.optimizer is None:
@@ -163,8 +157,6 @@ class CustomDPOTrainer(DPOTrainer):
         simpo_loss = -F.logsigmoid(self.beta * logits)
         return simpo_loss
 
-<<<<<<< HEAD
-=======
     def bco_loss(
         self,
         chosen_logps: "torch.Tensor",
@@ -184,7 +176,6 @@ class CustomDPOTrainer(DPOTrainer):
         )
         return bco_loss
 
->>>>>>> upstream/main
     def compute_preference_loss(
         self,
         policy_chosen_logps: "torch.Tensor",
@@ -208,15 +199,12 @@ class CustomDPOTrainer(DPOTrainer):
                 policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps
             )
 
-<<<<<<< HEAD
-=======
             if self.bco_gemma > 1e-6:
                 bco_losses = self.bco_loss(
                     policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps
                 )
                 losses += bco_losses * self.bco_gemma
 
->>>>>>> upstream/main
         return losses, chosen_rewards, rejected_rewards
 
     @override
@@ -296,12 +284,9 @@ class CustomDPOTrainer(DPOTrainer):
         sft_loss = -policy_chosen_logps_avg
         if self.ftx_gamma > 1e-6:
             losses += self.ftx_gamma * sft_loss
-<<<<<<< HEAD
-=======
             if self.bco_gemma > 1e-6:
                 # re-weigthing for MPO
                 losses /= self.ftx_gamma + self.bco_gemma + 1.0
->>>>>>> upstream/main
 
         prefix = "eval_" if train_eval == "eval" else ""
         metrics[f"{prefix}rewards/chosen"] = chosen_rewards.mean().item()

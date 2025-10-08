@@ -56,23 +56,17 @@ TEXT_MESSAGES = [
     {"role": "assistant", "content": "I am fine!"},
 ]
 
-<<<<<<< HEAD
-=======
 VIDEO_MESSAGES = [
     {"role": "user", "content": "<video>What is in this viode?"},
     {"role": "assistant", "content": "A cat."},
 ]
 
->>>>>>> upstream/main
 AUDIOS = [np.zeros(1600)]
 
 IMAGES = [Image.new("RGB", (32, 32), (255, 255, 255))]
 
-<<<<<<< HEAD
-=======
 VIDEOS = [[Image.new("RGB", (32, 32), (255, 255, 255))] * 4]
 
->>>>>>> upstream/main
 NO_IMAGES = []
 
 NO_VIDEOS = []
@@ -158,11 +152,8 @@ def _check_plugin(
             plugin.get_mm_inputs(IMAGES, NO_VIDEOS, AUDIOS, IMGLENS, NO_VIDLENS, AUDLENS, BATCH_IDS, processor),
             expected_mm_inputs,
         )
-<<<<<<< HEAD
-=======
     elif plugin.__class__.__name__ == "Qwen3VLPlugin":  # only check replacement
         assert plugin.process_messages(VIDEO_MESSAGES, NO_IMAGES, VIDEOS, NO_AUDIOS, processor) == expected_mm_messages
->>>>>>> upstream/main
     elif plugin.__class__.__name__ != "BasePlugin":  # test mm_messages
         assert plugin.process_messages(MM_MESSAGES, IMAGES, NO_VIDEOS, NO_AUDIOS, processor) == expected_mm_messages
         assert plugin.process_token_ids(INPUT_IDS, LABELS, IMAGES, NO_VIDEOS, NO_AUDIOS, tokenizer, processor) == (
@@ -341,9 +332,6 @@ def test_qwen2_omni_plugin():
     image_seqlen, audio_seqlen = 4, 2
     tokenizer_module = _load_tokenizer_module(model_name_or_path="Qwen/Qwen2.5-Omni-7B")
     qwen2_omni_plugin = get_mm_plugin(
-<<<<<<< HEAD
-        name="qwen2_omni", audio_token="<|AUDIO|>", image_token="<|IMAGE|>", video_token="<|VIDEO|>"
-=======
         name="qwen2_omni",
         image_token="<|IMAGE|>",
         video_token="<|VIDEO|>",
@@ -352,7 +340,6 @@ def test_qwen2_omni_plugin():
         vision_eos_token="<|vision_eos|>",
         audio_bos_token="<|audio_bos|>",
         audio_eos_token="<|audio_eos|>",
->>>>>>> upstream/main
     )
     check_inputs = {"plugin": qwen2_omni_plugin, **tokenizer_module}
     check_inputs["expected_mm_messages"] = [
@@ -386,8 +373,6 @@ def test_qwen2_vl_plugin():
     _check_plugin(**check_inputs)
 
 
-<<<<<<< HEAD
-=======
 @pytest.mark.skipif(not is_transformers_version_greater_than("4.57.0"), reason="Requires transformers>=4.57.0")
 def test_qwen3_vl_plugin():
     frame_seqlen = 1
@@ -409,7 +394,6 @@ def test_qwen3_vl_plugin():
     _check_plugin(**check_inputs)
 
 
->>>>>>> upstream/main
 @pytest.mark.skipif(not is_transformers_version_greater_than("4.47.0"), reason="Requires transformers>=4.47.0")
 def test_video_llava_plugin():
     image_seqlen = 256

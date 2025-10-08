@@ -69,8 +69,6 @@ QWEN_TOOL_PROMPT = (
     """"arguments": <args-json-object>}}\n</tool_call>"""
 )
 
-<<<<<<< HEAD
-=======
 SEED_TOOL_PROMPT = (
     "system\nYou are Doubao, a helpful AI assistant. You may call one or more functions to assist with the user query."
     "Tool List:\nYou are authorized to use the following tools (described in JSON Schema format). Before performing "
@@ -88,7 +86,6 @@ LING_TOOL_PROMPT = (
     """"arguments": <args-json-object>}}\n</tool_call>"""
 )
 
->>>>>>> upstream/main
 
 @dataclass
 class ToolUtils(ABC):
@@ -367,8 +364,6 @@ class GLM4MOEToolUtils(QwenToolUtils):
         return "\n".join(function_texts)
 
 
-<<<<<<< HEAD
-=======
 class SeedToolUtils(ToolUtils):
     r"""Seed tool using template."""
 
@@ -433,7 +428,6 @@ class LingToolUtils(QwenToolUtils):
         return LING_TOOL_PROMPT.format(tool_text=tool_text) + "\n" + "detailed thinking off"
 
 
->>>>>>> upstream/main
 TOOLS = {
     "default": DefaultToolUtils(),
     "glm4": GLM4ToolUtils(),
@@ -441,11 +435,8 @@ TOOLS = {
     "mistral": MistralToolUtils(),
     "qwen": QwenToolUtils(),
     "glm4_moe": GLM4MOEToolUtils(),
-<<<<<<< HEAD
-=======
     "seed_oss": SeedToolUtils(),
     "ling": LingToolUtils(),
->>>>>>> upstream/main
 }
 
 

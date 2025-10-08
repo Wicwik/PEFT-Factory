@@ -34,56 +34,35 @@ LOCALES = {
         "en": {
             "value": (
                 "<h3><center>Visit <a href='https://github.com/hiyouga/LLaMA-Factory' target='_blank'>"
-<<<<<<< HEAD
                 "GitHub Page</a></center></h3>"
-=======
-                "GitHub Page</a> <a href='https://llamafactory.readthedocs.io/en/latest/' target='_blank'>"
-                "Documentation</a></center></h3>"
->>>>>>> upstream/main
             ),
         },
         "ru": {
             "value": (
                 "<h3><center>Посетить <a href='https://github.com/hiyouga/LLaMA-Factory' target='_blank'>"
-<<<<<<< HEAD
-                "страницу GitHub</a></center></h3>"
-=======
                 "страницу GitHub</a> <a href='https://llamafactory.readthedocs.io/en/latest/' target='_blank'>"
                 "Документацию</a></center></h3>"
->>>>>>> upstream/main
             ),
         },
         "zh": {
             "value": (
                 "<h3><center>访问 <a href='https://github.com/hiyouga/LLaMA-Factory' target='_blank'>"
-<<<<<<< HEAD
-                "GitHub 主页</a></center></h3>"
-=======
                 "GitHub 主页</a> <a href='https://llamafactory.readthedocs.io/zh-cn/latest/' target='_blank'>"
                 "官方文档</a></center></h3>"
->>>>>>> upstream/main
             ),
         },
         "ko": {
             "value": (
                 "<h3><center><a href='https://github.com/hiyouga/LLaMA-Factory' target='_blank'>"
-<<<<<<< HEAD
-                "GitHub 페이지</a>를 방문하세요.</center></h3>"
-=======
                 "GitHub 페이지</a> <a href='https://llamafactory.readthedocs.io/en/latest/' target='_blank'>"
                 "공식 문서</a>를 방문하세요.</center></h3>"
->>>>>>> upstream/main
             ),
         },
         "ja": {
             "value": (
                 "<h3><center><a href='https://github.com/hiyouga/LLaMA-Factory' target='_blank'>"
-<<<<<<< HEAD
-                "GitHub ページ</a>にアクセスする</center></h3>"
-=======
                 "GitHub ページ</a> <a href='https://llamafactory.readthedocs.io/en/latest/' target='_blank'>"
                 "ドキュメント</a>にアクセスする</center></h3>"
->>>>>>> upstream/main
             ),
         },
     },
@@ -1343,7 +1322,6 @@ LOCALES = {
             "info": "LoRA 層以外の学習可能なモジュールの名前。複数のモジュールを区切るにはカンマを使用します。",
         },
     },
-<<<<<<< HEAD
     "peft_tab": {
         "en": {
             "label": "PEFT configurations",
@@ -1361,8 +1339,6 @@ LOCALES = {
             "info": "Set PEFT adapter to inference mode",
         }
     },
-=======
->>>>>>> upstream/main
     "rlhf_tab": {
         "en": {
             "label": "RLHF configurations",

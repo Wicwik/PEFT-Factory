@@ -12,17 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-<<<<<<< HEAD
-from llamafactory.train.tuner import run_exp  # use absolute import
-
-
-def launch():
-    run_exp()
-
-
-if __name__ == "__main__":
-    launch()
-=======
 
 def run_api():
     from llamafactory.api.app import run_api as _run_api
@@ -66,4 +55,3 @@ def run_web_ui():
 
 if __name__ == "__main__":
     run_exp()
->>>>>>> upstream/main

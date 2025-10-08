@@ -134,11 +134,7 @@ def _make_batched_images(images: list["ImageObject"], imglens: list[int]) -> lis
 
 def _check_video_is_nested_images(video: "VideoInput") -> bool:
     r"""Check if the video is nested images."""
-<<<<<<< HEAD
-    return isinstance(video, list) and all(isinstance(frame, (str, BinaryIO, dict)) for frame in video)
-=======
     return isinstance(video, list) and all(isinstance(frame, (str, BinaryIO, dict, ImageObject)) for frame in video)
->>>>>>> upstream/main
 
 
 @dataclass
@@ -1401,12 +1397,9 @@ class Qwen2AudioPlugin(BasePlugin):
 
 @dataclass
 class Qwen2VLPlugin(BasePlugin):
-<<<<<<< HEAD
-=======
     vision_bos_token: str = "<|vision_start|>"
     vision_eos_token: str = "<|vision_end|>"
 
->>>>>>> upstream/main
     @override
     def _preprocess_image(self, image: "ImageObject", **kwargs) -> "ImageObject":
         image = super()._preprocess_image(image, **kwargs)
@@ -1522,26 +1515,18 @@ class Qwen2VLPlugin(BasePlugin):
             while IMAGE_PLACEHOLDER in content:
                 image_seqlen = image_grid_thw[num_image_tokens].prod() // merge_length if self.expand_mm_tokens else 1
                 content = content.replace(
-<<<<<<< HEAD
-                    IMAGE_PLACEHOLDER, f"<|vision_start|>{self.image_token * image_seqlen}<|vision_end|>", 1
-=======
                     IMAGE_PLACEHOLDER,
                     f"{self.vision_bos_token}{self.image_token * image_seqlen}{self.vision_eos_token}",
                     1,
->>>>>>> upstream/main
                 )
                 num_image_tokens += 1
 
             while VIDEO_PLACEHOLDER in content:
                 video_seqlen = video_grid_thw[num_video_tokens].prod() // merge_length if self.expand_mm_tokens else 1
                 content = content.replace(
-<<<<<<< HEAD
-                    VIDEO_PLACEHOLDER, f"<|vision_start|>{self.video_token * video_seqlen}<|vision_end|>", 1
-=======
                     VIDEO_PLACEHOLDER,
                     f"{self.vision_bos_token}{self.video_token * video_seqlen}{self.vision_eos_token}",
                     1,
->>>>>>> upstream/main
                 )
                 num_video_tokens += 1
 
@@ -1551,8 +1536,6 @@ class Qwen2VLPlugin(BasePlugin):
 
 
 @dataclass
-<<<<<<< HEAD
-=======
 class Qwen3VLPlugin(Qwen2VLPlugin):
     @override
     def _get_mm_inputs(
@@ -1671,7 +1654,6 @@ class Qwen3VLPlugin(Qwen2VLPlugin):
 
 
 @dataclass
->>>>>>> upstream/main
 class GLM4VPlugin(Qwen2VLPlugin):
     @override
     def _get_mm_inputs(
@@ -1773,12 +1755,9 @@ class GLM4VPlugin(Qwen2VLPlugin):
                     )
                     video_structure += frame_structure
 
-<<<<<<< HEAD
-=======
                 if not self.expand_mm_tokens:
                     video_structure = self.video_token
 
->>>>>>> upstream/main
                 content = content.replace(VIDEO_PLACEHOLDER, f"<|begin_of_video|>{video_structure}<|end_of_video|>", 1)
                 num_video_tokens += 1
 
@@ -1804,15 +1783,11 @@ class GLM4VPlugin(Qwen2VLPlugin):
         return mm_inputs
 
 
-<<<<<<< HEAD
-class Qwen2OmniPlugin(Qwen2VLPlugin):
-=======
 @dataclass
 class Qwen2OmniPlugin(Qwen2VLPlugin):
     audio_bos_token: str = "<|audio_start|>"
     audio_eos_token: str = "<|audio_end|>"
 
->>>>>>> upstream/main
     @override
     def _get_mm_inputs(
         self,
@@ -1899,13 +1874,9 @@ class Qwen2OmniPlugin(Qwen2VLPlugin):
             while IMAGE_PLACEHOLDER in content:
                 image_seqlen = image_grid_thw[num_image_tokens].prod() // merge_length if self.expand_mm_tokens else 1
                 content = content.replace(
-<<<<<<< HEAD
-                    IMAGE_PLACEHOLDER, f"<|vision_bos|>{self.image_token * image_seqlen}<|vision_eos|>", 1
-=======
                     IMAGE_PLACEHOLDER,
                     f"{self.vision_bos_token}{self.image_token * image_seqlen}{self.vision_eos_token}",
                     1,
->>>>>>> upstream/main
                 )
                 num_image_tokens += 1
 
@@ -1942,11 +1913,7 @@ class Qwen2OmniPlugin(Qwen2VLPlugin):
                     video_chunk_indices = processor.get_chunked_index(video_t_index, t_ntoken_per_chunk)
                     audio_chunk_indices = processor.get_chunked_index(audio_t_index, t_ntoken_per_chunk)
                     placeholder_string = ""
-<<<<<<< HEAD
-                    placeholder_string += "<|vision_bos|>" + "<|audio_bos|>"
-=======
                     placeholder_string += self.vision_bos_token + self.audio_bos_token
->>>>>>> upstream/main
                     for j in range(max(len(video_chunk_indices), len(audio_chunk_indices))):
                         video_chunk_index = video_chunk_indices[j] if j < len(video_chunk_indices) else None
                         audio_chunk_index = audio_chunk_indices[j] if j < len(audio_chunk_indices) else None
@@ -1956,11 +1923,7 @@ class Qwen2OmniPlugin(Qwen2VLPlugin):
                         if audio_chunk_index is not None:
                             placeholder_string += self.audio_token * (audio_chunk_index[1] - audio_chunk_index[0])
 
-<<<<<<< HEAD
-                    placeholder_string += "<|audio_eos|>" + "<|vision_eos|>"
-=======
                     placeholder_string += self.audio_eos_token + self.vision_eos_token
->>>>>>> upstream/main
                     content = content.replace(VIDEO_PLACEHOLDER, placeholder_string, 1)
                     content = content.replace(AUDIO_PLACEHOLDER, "", 1)
                     num_audio_tokens += 1
@@ -1969,13 +1932,9 @@ class Qwen2OmniPlugin(Qwen2VLPlugin):
                 while AUDIO_PLACEHOLDER in content:
                     audio_seqlen = audio_lengths[num_audio_tokens] if self.expand_mm_tokens else 1
                     content = content.replace(
-<<<<<<< HEAD
-                        AUDIO_PLACEHOLDER, f"<|audio_bos|>{self.audio_token * audio_seqlen}<|audio_eos|>", 1
-=======
                         AUDIO_PLACEHOLDER,
                         f"{self.audio_bos_token}{self.audio_token * audio_seqlen}{self.audio_eos_token}",
                         1,
->>>>>>> upstream/main
                     )
                     num_audio_tokens += 1
 
@@ -1984,13 +1943,9 @@ class Qwen2OmniPlugin(Qwen2VLPlugin):
                         video_grid_thw[num_video_tokens].prod() // merge_length if self.expand_mm_tokens else 1
                     )
                     content = content.replace(
-<<<<<<< HEAD
-                        VIDEO_PLACEHOLDER, f"<|vision_bos|>{self.video_token * video_seqlen}<|vision_eos|>", 1
-=======
                         VIDEO_PLACEHOLDER,
                         f"{self.vision_bos_token}{self.video_token * video_seqlen}{self.vision_eos_token}",
                         1,
->>>>>>> upstream/main
                     )
                     num_video_tokens += 1
 
@@ -2070,10 +2025,7 @@ PLUGINS = {
     "qwen2_audio": Qwen2AudioPlugin,
     "qwen2_omni": Qwen2OmniPlugin,
     "qwen2_vl": Qwen2VLPlugin,
-<<<<<<< HEAD
-=======
     "qwen3_vl": Qwen3VLPlugin,
->>>>>>> upstream/main
     "video_llava": VideoLlavaPlugin,
 }
 
@@ -2091,17 +2043,10 @@ def get_mm_plugin(
     image_token: Optional[str] = None,
     video_token: Optional[str] = None,
     audio_token: Optional[str] = None,
-<<<<<<< HEAD
-=======
     **kwargs,
->>>>>>> upstream/main
 ) -> "BasePlugin":
     r"""Get plugin for multimodal inputs."""
     if name not in PLUGINS:
         raise ValueError(f"Multimodal plugin `{name}` not found.")
 
-<<<<<<< HEAD
-    return PLUGINS[name](image_token, video_token, audio_token)
-=======
     return PLUGINS[name](image_token, video_token, audio_token, **kwargs)
->>>>>>> upstream/main

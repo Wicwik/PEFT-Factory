@@ -24,12 +24,6 @@ from typing import TYPE_CHECKING, Any, Optional
 from ..extras.constants import EngineName
 from ..extras.misc import torch_gc
 from ..hparams import get_infer_args
-<<<<<<< HEAD
-from .hf_engine import HuggingfaceEngine
-from .sglang_engine import SGLangEngine
-from .vllm_engine import VllmEngine
-=======
->>>>>>> upstream/main
 
 
 if TYPE_CHECKING:
@@ -52,14 +46,6 @@ class ChatModel:
 
     def __init__(self, args: Optional[dict[str, Any]] = None) -> None:
         model_args, data_args, finetuning_args, generating_args = get_infer_args(args)
-<<<<<<< HEAD
-        if model_args.infer_backend == EngineName.HF:
-            self.engine: BaseEngine = HuggingfaceEngine(model_args, data_args, finetuning_args, generating_args)
-        elif model_args.infer_backend == EngineName.VLLM:
-            self.engine: BaseEngine = VllmEngine(model_args, data_args, finetuning_args, generating_args)
-        elif model_args.infer_backend == EngineName.SGLANG:
-            self.engine: BaseEngine = SGLangEngine(model_args, data_args, finetuning_args, generating_args)
-=======
 
         if model_args.infer_backend == EngineName.HF:
             from .hf_engine import HuggingfaceEngine
@@ -85,7 +71,6 @@ class ChatModel:
                     "SGLang not install, you may need to run `pip install sglang[all]`\n"
                     "or try to use HuggingFace backend: --infer_backend huggingface"
                 ) from e
->>>>>>> upstream/main
         else:
             raise NotImplementedError(f"Unknown backend: {model_args.infer_backend}")
 

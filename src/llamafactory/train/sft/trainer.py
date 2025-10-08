@@ -22,10 +22,7 @@ from typing import TYPE_CHECKING, Any, Optional, Union
 
 import numpy as np
 import torch
-<<<<<<< HEAD
 from adapters import AdapterTrainer
-=======
->>>>>>> upstream/main
 from transformers import Seq2SeqTrainer
 from typing_extensions import override
 
@@ -33,10 +30,7 @@ from ...extras import logging
 from ...extras.constants import IGNORE_INDEX
 from ...extras.packages import is_transformers_version_greater_than
 from ..callbacks import SaveProcessorCallback
-<<<<<<< HEAD
-=======
 from ..fp8_utils import configure_fp8_environment, verify_fp8_status
->>>>>>> upstream/main
 from ..trainer_utils import create_custom_optimizer, create_custom_scheduler
 
 
@@ -45,11 +39,7 @@ if TYPE_CHECKING:
     from transformers import PreTrainedTokenizer, ProcessorMixin
     from transformers.trainer import PredictionOutput
 
-<<<<<<< HEAD
-    from ...hparams import FinetuningArguments
-=======
     from ...hparams import FinetuningArguments, ModelArguments
->>>>>>> upstream/main
 
 
 logger = logging.get_logger(__name__)
@@ -62,11 +52,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         self,
         finetuning_args: "FinetuningArguments",
         processor: Optional["ProcessorMixin"],
-<<<<<<< HEAD
-        gen_kwargs: Optional[dict[str, Any]] = None,
-        **kwargs,
-    ) -> None:
-=======
         model_args: Optional["ModelArguments"] = None,
         gen_kwargs: Optional[dict[str, Any]] = None,
         **kwargs,
@@ -74,7 +59,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         # Configure FP8 environment if enabled
         if model_args is not None and model_args.fp8:
             configure_fp8_environment(model_args)
->>>>>>> upstream/main
         if is_transformers_version_greater_than("4.46"):
             kwargs["processing_class"] = kwargs.pop("tokenizer")
         else:
@@ -100,8 +84,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
             self.accelerator.clip_grad_norm_ = MethodType(clip_grad_norm_old_version, self.accelerator)
             self.add_callback(BAdamCallback)
 
-<<<<<<< HEAD
-=======
         if finetuning_args.use_dft_loss:
             from ..trainer_utils import dft_loss_func
 
@@ -111,7 +93,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         if model_args is not None and model_args.fp8 and hasattr(self, "accelerator"):
             verify_fp8_status(self.accelerator, model_args)
 
->>>>>>> upstream/main
     @override
     def create_optimizer(self) -> "torch.optim.Optimizer":
         if self.optimizer is None:
@@ -197,7 +178,6 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         with open(output_prediction_file, "w", encoding="utf-8") as f:
             for text, pred, label in zip(decoded_inputs, decoded_preds, decoded_labels):
                 f.write(json.dumps({"prompt": text, "predict": pred, "label": label}, ensure_ascii=False) + "\n")
-<<<<<<< HEAD
 
 
 class CustomSeq2SeqAdapterTrainer(CustomSeq2SeqTrainer, AdapterTrainer):
@@ -205,5 +185,3 @@ class CustomSeq2SeqAdapterTrainer(CustomSeq2SeqTrainer, AdapterTrainer):
         self, finetuning_args: "FinetuningArguments", processor: Optional["ProcessorMixin"], **kwargs
     ) -> None:
         super().__init__(finetuning_args=finetuning_args, processor=processor, **kwargs)
-=======
->>>>>>> upstream/main

@@ -62,17 +62,11 @@ def check_lora_model(model: "LoraModel") -> tuple[set[str], set[str]]:
 
 
 def load_train_model(add_valuehead: bool = False, **kwargs) -> "PreTrainedModel":
-<<<<<<< HEAD
     model_args, _, _, finetuning_args, _, peft_args = get_train_args(kwargs)
     tokenizer = load_tokenizer(model_args)["tokenizer"]
     return load_model(
         tokenizer, model_args, finetuning_args, peft_args, is_trainable=True, add_valuehead=add_valuehead
     )
-=======
-    model_args, _, _, finetuning_args, _ = get_train_args(kwargs)
-    tokenizer = load_tokenizer(model_args)["tokenizer"]
-    return load_model(tokenizer, model_args, finetuning_args, is_trainable=True, add_valuehead=add_valuehead)
->>>>>>> upstream/main
 
 
 def load_infer_model(add_valuehead: bool = False, **kwargs) -> "PreTrainedModel":
@@ -111,11 +105,7 @@ def load_reference_model(
 
 
 def load_dataset_module(**kwargs) -> "DatasetModule":
-<<<<<<< HEAD
     model_args, data_args, training_args, _, _, _ = get_train_args(kwargs)
-=======
-    model_args, data_args, training_args, _, _ = get_train_args(kwargs)
->>>>>>> upstream/main
     tokenizer_module = load_tokenizer(model_args)
     template = get_template_and_fix_tokenizer(tokenizer_module["tokenizer"], data_args)
     dataset_module = get_dataset(template, model_args, data_args, training_args, kwargs["stage"], **tokenizer_module)

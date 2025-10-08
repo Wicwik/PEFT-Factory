@@ -90,11 +90,7 @@ def create_modelcard_and_push(
     finetuning_args: "FinetuningArguments",
 ) -> None:
     kwargs = {
-<<<<<<< HEAD
         "tasks": {"name": "Causal Language Modeling", "type": "text-generation"},
-=======
-        "tasks": "text-generation",
->>>>>>> upstream/main
         "finetuned_from": model_args.model_name_or_path,
         "tags": ["llama-factory", finetuning_args.finetuning_type],
     }
@@ -635,8 +631,6 @@ def get_batch_logps(
     return logps, valid_length
 
 
-<<<<<<< HEAD
-=======
 def dft_loss_func(outputs, labels, num_items_in_batch=None):
     logits = outputs.get("logits")
     if logits is None:
@@ -682,7 +676,6 @@ def _dft_cross_entropy(
     return loss
 
 
->>>>>>> upstream/main
 def nested_detach(
     tensors: Union["torch.Tensor", list["torch.Tensor"], tuple["torch.Tensor"], dict[str, "torch.Tensor"]],
     clone: bool = False,

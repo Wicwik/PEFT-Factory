@@ -15,11 +15,8 @@
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Optional
 
-<<<<<<< HEAD
 from ..extras.constants import METHODS
 
-=======
->>>>>>> upstream/main
 
 @dataclass
 class FreezeArguments:
@@ -128,8 +125,6 @@ class LoraArguments:
 
 
 @dataclass
-<<<<<<< HEAD
-=======
 class OFTArguments:
     r"""Arguments pertaining to the OFT training."""
 
@@ -172,7 +167,6 @@ class OFTArguments:
 
 
 @dataclass
->>>>>>> upstream/main
 class RLHFArguments:
     r"""Arguments pertaining to the PPO, DPO and KTO training."""
 
@@ -184,13 +178,10 @@ class RLHFArguments:
         default=0.0,
         metadata={"help": "The supervised fine-tuning loss coefficient in DPO training."},
     )
-<<<<<<< HEAD
-=======
     pref_bco_weight: float = field(
         default=0.0,
         metadata={"help": "The Binary Classifier Optimization coefficient in DPO training."},
     )
->>>>>>> upstream/main
     pref_loss: Literal["sigmoid", "hinge", "ipo", "kto_pair", "orpo", "simpo"] = field(
         default="sigmoid",
         metadata={"help": "The type of DPO loss to use."},
@@ -453,9 +444,6 @@ class SwanLabArguments:
 
 @dataclass
 class FinetuningArguments(
-<<<<<<< HEAD
-    SwanLabArguments, BAdamArgument, ApolloArguments, GaloreArguments, RLHFArguments, LoraArguments, FreezeArguments
-=======
     SwanLabArguments,
     BAdamArgument,
     ApolloArguments,
@@ -464,7 +452,6 @@ class FinetuningArguments(
     LoraArguments,
     OFTArguments,
     FreezeArguments,
->>>>>>> upstream/main
 ):
     r"""Arguments pertaining to which techniques we are going to fine-tuning with."""
 
@@ -476,11 +463,7 @@ class FinetuningArguments(
         default="sft",
         metadata={"help": "Which stage will be performed in training."},
     )
-<<<<<<< HEAD
     finetuning_type: str = field(
-=======
-    finetuning_type: Literal["lora", "freeze", "full"] = field(
->>>>>>> upstream/main
         default="lora",
         metadata={"help": "Which fine-tuning method to use."},
     )
@@ -496,13 +479,10 @@ class FinetuningArguments(
         default=False,
         metadata={"help": "Whether or not to use the Muon optimizer."},
     )
-<<<<<<< HEAD
-=======
     use_dft_loss: bool = field(
         default=False,
         metadata={"help": "Whether to use the DFT loss."},
     )
->>>>>>> upstream/main
     freeze_vision_tower: bool = field(
         default=True,
         metadata={"help": "Whether ot not to freeze the vision tower in MLLM training."},
@@ -546,20 +526,13 @@ class FinetuningArguments(
         self.freeze_extra_modules: Optional[list[str]] = split_arg(self.freeze_extra_modules)
         self.lora_alpha: int = self.lora_alpha or self.lora_rank * 2
         self.lora_target: list[str] = split_arg(self.lora_target)
-<<<<<<< HEAD
-=======
         self.oft_target: list[str] = split_arg(self.oft_target)
->>>>>>> upstream/main
         self.additional_target: Optional[list[str]] = split_arg(self.additional_target)
         self.galore_target: list[str] = split_arg(self.galore_target)
         self.apollo_target: list[str] = split_arg(self.apollo_target)
         self.use_ref_model = self.stage == "dpo" and self.pref_loss not in ["orpo", "simpo"]
 
-<<<<<<< HEAD
         assert self.finetuning_type in METHODS, "Invalid fine-tuning method."
-=======
-        assert self.finetuning_type in ["lora", "oft", "freeze", "full"], "Invalid fine-tuning method."
->>>>>>> upstream/main
         assert self.ref_model_quantization_bit in [None, 8, 4], "We only accept 4-bit or 8-bit quantization."
         assert self.reward_model_quantization_bit in [None, 8, 4], "We only accept 4-bit or 8-bit quantization."
 
@@ -569,12 +542,9 @@ class FinetuningArguments(
         if self.stage == "ppo" and self.reward_model_type == "lora" and self.finetuning_type != "lora":
             raise ValueError("`reward_model_type` cannot be lora for Freeze/Full PPO training.")
 
-<<<<<<< HEAD
-=======
         if self.stage == "ppo" and self.reward_model_type == "oft" and self.finetuning_type != "oft":
             raise ValueError("`reward_model_type` cannot be oft for Freeze/Full PPO training.")
 
->>>>>>> upstream/main
         if self.stage == "dpo" and self.pref_loss != "sigmoid" and self.dpo_label_smoothing > 1e-6:
             raise ValueError("`dpo_label_smoothing` is only valid for sigmoid loss function.")
 

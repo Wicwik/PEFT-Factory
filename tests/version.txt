@@ -1,6 +1,2 @@
 # change if test fails or cache is outdated
-<<<<<<< HEAD
-0.9.4.100
-=======
 0.9.4.103
->>>>>>> upstream/main

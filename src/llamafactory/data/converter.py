@@ -11,21 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-<<<<<<< HEAD
 
-=======
 import json
->>>>>>> upstream/main
 import os
 from abc import abstractmethod
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Optional, Union
 
-<<<<<<< HEAD
 from datasets import ClassLabel
 
-=======
->>>>>>> upstream/main
 from ..extras import logging
 from .data_utils import Role
 
@@ -48,10 +42,7 @@ logger = logging.get_logger(__name__)
 class DatasetConverter:
     dataset_attr: "DatasetAttr"
     data_args: "DataArguments"
-<<<<<<< HEAD
     id2label: list[str]
-=======
->>>>>>> upstream/main
 
     def _find_medias(self, medias: Union["MediaType", list["MediaType"], None]) -> Optional[list["MediaType"]]:
         r"""Optionally concatenate media path to media dir when loading from local disk."""
@@ -104,12 +95,9 @@ class AlpacaDatasetConverter(DatasetConverter):
                 prompt.append({"role": Role.ASSISTANT.value, "content": old_response})
 
         query = []
-<<<<<<< HEAD
         if self.dataset_attr.instruction:
             query.append(self.dataset_attr.instruction)
 
-=======
->>>>>>> upstream/main
         if self.dataset_attr.prompt and example[self.dataset_attr.prompt]:
             query.append(example[self.dataset_attr.prompt])
 
@@ -135,7 +123,6 @@ class AlpacaDatasetConverter(DatasetConverter):
             ]
         elif self.dataset_attr.response and isinstance(example[self.dataset_attr.response], str):  # normal example
             response = [{"role": Role.ASSISTANT.value, "content": example[self.dataset_attr.response]}]
-<<<<<<< HEAD
         elif (
             self.dataset_attr.response and isinstance(example[self.dataset_attr.response], int) and self.id2label
         ):  # class label example
@@ -144,8 +131,6 @@ class AlpacaDatasetConverter(DatasetConverter):
             example[self.dataset_attr.response], float
         ):  # float value (stsb)
             response = [{"role": Role.ASSISTANT.value, "content": str(example[self.dataset_attr.response])}]
-=======
->>>>>>> upstream/main
         else:  # unsupervised
             response = []
 
@@ -257,11 +242,6 @@ class SharegptDatasetConverter(DatasetConverter):
         return output
 
 
-<<<<<<< HEAD
-DATASET_CONVERTERS = {
-    "alpaca": AlpacaDatasetConverter,
-    "sharegpt": SharegptDatasetConverter,
-=======
 @dataclass
 class OpenAIDatasetConverter(DatasetConverter):
     def __call__(self, example: dict[str, Any]) -> dict[str, Any]:
@@ -406,7 +386,6 @@ DATASET_CONVERTERS = {
     "alpaca": AlpacaDatasetConverter,
     "sharegpt": SharegptDatasetConverter,
     "openai": OpenAIDatasetConverter,
->>>>>>> upstream/main
 }
 
 
@@ -418,22 +397,14 @@ def register_dataset_converter(name: str, dataset_converter: type["DatasetConver
     DATASET_CONVERTERS[name] = dataset_converter
 
 
-<<<<<<< HEAD
 def get_dataset_converter(
     name: str, dataset_attr: "DatasetAttr", data_args: "DataArguments", id2label: list[str] = None
 ) -> "DatasetConverter":
-=======
-def get_dataset_converter(name: str, dataset_attr: "DatasetAttr", data_args: "DataArguments") -> "DatasetConverter":
->>>>>>> upstream/main
     r"""Get a dataset converter."""
     if name not in DATASET_CONVERTERS:
         raise ValueError(f"Dataset converter {name} not found.")
 
-<<<<<<< HEAD
     return DATASET_CONVERTERS[name](dataset_attr, data_args, id2label)
-=======
-    return DATASET_CONVERTERS[name](dataset_attr, data_args)
->>>>>>> upstream/main
 
 
 def align_dataset(
@@ -462,15 +433,11 @@ def align_dataset(
             desc="Converting format of dataset",
         )
 
-<<<<<<< HEAD
     id2label = None
     if dataset_attr.response and isinstance(dataset.features[dataset_attr.response], ClassLabel):
         id2label = dataset.features[dataset_attr.response]._int2str
 
     dataset_converter = get_dataset_converter(dataset_attr.formatting, dataset_attr, data_args, id2label)
-=======
-    dataset_converter = get_dataset_converter(dataset_attr.formatting, dataset_attr, data_args)
->>>>>>> upstream/main
     return dataset.map(
         dataset_converter,
         batched=False,

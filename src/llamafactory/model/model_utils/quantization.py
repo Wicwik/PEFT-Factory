@@ -90,14 +90,6 @@ def configure_quantization(
         if model_args.quantization_bit is not None:
             logger.warning_rank0("`quantization_bit` will not affect on the PTQ-quantized models.")
 
-<<<<<<< HEAD
-        if is_deepspeed_zero3_enabled() or is_fsdp_enabled():
-            raise ValueError("DeepSpeed ZeRO-3 or FSDP is incompatible with PTQ-quantized models.")
-
-        quantization_config: dict[str, Any] = getattr(config, "quantization_config", None)
-        quant_method = quantization_config.get("quant_method", "")
-
-=======
         quantization_config: dict[str, Any] = getattr(config, "quantization_config", None)
         quant_method = quantization_config.get("quant_method", "")
 
@@ -105,7 +97,6 @@ def configure_quantization(
             # mxfp4 will dequant the model weights
             raise ValueError("DeepSpeed ZeRO-3 or FSDP is incompatible with PTQ-quantized models.")
 
->>>>>>> upstream/main
         if quant_method == QuantizationMethod.GPTQ:
             check_version("gptqmodel>=2.0.0", mandatory=True)
             quantization_config.pop("disable_exllama", None)  # remove deprecated args

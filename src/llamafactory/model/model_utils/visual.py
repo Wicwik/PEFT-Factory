@@ -200,8 +200,6 @@ def patch_target_modules(
 
 
 _register_composite_model(
-<<<<<<< HEAD
-=======
     model_type="dots_ocr",
     projector_key="vision_tower.merger",
     vision_model_keys=["vision_tower"],
@@ -211,7 +209,6 @@ _register_composite_model(
 
 
 _register_composite_model(
->>>>>>> upstream/main
     model_type="gemma3",
 )
 
@@ -234,11 +231,6 @@ _register_composite_model(
 
 
 _register_composite_model(
-<<<<<<< HEAD
-    model_type="internvl",
-)
-
-=======
     model_type="glm4v_moe",
     projector_key="visual.merger",
     vision_model_keys=["visual.patch_embed", "visual.blocks"],
@@ -254,7 +246,6 @@ _register_composite_model(
 _register_composite_model(
     model_type="interns1",
 )
->>>>>>> upstream/main
 
 _register_composite_model(
     model_type="Keye",
@@ -266,14 +257,11 @@ _register_composite_model(
 
 
 _register_composite_model(
-<<<<<<< HEAD
-=======
     model_type="kimi_vl",
 )
 
 
 _register_composite_model(
->>>>>>> upstream/main
     model_type="llama4",
     vision_model_keys=["vision_model"],
 )
@@ -310,10 +298,6 @@ _register_composite_model(
     lora_conflict_keys=["audio_projection_layer"],
 )
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/main
 _register_composite_model(
     model_type="mistral3",
 )
@@ -368,8 +352,6 @@ _register_composite_model(
 
 
 _register_composite_model(
-<<<<<<< HEAD
-=======
     model_type="qwen3_vl",
     projector_key="visual.merger",
     vision_model_keys=["visual.patch_embed", "visual.blocks"],
@@ -397,6 +379,5 @@ _register_composite_model(
 
 
 _register_composite_model(
->>>>>>> upstream/main
     model_type="video_llava",
 )

@@ -213,8 +213,6 @@ class QuantizationArguments:
         default=None,
         metadata={"help": "Device map used to infer the 4-bit quantized model, needs bitsandbytes>=0.43.0."},
     )
-<<<<<<< HEAD
-=======
     fp8: bool = field(
         default=False,
         metadata={
@@ -232,8 +230,6 @@ class QuantizationArguments:
         default=False,
         metadata={"help": "Enable FP8 optimizations for FSDP2 all-gather operations."},
     )
->>>>>>> upstream/main
-
 
 @dataclass
 class ProcessorArguments:

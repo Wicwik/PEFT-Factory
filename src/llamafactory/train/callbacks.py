@@ -35,11 +35,7 @@ from typing_extensions import override
 
 from ..extras import logging
 from ..extras.constants import TRAINER_LOG, V_HEAD_SAFE_WEIGHTS_NAME, V_HEAD_WEIGHTS_NAME
-<<<<<<< HEAD
 from ..extras.misc import count_parameters, get_peak_memory, is_env_enabled, use_ray
-=======
-from ..extras.misc import get_peak_memory, is_env_enabled, use_ray
->>>>>>> upstream/main
 
 
 if is_safetensors_available():
@@ -77,11 +73,7 @@ def fix_valuehead_checkpoint(
     if safe_serialization:
         path_to_checkpoint = os.path.join(output_dir, SAFE_WEIGHTS_NAME)
         with safe_open(path_to_checkpoint, framework="pt", device="cpu") as f:
-<<<<<<< HEAD
-            state_dict: dict[str, torch.Tensor] = {key: f.get_tensor(key) for key in f.keys()}
-=======
             state_dict: dict[str, torch.Tensor] = {key: f.get_tensor(key).clone() for key in f.keys()}
->>>>>>> upstream/main
     else:
         path_to_checkpoint = os.path.join(output_dir, WEIGHTS_NAME)
         state_dict: dict[str, torch.Tensor] = torch.load(path_to_checkpoint, map_location="cpu", weights_only=True)
@@ -368,11 +360,8 @@ class ReporterCallback(TrainerCallback):
         if not state.is_world_process_zero:
             return
 
-<<<<<<< HEAD
         trainable_params, _ = count_parameters(kwargs["model"])
 
-=======
->>>>>>> upstream/main
         if "wandb" in args.report_to:
             import wandb
 
@@ -382,10 +371,7 @@ class ReporterCallback(TrainerCallback):
                     "data_args": self.data_args.to_dict(),
                     "finetuning_args": self.finetuning_args.to_dict(),
                     "generating_args": self.generating_args.to_dict(),
-<<<<<<< HEAD
                     "trainable_parameters": trainable_params,
-=======
->>>>>>> upstream/main
                 }
             )
 
@@ -398,9 +384,6 @@ class ReporterCallback(TrainerCallback):
                     "data_args": self.data_args.to_dict(),
                     "finetuning_args": self.finetuning_args.to_dict(),
                     "generating_args": self.generating_args.to_dict(),
-<<<<<<< HEAD
                     "trainable_parameters": trainable_params,
-=======
->>>>>>> upstream/main
                 }
             )

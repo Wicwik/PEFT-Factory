@@ -16,11 +16,8 @@ import os
 from typing import TYPE_CHECKING, Any, Optional, TypedDict
 
 import torch
-<<<<<<< HEAD
 from adapters import AutoAdapterModel
 from peft import PeftConfig
-=======
->>>>>>> upstream/main
 from transformers import (
     AutoConfig,
     AutoModelForCausalLM,
@@ -34,10 +31,7 @@ from transformers import (
 from trl import AutoModelForCausalLMWithValueHead
 
 from ..extras import logging
-<<<<<<< HEAD
 from ..extras.constants import ADAPTERS_METHODS
-=======
->>>>>>> upstream/main
 from ..extras.misc import count_parameters, skip_check_imports, try_download_model_from_other_hub
 from .adapter import init_adapter
 from .model_utils.liger_kernel import apply_liger_kernel
@@ -119,12 +113,10 @@ def load_tokenizer(model_args: "ModelArguments") -> "TokenizerModule":
         logger.info_rank0(f"Failed to load processor: {e}.")
         processor = None
 
-<<<<<<< HEAD
+    # TODO fix the if statement below
     if processor:
         patch_processor(processor, tokenizer, model_args)
 
-=======
->>>>>>> upstream/main
     # Avoid load tokenizer, see:
     # https://github.com/huggingface/transformers/blob/v4.40.0/src/transformers/models/auto/processing_auto.py#L324
     if processor is not None and "Processor" not in processor.__class__.__name__:
@@ -147,10 +139,7 @@ def load_model(
     tokenizer: "PreTrainedTokenizer",
     model_args: "ModelArguments",
     finetuning_args: "FinetuningArguments",
-<<<<<<< HEAD
     peft_args: "PeftConfig" = None,
-=======
->>>>>>> upstream/main
     is_trainable: bool = False,
     add_valuehead: bool = False,
 ) -> "PreTrainedModel":
@@ -175,18 +164,6 @@ def load_model(
         if model_args.mixture_of_depths == "load":
             model = load_mod_pretrained_model(**init_kwargs)
         else:
-<<<<<<< HEAD
-            if type(config) in AutoModelForVision2Seq._model_mapping.keys():  # image-text
-                load_class = AutoModelForVision2Seq
-            elif type(config) in AutoModelForImageTextToText._model_mapping.keys():  # image-text
-                load_class = AutoModelForImageTextToText
-            elif type(config) in AutoModelForSeq2SeqLM._model_mapping.keys():  # audio-text
-                load_class = AutoModelForSeq2SeqLM
-            elif type(config) in AutoModelForTextToWaveform._model_mapping.keys():  # audio hack for qwen2_5_omni
-                load_class = AutoModelForTextToWaveform
-            elif finetuning_args.finetuning_type in ADAPTERS_METHODS:  # Adapters library model
-                load_class = AutoAdapterModel
-=======
             if type(config) in AutoModelForImageTextToText._model_mapping.keys():  # image-text
                 load_class = AutoModelForImageTextToText
             elif type(config) in AutoModelForVision2Seq._model_mapping.keys():  # image-text
@@ -195,7 +172,8 @@ def load_model(
                 load_class = AutoModelForSeq2SeqLM
             elif type(config) in AutoModelForTextToWaveform._model_mapping.keys():  # audio hack for qwen omni
                 load_class = AutoModelForTextToWaveform
->>>>>>> upstream/main
+            elif finetuning_args.finetuning_type in ADAPTERS_METHODS:  # Adapters library model
+                load_class = AutoAdapterModel
             else:
                 load_class = AutoModelForCausalLM
 
@@ -203,13 +181,8 @@ def load_model(
                 model = load_class.from_config(config, trust_remote_code=model_args.trust_remote_code)
             else:
                 model = load_class.from_pretrained(**init_kwargs)
-<<<<<<< HEAD
-                if getattr(model.config, "model_type", None) == "qwen2_5_omni":
-                    model = model.thinker  # use part of Omni model
-=======
                 if getattr(model.config, "model_type", None) in ["qwen2_5_omni", "qwen3_omni_moe"]:
                     model = getattr(model, "thinker")
->>>>>>> upstream/main
 
         if model_args.mixture_of_depths == "convert":
             model = convert_pretrained_model_to_mod(model, config, model_args)
@@ -218,11 +191,7 @@ def load_model(
         patch_model(model, tokenizer, model_args, is_trainable, add_valuehead)
         register_autoclass(config, model, tokenizer)
 
-<<<<<<< HEAD
     model = init_adapter(config, model, model_args, finetuning_args, is_trainable, peft_args=peft_args)
-=======
-    model = init_adapter(config, model, model_args, finetuning_args, is_trainable)
->>>>>>> upstream/main
 
     if add_valuehead:
         model = AutoModelForCausalLMWithValueHead.from_pretrained(model)
