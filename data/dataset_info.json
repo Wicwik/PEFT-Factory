@@ -1004,7 +1004,7 @@
   "wic": {
     "hf_hub_url": "rbelanec/wic",
     "split": "train",
-    "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
+    "instruction": "Based on the context from the following sentence pair, classify the word into true or false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1013,7 +1013,7 @@
   "wic_eval": {
     "hf_hub_url": "rbelanec/wic",
     "split": "validation",
-    "instruction": "Based on the context from the following sentence pair, classify the word into true and false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
+    "instruction": "Based on the context from the following sentence pair, classify the word into true or false classes, based on its meaning in both of the sentences. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1022,7 +1022,7 @@
   "wsc": {
     "hf_hub_url": "rbelanec/wsc",
     "split": "train",
-    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
+    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
@@ -1031,7 +1031,7 @@
   "wsc_eval": {
     "hf_hub_url": "rbelanec/wsc",
     "split": "validation",
-    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true and false.",
+    "instruction": "Based on the following sentence, determine whether the pronoun marked with * * is referencing the noun marked with # #. Respond only with the corresponding true or false.",
     "columns": {
       "prompt": "inputs",
       "response": "targets"
