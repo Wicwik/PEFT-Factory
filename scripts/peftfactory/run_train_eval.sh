@@ -3,7 +3,7 @@ datasets=(wsc)
 peft_methods=(prompt-tuning)
 models=(llama-3-8b-instruct)
 seeds=(42 123 456 789 101112)
-EPOCHS=30
+EPOCHS=40
 
 for s in ${seeds[@]};
 do
