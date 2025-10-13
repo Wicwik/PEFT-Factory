@@ -38,6 +38,7 @@ do
                 llamafactory-cli train saves/${pm}/${m}/train_${d}_${s}_${TIMESTAMP}/train.yaml
                 llamafactory-cli train saves/${pm}/${m}/eval_${d}_${s}_${TIMESTAMP}/eval.yaml
                 python scripts/peftfactory/compute_metrics.py saves/${pm}/${m}/eval_${d}_${s}_${TIMESTAMP} ${d}
+            done
         done
     done
 done
