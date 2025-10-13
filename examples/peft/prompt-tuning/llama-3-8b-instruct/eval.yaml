@@ -34,7 +34,7 @@ include_num_input_tokens_seen: true
 save_total_limit: 1
 
 ### train
-per_device_train_batch_size: 8
+per_device_train_batch_size: 4
 learning_rate: 5.0e-5
 num_train_epochs: 10.0
 weight_decay: 1.0e-5
@@ -50,7 +50,7 @@ run_name: ${WANDB_NAME}
 
 ### eval
 do_eval: false
-per_device_eval_batch_size: 8
+per_device_eval_batch_size: 4
 
 ### predict
 do_predict: true
