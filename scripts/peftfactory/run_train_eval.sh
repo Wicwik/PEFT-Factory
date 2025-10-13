@@ -1,7 +1,7 @@
 datasets=(wsc)
 # datasets=(cb copa wsc svamp conala rte mrpc openbookqa wic stsb cola gsm8k siqa math_qa winogrande sst2)
 # peft_methods=(prefix-tuning prompt-tuning p-tuning lora lntuning ia3)
-peft_methods=(prompt-tuning)
+peft_methods=(p-tuning)
 models=(llama-3-8b-instruct)
 seeds=(42 123 456 789 101112)
 EPOCHS=30
