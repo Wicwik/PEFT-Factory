@@ -11,7 +11,7 @@ stage: sft
 do_train: true
 finetuning_type: prefix-tuning
 task_type: CAUSAL_LM
-num_virtual_tokens: 32
+num_virtual_tokens: 100
 prefix_projection: true
 encoder_hidden_size: 512
 disable_gradient_checkpointing: true
@@ -42,7 +42,7 @@ save_total_limit: 1
 per_device_train_batch_size: 4
 learning_rate: 1.0e-3
 num_train_epochs: ${EPOCHS}
-# weight_decay: 1.0e-6
+weight_decay: 1.0e-5
 lr_scheduler_type: cosine
 bf16: true
 ddp_timeout: 180000000

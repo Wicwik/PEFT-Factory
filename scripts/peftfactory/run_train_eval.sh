@@ -3,7 +3,8 @@ datasets=(wsc)
 # peft_methods=(prefix-tuning prompt-tuning p-tuning lora lntuning ia3)
 peft_methods=(prefix-tuning)
 models=(llama-3-8b-instruct)
-seeds=(42 123 456 789 101112)
+# seeds=(42 123 456 789 101112)
+seeds=(42)
 EPOCHS=30
 
 for s in ${seeds[@]};
