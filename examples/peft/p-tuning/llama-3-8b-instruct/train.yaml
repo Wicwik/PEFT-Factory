@@ -21,8 +21,8 @@ dataset: ${DATASET}
 template: llama3
 cutoff_len: 2048
 overwrite_cache: true
-preprocessing_num_workers: 16
-dataloader_num_workers: 4
+preprocessing_num_workers: 8
+dataloader_num_workers: 2
 packing: false
 
 ### output
