@@ -1,11 +1,9 @@
-datasets=(wsc)
-# datasets=(cb copa wsc svamp conala rte mrpc openbookqa wic stsb cola gsm8k siqa math_qa winogrande sst2)
-# peft_methods=(prefix-tuning prompt-tuning p-tuning lora lntuning ia3)
-peft_methods=(prefix-tuning)
+datasets=(codealpacapy boolq piqa record multirc) # GPU1
+# datasets=(mmlu mnli qqp apps) # GPU2
+peft_methods=(prefix-tuning prompt-tuning p-tuning lora lntuning ia3)
 models=(llama-3-8b-instruct)
-# seeds=(42 123 456 789 101112)
-seeds=(42)
-EPOCHS=30
+seeds=(42 123 456 789 101112)
+EPOCHS=20
 
 for s in ${seeds[@]};
 do
