@@ -13,7 +13,7 @@ finetuning_type: prefix-tuning
 task_type: CAUSAL_LM
 num_virtual_tokens: 32
 prefix_projection: true
-encoder_hidden_size: 512
+encoder_hidden_size: 256
 disable_gradient_checkpointing: true
 
 ### dataset
