@@ -93,7 +93,7 @@ MOD_SUPPORTED_MODELS = {"bloom", "falcon", "gemma", "llama", "mistral", "mixtral
 
 MULTIMODAL_SUPPORTED_MODELS = set()
 
-PEFT_METHODS = {"lora", "oft"}
+PEFT_METHODS = {"lora", "oft"} | set(HF_PEFT_METHODS) | set(ADAPTERS_METHODS) | set(CUSTOM_PEFT_METHODS)
 
 RUNNING_LOG = "running_log.txt"
 
