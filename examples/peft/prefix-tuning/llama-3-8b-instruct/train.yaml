@@ -27,8 +27,8 @@ packing: false
 
 ### output
 output_dir: ${OUTPUT_DIR}
-logging_steps: 10
-save_steps: 0.1
+logging_steps: 5
+save_steps: 0.05
 overwrite_output_dir: true
 save_only_model: false
 plot_loss: true
@@ -39,7 +39,7 @@ load_best_model_at_end: true
 save_total_limit: 1
 
 ### train
-per_device_train_batch_size: 8
+per_device_train_batch_size: 4
 learning_rate: 5.0e-5 
 num_train_epochs: ${EPOCHS}
 weight_decay: 1.0e-5
@@ -54,7 +54,7 @@ report_to:
 run_name: ${WANDB_NAME}
 
 ### eval
-per_device_eval_batch_size: 8
+per_device_eval_batch_size: 4
 eval_strategy: steps
-eval_steps: 0.1
+eval_steps: 0.05
 val_size: 0.2
