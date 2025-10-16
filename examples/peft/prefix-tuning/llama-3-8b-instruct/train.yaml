@@ -27,7 +27,7 @@ packing: false
 
 ### output
 output_dir: ${OUTPUT_DIR}
-logging_steps: 5
+logging_steps: 10
 save_steps: 0.1
 overwrite_output_dir: true
 save_only_model: false
